@@ -35,9 +35,17 @@ export const studentApi = createApi({
       }),
       invalidatesTags: ["Student"],
     }),
+    postStudent: builder.mutation<void,Omit<Student,"id" & "createdAt">>({
+      query:(student)=>({
+        url:`students`,
+        method:"POST",
+        body:student
+      }),
+      invalidatesTags:["Student"]
+    })
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetStudensQuery, useDeleteStudentMutation,usePatchStudentMutation } = studentApi;
+export const { useGetStudensQuery, useDeleteStudentMutation,usePatchStudentMutation,usePostStudentMutation } = studentApi;

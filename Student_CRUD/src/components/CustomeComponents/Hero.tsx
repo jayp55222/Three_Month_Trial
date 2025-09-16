@@ -22,6 +22,7 @@ import DeleteConfirmDialog from "./DeleteConfirmDialog";
 import EditButton from "./EditeButton";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store";
+import { CreateButton } from "./CreateButton";
 
 type User = {
   id: string;
@@ -77,9 +78,10 @@ export default function Hero() {
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
 
   const { data: studentList, isLoading, isSuccess } = useGetStudensQuery();
-  const editeobj = useSelector((state:RootState)=> state.editablestudent.editableStudent)
-  console.log(editeobj);
-  
+  const editeobj = useSelector(
+    (state: RootState) => state.editablestudent.editableStudent
+  );
+
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -134,6 +136,7 @@ export default function Hero() {
       <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <CardTitle>Users</CardTitle>
         <div className="flex items-center gap-2">
+          <CreateButton />
           <Input
             placeholder="Search by name, email or role..."
             value={query}

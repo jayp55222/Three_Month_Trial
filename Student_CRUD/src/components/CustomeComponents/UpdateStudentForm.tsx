@@ -25,22 +25,25 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleforupdateform } from "@/services/booleanSlice";
 import type { RootState } from "@/store";
 import { useEffect } from "react";
-import { usePatchStudentMutation } from "@/services/studentApi";
+import {
+  usePatchStudentMutation,
+  usePostStudentMutation,
+} from "@/services/studentApi";
 import toast from "react-hot-toast";
+import { toggleform } from "@/services/booleanSlice";
 
 // ✅ 1. Define schema with zod for validation
 const studentSchema = z.object({
-  // createdAt: z.string(),
+  createdAt: z.string().optional(),
   firstname: z.string().min(2, "First name is too short"),
   lastname: z.string().min(2, "Last name is too short"),
   gender: z.enum(["Male", "Female", "Other"]),
   birthday: z.string(),
   city: z.string(),
   state: z.string(),
-  id: z.string(),
+  id: z.string().optional(),
 });
 
 export type StudentFormValues = z.infer<typeof studentSchema>;
@@ -53,20 +56,25 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
   const student = useSelector(
     (state: RootState) => state.editablestudent.editableStudent
   );
+
   const dispatch = useDispatch();
-  const [patchStudent, { isLoading, isSuccess, isError }] =
+  const [patchStudent] =
     usePatchStudentMutation();
+
+  const [postStudent] = usePostStudentMutation();
 
   // ✅ 2. Setup React Hook Form
   const form = useForm<StudentFormValues>({
     resolver: zodResolver(studentSchema),
   });
 
-  useEffect(() => {
-    if (student) {
-      form.reset(student); // reset will populate all fields
-    }
-  }, [student, form]);
+  if (student?.id !== undefined) {
+    useEffect(() => {
+      if (student) {
+        form.reset(student); // reset will populate all fields
+      }
+    }, [student, form]);
+  }
 
   // ✅ 3. Render form
   return (
@@ -75,7 +83,7 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
       <button
         type="button"
         className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-        onClick={() => dispatch(toggleforupdateform())} // replace with your close handler
+        onClick={() => dispatch(toggleform())} // replace with your close handler
       >
         <X className="h-5 w-5" />
       </button>
@@ -84,16 +92,32 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((data) => {
-            return patchStudent({ Id: data.id, ...data })
-              .unwrap()
-              .then((fulfilled) => {
-                dispatch(toggleforupdateform());
-                toast.success("Successfully Updated!");
-              })
-              .catch((rejected) => {
-                toast.error("Failed to Update");
-                console.error(rejected);
-              });
+            console.log(data)
+            if (student?.id) {
+              patchStudent({ Id: data.id, ...data })
+                .unwrap()
+                .then((fulfilled) => {
+                  dispatch(toggleform());
+                  toast.success("Successfully Updated!");
+                })
+                .catch((rejected) => {
+                  toast.error("Failed to Update");
+                  console.error(rejected);
+                });
+            } else {
+              postStudent(data)
+                .unwrap()
+                .then((fulfilled) => {
+                  dispatch(toggleform());
+                  toast.success("Successfully Created!");
+                })
+                .catch((rejected) => {
+                  toast.error("Failed to Create");
+                  console.error(rejected);
+                });
+                console.log(data);
+                
+            }
           })}
           className="space-y-4"
         >
@@ -223,14 +247,23 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
           />
 
           {/* Hidden fields (id + createdAt) */}
-          <input type="hidden" {...form.register("id")} />
-          {/* <input type="hidden" {...form.register("createdAt")} /> */}
+
+          {student?.id && <input type="hidden" {...form.register("id")} />}
+
+          {!student?.id && (
+            <input
+              type="hidden"
+              {...form.register("createdAt", {
+                value: new Date(Date.now()).toISOString(),
+              })}
+            />
+          )}
 
           <Button
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600"
           >
-            Update Student
+            {student?.id !== undefined ? "Update Student" : "Create Student"}
           </Button>
         </form>
       </Form>
