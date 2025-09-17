@@ -23,29 +23,63 @@ export const studentApi = createApi({
       invalidatesTags: ["Student"], // <-- this tells RTK Query to refetch queries tagged with 'Student'
     }),
     // PATCH - update partial student data
-    patchStudent: builder.mutation<void, Partial<Omit<Student,"id" | " createdAt">> & { Id: string }>({
+    patchStudent: builder.mutation<
+      void,
+      Partial<Omit<Student, "id" | " createdAt">> & { Id: string }
+    >({
       query: ({ Id, ...patch }) => ({
         url: `students/${Id}`,
         method: "PATCH",
         body: patch,
-        headers:{
+        headers: {
           "Content-Type": "application/json",
         },
-        mode:'cors'
+        mode: "cors",
       }),
       invalidatesTags: ["Student"],
     }),
-    postStudent: builder.mutation<void,Omit<Student,"id" & "createdAt">>({
-      query:(student)=>({
-        url:`students`,
-        method:"POST",
-        body:student
+    postStudent: builder.mutation<void, Omit<Student, "id" & "createdAt">>({
+      query: (student) => ({
+        url: `students`,
+        method: "POST",
+        body: student,
       }),
-      invalidatesTags:["Student"]
-    })
+      invalidatesTags: ["Student"],
+    }),
+    // getStudentsByFilter: builder.query<
+    //   Student[],
+    //   { key: string; value: string | number }
+    // >({
+    //   query: ({ key, value }) => {
+    //     const url = new URL(
+    //       "https://6891dd89447ff4f11fbe160d.mockapi.io/api/v1/students"
+    //     );
+
+    //     // loop through keys of the object and append
+    //     Object.entries({
+    //       firstname: value,
+    //       lastname: value,
+    //       gender: value,
+    //       city: value,
+    //       state: value,
+    //       id: value,
+    //     }).forEach(([key, value]) => {
+    //       if (value !== undefined && value !== null && value !== "") {
+    //         url.searchParams.append(key, String(value));
+    //       }
+    //     });
+
+    //     return url.toString();
+    //   },
+    // }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetStudensQuery, useDeleteStudentMutation,usePatchStudentMutation,usePostStudentMutation } = studentApi;
+export const {
+  useGetStudensQuery,
+  useDeleteStudentMutation,
+  usePatchStudentMutation,
+  usePostStudentMutation,
+} = studentApi;

@@ -20,106 +20,111 @@ import { formatToIndianDate } from "@/services/dateconverter";
 import { getHeaderClass } from "@/functions/DyanamicClass";
 import DeleteConfirmDialog from "./DeleteConfirmDialog";
 import EditButton from "./EditeButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/store";
 import { CreateButton } from "./CreateButton";
+import { getPaginationRowModel, useReactTable } from "@tanstack/react-table";
+import { setSearchQuery } from "@/services/dataSlice";
+import { filterStudents } from "@/functions/filter";
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  createdAt: string;
-};
+// type User = {
+//   id: string;
+//   name: string;
+//   email: string;
+//   role: string;
+//   createdAt: string;
+// };
 
-const sampleData: User[] = [
-  {
-    id: "1",
-    name: "Asha Patel",
-    email: "asha@example.com",
-    role: "Admin",
-    createdAt: "2025-08-01",
-  },
-  {
-    id: "2",
-    name: "Ravi Kumar",
-    email: "ravi@example.com",
-    role: "Editor",
-    createdAt: "2025-07-12",
-  },
-  {
-    id: "3",
-    name: "Nina Verma",
-    email: "nina@example.com",
-    role: "Viewer",
-    createdAt: "2025-05-22",
-  },
-  {
-    id: "4",
-    name: "Karan Mehta",
-    email: "karan@example.com",
-    role: "Editor",
-    createdAt: "2025-04-18",
-  },
-  {
-    id: "5",
-    name: "Priya Singh",
-    email: "priya@example.com",
-    role: "Viewer",
-    createdAt: "2025-02-11",
-  },
-];
+// const sampleData: User[] = [
+//   {
+//     id: "1",
+//     name: "Asha Patel",
+//     email: "asha@example.com",
+//     role: "Admin",
+//     createdAt: "2025-08-01",
+//   },
+//   {
+//     id: "2",
+//     name: "Ravi Kumar",
+//     email: "ravi@example.com",
+//     role: "Editor",
+//     createdAt: "2025-07-12",
+//   },
+//   {
+//     id: "3",
+//     name: "Nina Verma",
+//     email: "nina@example.com",
+//     role: "Viewer",
+//     createdAt: "2025-05-22",
+//   },
+//   {
+//     id: "4",
+//     name: "Karan Mehta",
+//     email: "karan@example.com",
+//     role: "Editor",
+//     createdAt: "2025-04-18",
+//   },
+//   {
+//     id: "5",
+//     name: "Priya Singh",
+//     email: "priya@example.com",
+//     role: "Viewer",
+//     createdAt: "2025-02-11",
+//   },
+// ];
 
 export default function Hero() {
-  const [query, setQuery] = useState("");
+  const [reverseboolen, setreverseboolen] = useState(false);
+  const [reversearray, setReversearray] = useState([]);
+  const [filterarray, setFilterearray] = useState(undefined);
   const [page, setPage] = useState(1);
   const pageSize = 3;
   const [sortField, setSortField] = useState<keyof Student | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
 
   const { data: studentList, isLoading, isSuccess } = useGetStudensQuery();
-  const editeobj = useSelector(
-    (state: RootState) => state.editablestudent.editableStudent
+  const { editableStudent: editeobj, tabelquery } = useSelector(
+    (state: RootState) => state.editablestudent
   );
+  const dispatch = useDispatch();
 
+  // const filtered = useMemo(() => {
+  //   const q = query.trim().toLowerCase();
+  //   let out = sampleData.filter(
+  //     (u) =>
+  //       u.name.toLowerCase().includes(q) ||
+  //       u.email.toLowerCase().includes(q) ||
+  //       u.role.toLowerCase().includes(q)
+  //   );
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    let out = sampleData.filter(
-      (u) =>
-        u.name.toLowerCase().includes(q) ||
-        u.email.toLowerCase().includes(q) ||
-        u.role.toLowerCase().includes(q)
-    );
+  //   if (sortField) {
+  //     out = out.slice().sort((a, b) => {
+  //       const va = String(a[sortField]).toLowerCase();
+  //       const vb = String(b[sortField]).toLowerCase();
+  //       if (va === vb) return 0;
+  //       if (sortDir === "asc") return va > vb ? 1 : -1;
+  //       return va < vb ? 1 : -1;
+  //     });
+  //   }
 
-    if (sortField) {
-      out = out.slice().sort((a, b) => {
-        const va = String(a[sortField]).toLowerCase();
-        const vb = String(b[sortField]).toLowerCase();
-        if (va === vb) return 0;
-        if (sortDir === "asc") return va > vb ? 1 : -1;
-        return va < vb ? 1 : -1;
-      });
-    }
+  //   return out;
+  // }, [query, sortField, sortDir]);
 
-    return out;
-  }, [query, sortField, sortDir]);
+  // const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  // const paged = useMemo(() => {
+  //   const start = (page - 1) * pageSize;
+  //   return filtered.slice(start, start + pageSize);
+  // }, [filtered, page]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
-  const paged = useMemo(() => {
-    const start = (page - 1) * pageSize;
-    return filtered.slice(start, start + pageSize);
-  }, [filtered, page]);
-
-  function toggleSort(field: keyof Student) {
-    if (sortField === field) {
-      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
-    } else {
-      setSortField(field);
-      setSortDir("asc");
-    }
-    setPage(1);
-  }
+  // function toggleSort(field: keyof Student) {
+  //   if (sortField === field) {
+  //     setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+  //   } else {
+  //     setSortField(field);
+  //     setSortDir("asc");
+  //   }
+  //   setPage(1);
+  // }
 
   const tablerow: Omit<Student, "createdAt"> = {
     id: "Id",
@@ -131,6 +136,10 @@ export default function Hero() {
     birthday: "Birthday",
   };
 
+  const Filterarray = useMemo(() => {
+    return filterStudents(studentList ?? [], tabelquery);
+  }, [studentList, tabelquery]);
+
   return (
     <Card className="w-full h-full">
       <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -138,12 +147,9 @@ export default function Hero() {
         <div className="flex items-center gap-2">
           <CreateButton />
           <Input
-            placeholder="Search by name, email or role..."
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setPage(1);
-            }}
+            placeholder="Search by name, gender or role..."
+            value={tabelquery}
+            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
             className="max-w-xs"
           />
           <Button
@@ -159,29 +165,41 @@ export default function Hero() {
           </Button>
         </div>
       </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[300px]">
+      <CardContent className="w-full h-full">
+        <ScrollArea className="h-[1000px]">
           <Table>
             <TableHeader>
               <TableRow>
                 {Object.entries(tablerow).map(([key, value]) => (
                   <TableHead
-                    // className={`${getHeaderClass(key)}`}
-                    onClick={() => toggleSort(key)}
+                  // className={`${getHeaderClass(key)}`}
                   >
                     {value}
-                    <ChevronsUpDown className="inline-block w-4 h-4 ml-1 align-text-bottom" />
+                    {value === "Id" && (
+                      <ChevronsUpDown
+                        className="inline-block w-4 h-4 ml-1 align-text-bottom cursor-pointer"
+                        onClick={() => {
+                          setReversearray([...(studentList ?? [])].reverse());
+                          setreverseboolen((prev) => !prev);
+                        }}
+                      />
+                    )}
                   </TableHead>
                 ))}
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {studentList?.map((student) => (
+              {(reverseboolen
+                ? reversearray
+                : filterarray
+                ? filterarray
+                : studentList
+              )?.map((student) => (
                 <TableRow key={student.id}>
                   <TableCell className="font-medium">{student.id}</TableCell>
                   <TableCell>{student.firstname}</TableCell>
-                  <TableCell className="hidden md:inline">
+                  <TableCell className="hidden md:inline-flex md:pt-4">
                     {student.lastname}
                   </TableCell>
                   <TableCell>{student.gender}</TableCell>
@@ -199,7 +217,7 @@ export default function Hero() {
                 </TableRow>
               ))}
 
-              {paged.length === 0 && (
+              {/* {paged.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={5}>
                     <div className="py-6 text-center text-sm text-muted-foreground">
@@ -207,13 +225,13 @@ export default function Hero() {
                     </div>
                   </TableCell>
                 </TableRow>
-              )}
+              )} */}
             </TableBody>
           </Table>
         </ScrollArea>
 
         {/* Pagination */}
-        <div className="mt-4 flex items-center justify-between">
+        {/* <div className="mt-4 flex items-center justify-between">
           <div className="text-sm text-muted-foreground">
             Showing {Math.min((page - 1) * pageSize + 1, filtered.length)} -{" "}
             {Math.min(page * pageSize, filtered.length)} of {filtered.length}
@@ -238,7 +256,7 @@ export default function Hero() {
               Next
             </Button>
           </div>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );

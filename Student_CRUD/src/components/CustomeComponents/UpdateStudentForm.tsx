@@ -33,16 +33,17 @@ import {
 } from "@/services/studentApi";
 import toast from "react-hot-toast";
 import { toggleform } from "@/services/booleanSlice";
+import { clearEditableStudent } from "@/services/dataSlice";
 
 // ✅ 1. Define schema with zod for validation
 const studentSchema = z.object({
   createdAt: z.string().optional(),
-  firstname: z.string().min(2, "First name is too short"),
-  lastname: z.string().min(2, "Last name is too short"),
+  firstname: z.string().min(2, "First name is too short").default(""),
+  lastname: z.string().min(2, "Last name is too short").default(""),
   gender: z.enum(["Male", "Female", "Other"]),
-  birthday: z.string(),
-  city: z.string(),
-  state: z.string(),
+  birthday: z.string().default(""),
+  city: z.string().default(""),
+  state: z.string().default(""),
   id: z.string().optional(),
 });
 
@@ -58,8 +59,7 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
   );
 
   const dispatch = useDispatch();
-  const [patchStudent] =
-    usePatchStudentMutation();
+  const [patchStudent] = usePatchStudentMutation();
 
   const [postStudent] = usePostStudentMutation();
 
@@ -68,13 +68,11 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
     resolver: zodResolver(studentSchema),
   });
 
-  if (student?.id !== undefined) {
-    useEffect(() => {
-      if (student) {
-        form.reset(student); // reset will populate all fields
-      }
-    }, [student, form]);
-  }
+  useEffect(() => {
+    if (student?.id) {
+      form.reset(student); // reset will populate all fields
+    }
+  }, [student, form]);
 
   // ✅ 3. Render form
   return (
@@ -83,7 +81,10 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
       <button
         type="button"
         className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-        onClick={() => dispatch(toggleform())} // replace with your close handler
+        onClick={() => {
+          dispatch(clearEditableStudent());
+          dispatch(toggleform());
+        }} // replace with your close handler
       >
         <X className="h-5 w-5" />
       </button>
@@ -92,12 +93,12 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((data) => {
-            console.log(data)
             if (student?.id) {
               patchStudent({ Id: data.id, ...data })
                 .unwrap()
                 .then((fulfilled) => {
                   dispatch(toggleform());
+                  dispatch(clearEditableStudent());
                   toast.success("Successfully Updated!");
                 })
                 .catch((rejected) => {
@@ -115,8 +116,6 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
                   toast.error("Failed to Create");
                   console.error(rejected);
                 });
-                console.log(data);
-                
             }
           })}
           className="space-y-4"
@@ -158,7 +157,7 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    defaultValue={student?.gender}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select gender" />

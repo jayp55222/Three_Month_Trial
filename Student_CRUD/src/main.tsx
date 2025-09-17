@@ -5,15 +5,12 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import { GSAPProvider } from "./AnimationLibrary/gsap-provider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <GSAPProvider>
-          <App />
-        </GSAPProvider>
+        <App />
       </Provider>
     </BrowserRouter>
   </StrictMode>

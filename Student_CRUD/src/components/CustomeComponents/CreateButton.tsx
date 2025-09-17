@@ -12,7 +12,7 @@ export function CreateButton() {
         dispatch(toggleform());
       }}
     >
-      <Plus className="h-4 w-4" />
+      <Plus className="h-4 w-4 text-white" />
       Create
     </Button>
   );
