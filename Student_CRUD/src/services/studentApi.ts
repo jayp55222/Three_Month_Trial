@@ -46,32 +46,27 @@ export const studentApi = createApi({
       }),
       invalidatesTags: ["Student"],
     }),
-    // getStudentsByFilter: builder.query<
-    //   Student[],
-    //   { key: string; value: string | number }
-    // >({
-    //   query: ({ key, value }) => {
-    //     const url = new URL(
-    //       "https://6891dd89447ff4f11fbe160d.mockapi.io/api/v1/students"
-    //     );
-
-    //     // loop through keys of the object and append
-    //     Object.entries({
-    //       firstname: value,
-    //       lastname: value,
-    //       gender: value,
-    //       city: value,
-    //       state: value,
-    //       id: value,
-    //     }).forEach(([key, value]) => {
-    //       if (value !== undefined && value !== null && value !== "") {
-    //         url.searchParams.append(key, String(value));
-    //       }
-    //     });
-
-    //     return url.toString();
-    //   },
-    // }),
+    getPeginatedStudents: builder.query<
+      Student[],
+      {
+        page: number;
+        limit: number;
+        sortBy?: string;
+        order?: string;
+        search?: string;
+      }
+    >({
+      query: ({ page, limit, sortBy = "id", order, search }) => ({
+        url: "students",
+        method: "GET",
+        params: { page, limit, sortBy, order, filter: search },
+      }),
+    }),
+    getStudentsLength: builder.query<number, void>({
+      query: () => "students",
+      // Transform the response to only return the array length
+      transformResponse: (response: Student[]) => response.length,
+    }),
   }),
 });
 
@@ -82,4 +77,6 @@ export const {
   useDeleteStudentMutation,
   usePatchStudentMutation,
   usePostStudentMutation,
+  useGetPeginatedStudentsQuery,
+  useGetStudentsLengthQuery,
 } = studentApi;

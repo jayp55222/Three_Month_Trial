@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-
 // Shadcn-style imports (assumes you have these components scaffolded in your project)
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
@@ -13,8 +12,17 @@ import {
   TableCell,
 } from "../ui/table";
 import { ScrollArea } from "../ui/scroll-area";
-import { MoreHorizontal, ChevronsUpDown } from "lucide-react";
-import { useGetStudensQuery } from "@/services/studentApi";
+import {
+  MoreHorizontal,
+  ChevronsUpDown,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import {
+  useGetPeginatedStudentsQuery,
+  useGetStudensQuery,
+  useGetStudentsLengthQuery,
+} from "@/services/studentApi";
 import type { Student } from "@/types/students";
 import { formatToIndianDate } from "@/services/dateconverter";
 import { getHeaderClass } from "@/functions/DyanamicClass";
@@ -23,109 +31,24 @@ import EditButton from "./EditeButton";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/store";
 import { CreateButton } from "./CreateButton";
-import { getPaginationRowModel, useReactTable } from "@tanstack/react-table";
-import { setSearchQuery } from "@/services/dataSlice";
-import { filterStudents } from "@/functions/filter";
-
-// type User = {
-//   id: string;
-//   name: string;
-//   email: string;
-//   role: string;
-//   createdAt: string;
-// };
-
-// const sampleData: User[] = [
-//   {
-//     id: "1",
-//     name: "Asha Patel",
-//     email: "asha@example.com",
-//     role: "Admin",
-//     createdAt: "2025-08-01",
-//   },
-//   {
-//     id: "2",
-//     name: "Ravi Kumar",
-//     email: "ravi@example.com",
-//     role: "Editor",
-//     createdAt: "2025-07-12",
-//   },
-//   {
-//     id: "3",
-//     name: "Nina Verma",
-//     email: "nina@example.com",
-//     role: "Viewer",
-//     createdAt: "2025-05-22",
-//   },
-//   {
-//     id: "4",
-//     name: "Karan Mehta",
-//     email: "karan@example.com",
-//     role: "Editor",
-//     createdAt: "2025-04-18",
-//   },
-//   {
-//     id: "5",
-//     name: "Priya Singh",
-//     email: "priya@example.com",
-//     role: "Viewer",
-//     createdAt: "2025-02-11",
-//   },
-// ];
+import { clearSearchQuery, setSearchQuery } from "@/services/dataSlice";
+import { FilterStudents } from "@/functions/filter";
 
 export default function Hero() {
   const [reverseboolen, setreverseboolen] = useState(false);
   const [reversearray, setReversearray] = useState([]);
-  const [filterarray, setFilterearray] = useState(undefined);
   const [page, setPage] = useState(1);
-  const pageSize = 3;
-  const [sortField, setSortField] = useState<keyof Student | null>(null);
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+  const [order, setOrder] = useState<"asc" | "desc">("asc");
+  const limit = 10; // number of records per page
 
   const { data: studentList, isLoading, isSuccess } = useGetStudensQuery();
-  const { editableStudent: editeobj, tabelquery } = useSelector(
+  const { data: studentListLength } = useGetStudentsLengthQuery();
+
+  const { tabelquery } = useSelector(
     (state: RootState) => state.editablestudent
   );
   const dispatch = useDispatch();
-
-  // const filtered = useMemo(() => {
-  //   const q = query.trim().toLowerCase();
-  //   let out = sampleData.filter(
-  //     (u) =>
-  //       u.name.toLowerCase().includes(q) ||
-  //       u.email.toLowerCase().includes(q) ||
-  //       u.role.toLowerCase().includes(q)
-  //   );
-
-  //   if (sortField) {
-  //     out = out.slice().sort((a, b) => {
-  //       const va = String(a[sortField]).toLowerCase();
-  //       const vb = String(b[sortField]).toLowerCase();
-  //       if (va === vb) return 0;
-  //       if (sortDir === "asc") return va > vb ? 1 : -1;
-  //       return va < vb ? 1 : -1;
-  //     });
-  //   }
-
-  //   return out;
-  // }, [query, sortField, sortDir]);
-
-  // const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
-  // const paged = useMemo(() => {
-  //   const start = (page - 1) * pageSize;
-  //   return filtered.slice(start, start + pageSize);
-  // }, [filtered, page]);
-
-  // function toggleSort(field: keyof Student) {
-  //   if (sortField === field) {
-  //     setSortDir((d) => (d === "asc" ? "desc" : "asc"));
-  //   } else {
-  //     setSortField(field);
-  //     setSortDir("asc");
-  //   }
-  //   setPage(1);
-  // }
-
+  const totalpage = Math.ceil(studentListLength / limit);
   const tablerow: Omit<Student, "createdAt"> = {
     id: "Id",
     firstname: "Firstname",
@@ -136,14 +59,22 @@ export default function Hero() {
     birthday: "Birthday",
   };
 
+  //return Filter array on user Input
   const Filterarray = useMemo(() => {
-    return filterStudents(studentList ?? [], tabelquery);
+    return FilterStudents(studentList ?? [], tabelquery);
   }, [studentList, tabelquery]);
-
+  const { data: paginatedStudent } = useGetPeginatedStudentsQuery({
+    page: page,
+    limit: 10,
+    order,
+    search: tabelquery,
+  });
+  console.log(order);
+  
   return (
     <Card className="w-full h-full">
       <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <CardTitle>Users</CardTitle>
+        <CardTitle>Students</CardTitle>
         <div className="flex items-center gap-2">
           <CreateButton />
           <Input
@@ -154,10 +85,7 @@ export default function Hero() {
           />
           <Button
             onClick={() => {
-              setQuery("");
-              setSortField(null);
-              setSortDir("asc");
-              setPage(1);
+              dispatch(clearSearchQuery());
             }}
             className="bg-blue-500 hover:bg-blue-700 cursor-pointer"
           >
@@ -166,7 +94,7 @@ export default function Hero() {
         </div>
       </CardHeader>
       <CardContent className="w-full h-full">
-        <ScrollArea className="h-[1000px]">
+        <ScrollArea className="w-full h-full">
           <Table>
             <TableHeader>
               <TableRow>
@@ -179,6 +107,7 @@ export default function Hero() {
                       <ChevronsUpDown
                         className="inline-block w-4 h-4 ml-1 align-text-bottom cursor-pointer"
                         onClick={() => {
+                          setOrder((prev) => (prev === "asc" ? "desc" : "asc"));
                           setReversearray([...(studentList ?? [])].reverse());
                           setreverseboolen((prev) => !prev);
                         }}
@@ -190,11 +119,9 @@ export default function Hero() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {(reverseboolen
-                ? reversearray
-                : filterarray
-                ? filterarray
-                : studentList
+              {(paginatedStudent
+                ? paginatedStudent
+                :[]
               )?.map((student) => (
                 <TableRow key={student.id}>
                   <TableCell className="font-medium">{student.id}</TableCell>
@@ -216,47 +143,34 @@ export default function Hero() {
                   </TableCell>
                 </TableRow>
               ))}
-
-              {/* {paged.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={5}>
-                    <div className="py-6 text-center text-sm text-muted-foreground">
-                      No results found.
-                    </div>
-                  </TableCell>
-                </TableRow>
-              )} */}
             </TableBody>
           </Table>
         </ScrollArea>
-
-        {/* Pagination */}
-        {/* <div className="mt-4 flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            Showing {Math.min((page - 1) * pageSize + 1, filtered.length)} -{" "}
-            {Math.min(page * pageSize, filtered.length)} of {filtered.length}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Button
-              disabled={page === 1}
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              className="bg-blue-500 hover:bg-blue-600"
-            >
-              Prev
-            </Button>
-            <div className="text-sm">
-              Page {page} of {totalPages}
-            </div>
-            <Button
-              disabled={page === totalPages}
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              className="bg-blue-500 hover:bg-blue-600"
-            >
-              Next
-            </Button>
-          </div>
-        </div> */}
+        <div className="flex justify-end-safe items-center gap-4">
+          <Button
+            className="bg-blue-500 hover:bg-blue-600"
+            onClick={() => {
+              if (page > 1) {
+                setPage((prev) => prev - 1);
+              }
+            }}
+          >
+            <ChevronLeft />
+            Previous
+          </Button>
+          {page} of {totalpage}
+          <Button
+            className="bg-blue-500 hover:bg-blue-600"
+            onClick={() => {
+              if (page <= totalpage - 1) {
+                setPage((prev) => prev + 1);
+              }
+            }}
+          >
+            Next
+            <ChevronRight />
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
