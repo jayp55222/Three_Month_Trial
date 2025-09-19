@@ -11,7 +11,7 @@ export const studentApi = createApi({
   keepUnusedDataFor: 10,
   tagTypes: ["Student"], // <-- declare the tag type
   endpoints: (builder) => ({
-    getStudens: builder.query<Student[], string>({
+    getStudents: builder.query<Student[], string>({
       query: () => `students`,
       providesTags: ["Student"], // <-- this tells RTK Query that this query is related to 'Student'
     }),
@@ -46,37 +46,15 @@ export const studentApi = createApi({
       }),
       invalidatesTags: ["Student"],
     }),
-    getPeginatedStudents: builder.query<
-      Student[],
-      {
-        page: number;
-        limit: number;
-        sortBy?: string;
-        order?: string;
-        search?: string;
-      }
-    >({
-      query: ({ page, limit, sortBy = "id", order, search }) => ({
-        url: "students",
-        method: "GET",
-        params: { page, limit, sortBy, order, filter: search },
-      }),
-    }),
-    getStudentsLength: builder.query<number, void>({
-      query: () => "students",
-      // Transform the response to only return the array length
-      transformResponse: (response: Student[]) => response.length,
-    }),
+    
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {
-  useGetStudensQuery,
+  useGetStudentsQuery,
   useDeleteStudentMutation,
   usePatchStudentMutation,
   usePostStudentMutation,
-  useGetPeginatedStudentsQuery,
-  useGetStudentsLengthQuery,
 } = studentApi;

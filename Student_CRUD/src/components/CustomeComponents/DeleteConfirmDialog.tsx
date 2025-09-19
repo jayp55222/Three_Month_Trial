@@ -10,24 +10,22 @@ import {
 import { Button } from "../ui/button";
 import { useDeleteStudentMutation } from "@/services/studentApi";
 import toast from "react-hot-toast";
+import React from "react";
 
 interface DeleteConfirmDialogProps {
   id: string;
-  onClose: () => void;
-  onConfirm: (id: string) => void; // use id when confirming
 }
 
 export default function DeleteConfirmDialog({
-  id,
-  onClose,
-  onConfirm,
+  id
 }: DeleteConfirmDialogProps) {
   // Delete mutation
   const [deleteStudent, { isError, isSuccess, isLoading: isDeleting }] =
     useDeleteStudentMutation();
+    const [open, setOpen] = React.useState(false);
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="destructive">Delete</Button>
       </DialogTrigger>
@@ -40,7 +38,7 @@ export default function DeleteConfirmDialog({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline" onClick={onClose} disabled={isDeleting}>
+          <Button variant="outline" onClick={() => setOpen(false)} disabled={isDeleting}>
             Cancel
           </Button>
           <Button
@@ -49,6 +47,7 @@ export default function DeleteConfirmDialog({
               deleteStudent(id)
                 .unwrap()
                 .then((fulfilled) => {
+                  setOpen(false); // close after success
                   toast.success("Successfully Deleted!");
                   console.log(fulfilled);
                 })

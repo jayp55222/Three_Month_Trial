@@ -28,6 +28,7 @@
     "date-fns": "^4.1.0",
     "gsap": "^3.13.0",
     "lucide-react": "^0.544.0",
+    "motion": "^12.23.16",
     "react": "^19.1.1",
     "react-day-picker": "^9.10.0",
     "react-dom": "^19.1.1",

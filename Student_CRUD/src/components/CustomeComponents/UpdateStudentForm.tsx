@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -26,7 +27,6 @@ import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/store";
-import { useEffect } from "react";
 import {
   usePatchStudentMutation,
   usePostStudentMutation,
@@ -34,6 +34,7 @@ import {
 import toast from "react-hot-toast";
 import { toggleform } from "@/services/booleanSlice";
 import { clearEditableStudent } from "@/services/dataSlice";
+import { motion } from "framer-motion";
 
 // ✅ 1. Define schema with zod for validation
 const studentSchema = z.object({
@@ -177,44 +178,61 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
           <FormField
             control={form.control}
             name="birthday"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Birthday</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-[240px] justify-start text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {field.value ? (
-                          format(new Date(field.value), "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value ? new Date(field.value) : undefined}
-                      onSelect={(date) => {
-                        field.onChange(
-                          date ? date.toISOString().split("T")[0] : ""
-                        );
-                      }}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
+            render={({ field }) => {
+              const [open, setOpen] = React.useState(false); // control popover open state
+              const [month, setMonth] = React.useState(new Date());
+
+              return (
+                <FormItem className="flex flex-col relative">
+                  <FormLabel>Birthday</FormLabel>
+                  <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-[240px] justify-start text-left font-normal relative",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {field.value ? (
+                            format(new Date(field.value), "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <span className="sr-only">Select date</span>
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="w-auto overflow-hidden p-0"
+                      align="end"
+                      alignOffset={-8}
+                      sideOffset={10}
+                    >
+                      <Calendar
+                        mode="single"
+                        selected={
+                          field.value ? new Date(field.value) : undefined
+                        }
+                        month={month}
+                        captionLayout="dropdown"
+                        onMonthChange={setMonth}
+                        onSelect={(date) => {
+                          field.onChange(
+                            date ? date.toISOString().split("T")[0] : ""
+                          );
+                          setOpen(false);
+                        }}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
           />
 
           <FormField
