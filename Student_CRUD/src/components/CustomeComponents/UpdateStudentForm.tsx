@@ -191,7 +191,7 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
                         <Button
                           variant="outline"
                           className={cn(
-                            "w-[240px] justify-start text-left font-normal relative",
+                            "w-auto justify-start text-left font-normal relative",
                             !field.value && "text-muted-foreground"
                           )}
                         >

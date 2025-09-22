@@ -1,0 +1,866 @@
+{
+  "categories": [
+    {
+      "name": "Accessories",
+      "subcategories": ["Boots", "Shoes", "Sunglasses"]
+    },
+    {
+      "name": "Beauty",
+      "subcategories": ["Eye", "Fragrance", "Hair", "Lips", "Nails", "Skincare"]
+    },
+    {
+      "name": "Clothes",
+      "subcategories": ["Bags", "Boot", "Shirt", "Short", "Watch"]
+    },
+    {
+      "name": "Electronic",
+      "subcategories": [
+        "Camcorder",
+        "Computers",
+        "Headphones",
+        "Laptops",
+        "Mouse",
+        "Smartphones",
+        "Smartwatches",
+        "Speaker",
+        "Televisions"
+      ]
+    },
+    {
+      "name": "Furniture",
+      "subcategories": ["Cabinet", "Chair", "Lighting", "Sofa", "Table"]
+    },
+    {
+      "name": "Jewelry",
+      "subcategories": ["Bracelet", "Earings", "Necklaces", "Rings"]
+    },
+    {
+      "name": "Men",
+      "subcategories": [
+        "Accessory",
+        "Clothing",
+        "Sneakers",
+        "Sweater",
+        "Trouser",
+        "Watches"
+      ]
+    },
+    {
+      "name": "Sport",
+      "subcategories": ["Fitness", "Hats", "Mens", "Sneaker", "Womens"]
+    },
+    {
+      "name": "Women",
+      "subcategories": [
+        "Accessories",
+        "Glasses",
+        "Handbags",
+        "Leather Bag",
+        "Outfit",
+        "Sandals"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Classic Leather Boots",
+      "category": "Accessories",
+      "subcategory": "Boots",
+      "price": 89.99,
+      "quantity": 15
+    },
+    {
+      "id": 2,
+      "name": "Running Shoes",
+      "category": "Accessories",
+      "subcategory": "Shoes",
+      "price": 59.99,
+      "quantity": 30
+    },
+    {
+      "id": 3,
+      "name": "Polarized Sunglasses",
+      "category": "Accessories",
+      "subcategory": "Sunglasses",
+      "price": 39.99,
+      "quantity": 25
+    },
+    {
+      "id": 4,
+      "name": "Waterproof Mascara",
+      "category": "Beauty",
+      "subcategory": "Eye",
+      "price": 12.99,
+      "quantity": 40
+    },
+    {
+      "id": 5,
+      "name": "Rose Perfume",
+      "category": "Beauty",
+      "subcategory": "Fragrance",
+      "price": 49.99,
+      "quantity": 20
+    },
+    {
+      "id": 6,
+      "name": "Organic Hair Oil",
+      "category": "Beauty",
+      "subcategory": "Hair",
+      "price": 15.99,
+      "quantity": 50
+    },
+    {
+      "id": 7,
+      "name": "Casual Cotton Shirt",
+      "category": "Clothes",
+      "subcategory": "Shirt",
+      "price": 25.99,
+      "quantity": 35
+    },
+    {
+      "id": 8,
+      "name": "Summer Shorts",
+      "category": "Clothes",
+      "subcategory": "Short",
+      "price": 18.99,
+      "quantity": 40
+    },
+    {
+      "id": 9,
+      "name": "Smartphone Pro X",
+      "category": "Electronic",
+      "subcategory": "Smartphones",
+      "price": 699.99,
+      "quantity": 12
+    },
+    {
+      "id": 10,
+      "name": "Gaming Laptop 15\"",
+      "category": "Electronic",
+      "subcategory": "Laptops",
+      "price": 999.99,
+      "quantity": 8
+    },
+    {
+      "id": 11,
+      "name": "Wooden Dining Table",
+      "category": "Furniture",
+      "subcategory": "Table",
+      "price": 299.99,
+      "quantity": 5
+    },
+    {
+      "id": 12,
+      "name": "Modern Sofa Set",
+      "category": "Furniture",
+      "subcategory": "Sofa",
+      "price": 499.99,
+      "quantity": 3
+    },
+    {
+      "id": 13,
+      "name": "Diamond Ring",
+      "category": "Jewelry",
+      "subcategory": "Rings",
+      "price": 1299.99,
+      "quantity": 2
+    },
+    {
+      "id": 14,
+      "name": "Gold Necklace",
+      "category": "Jewelry",
+      "subcategory": "Necklaces",
+      "price": 799.99,
+      "quantity": 4
+    },
+    {
+      "id": 15,
+      "name": "Men’s Wool Sweater",
+      "category": "Men",
+      "subcategory": "Sweater",
+      "price": 39.99,
+      "quantity": 22
+    },
+    {
+      "id": 16,
+      "name": "Men’s Formal Trousers",
+      "category": "Men",
+      "subcategory": "Trouser",
+      "price": 29.99,
+      "quantity": 18
+    },
+    {
+      "id": 17,
+      "name": "Yoga Mat",
+      "category": "Sport",
+      "subcategory": "Fitness",
+      "price": 24.99,
+      "quantity": 60
+    },
+    {
+      "id": 18,
+      "name": "Baseball Cap",
+      "category": "Sport",
+      "subcategory": "Hats",
+      "price": 14.99,
+      "quantity": 45
+    },
+    {
+      "id": 19,
+      "name": "Women’s Handbag",
+      "category": "Women",
+      "subcategory": "Handbags",
+      "price": 79.99,
+      "quantity": 20
+    },
+    {
+      "id": 20,
+      "name": "Leather Sandals",
+      "category": "Women",
+      "subcategory": "Sandals",
+      "price": 34.99,
+      "quantity": 25
+    },
+    {
+      "id": 21,
+      "name": "Winter Leather Boots",
+      "category": "Accessories",
+      "subcategory": "Boots",
+      "price": 99.99,
+      "quantity": 12
+    },
+    {
+      "id": 22,
+      "name": "Casual Sneakers",
+      "category": "Accessories",
+      "subcategory": "Shoes",
+      "price": 49.99,
+      "quantity": 28
+    },
+    {
+      "id": 23,
+      "name": "Aviator Sunglasses",
+      "category": "Accessories",
+      "subcategory": "Sunglasses",
+      "price": 45.99,
+      "quantity": 18
+    },
+    {
+      "id": 24,
+      "name": "Eye Shadow Palette",
+      "category": "Beauty",
+      "subcategory": "Eye",
+      "price": 22.99,
+      "quantity": 35
+    },
+    {
+      "id": 25,
+      "name": "Luxury Perfume",
+      "category": "Beauty",
+      "subcategory": "Fragrance",
+      "price": 59.99,
+      "quantity": 15
+    },
+    {
+      "id": 26,
+      "name": "Hair Shampoo",
+      "category": "Beauty",
+      "subcategory": "Hair",
+      "price": 9.99,
+      "quantity": 45
+    },
+    {
+      "id": 27,
+      "name": "Matte Lipstick",
+      "category": "Beauty",
+      "subcategory": "Lips",
+      "price": 14.99,
+      "quantity": 50
+    },
+    {
+      "id": 28,
+      "name": "Nail Polish Set",
+      "category": "Beauty",
+      "subcategory": "Nails",
+      "price": 19.99,
+      "quantity": 40
+    },
+    {
+      "id": 29,
+      "name": "Face Moisturizer",
+      "category": "Beauty",
+      "subcategory": "Skincare",
+      "price": 17.99,
+      "quantity": 35
+    },
+    {
+      "id": 30,
+      "name": "Denim Jacket",
+      "category": "Clothes",
+      "subcategory": "Shirt",
+      "price": 44.99,
+      "quantity": 22
+    },
+    {
+      "id": 31,
+      "name": "Formal Shirt",
+      "category": "Clothes",
+      "subcategory": "Shirt",
+      "price": 29.99,
+      "quantity": 30
+    },
+    {
+      "id": 32,
+      "name": "Casual Backpack",
+      "category": "Clothes",
+      "subcategory": "Bags",
+      "price": 39.99,
+      "quantity": 25
+    },
+    {
+      "id": 33,
+      "name": "Leather Belt",
+      "category": "Clothes",
+      "subcategory": "Boot",
+      "price": 24.99,
+      "quantity": 18
+    },
+    {
+      "id": 34,
+      "name": "Sports Watch",
+      "category": "Clothes",
+      "subcategory": "Watch",
+      "price": 119.99,
+      "quantity": 8
+    },
+    {
+      "id": 35,
+      "name": "HD Camcorder",
+      "category": "Electronic",
+      "subcategory": "Camcorder",
+      "price": 249.99,
+      "quantity": 6
+    },
+    {
+      "id": 36,
+      "name": "Desktop Computer",
+      "category": "Electronic",
+      "subcategory": "Computers",
+      "price": 799.99,
+      "quantity": 10
+    },
+    {
+      "id": 37,
+      "name": "Bluetooth Headphones",
+      "category": "Electronic",
+      "subcategory": "Headphones",
+      "price": 59.99,
+      "quantity": 25
+    },
+    {
+      "id": 38,
+      "name": "Gaming Mouse",
+      "category": "Electronic",
+      "subcategory": "Mouse",
+      "price": 29.99,
+      "quantity": 40
+    },
+    {
+      "id": 39,
+      "name": "Smartwatch Series 5",
+      "category": "Electronic",
+      "subcategory": "Smartwatches",
+      "price": 199.99,
+      "quantity": 14
+    },
+    {
+      "id": 40,
+      "name": "Portable Speaker",
+      "category": "Electronic",
+      "subcategory": "Speaker",
+      "price": 79.99,
+      "quantity": 20
+    },
+    {
+      "id": 41,
+      "name": "4K Smart TV",
+      "category": "Electronic",
+      "subcategory": "Televisions",
+      "price": 599.99,
+      "quantity": 7
+    },
+    {
+      "id": 42,
+      "name": "Wooden Cabinet",
+      "category": "Furniture",
+      "subcategory": "Cabinet",
+      "price": 149.99,
+      "quantity": 12
+    },
+    {
+      "id": 43,
+      "name": "Office Chair",
+      "category": "Furniture",
+      "subcategory": "Chair",
+      "price": 89.99,
+      "quantity": 18
+    },
+    {
+      "id": 44,
+      "name": "Table Lamp",
+      "category": "Furniture",
+      "subcategory": "Lighting",
+      "price": 39.99,
+      "quantity": 30
+    },
+    {
+      "id": 45,
+      "name": "Queen Size Sofa",
+      "category": "Furniture",
+      "subcategory": "Sofa",
+      "price": 399.99,
+      "quantity": 5
+    },
+    {
+      "id": 46,
+      "name": "Dining Table Set",
+      "category": "Furniture",
+      "subcategory": "Table",
+      "price": 349.99,
+      "quantity": 6
+    },
+    {
+      "id": 47,
+      "name": "Silver Bracelet",
+      "category": "Jewelry",
+      "subcategory": "Bracelet",
+      "price": 199.99,
+      "quantity": 8
+    },
+    {
+      "id": 48,
+      "name": "Pearl Earrings",
+      "category": "Jewelry",
+      "subcategory": "Earings",
+      "price": 149.99,
+      "quantity": 12
+    },
+    {
+      "id": 49,
+      "name": "Platinum Necklace",
+      "category": "Jewelry",
+      "subcategory": "Necklaces",
+      "price": 1299.99,
+      "quantity": 3
+    },
+    {
+      "id": 50,
+      "name": "Silver Ring",
+      "category": "Jewelry",
+      "subcategory": "Rings",
+      "price": 119.99,
+      "quantity": 15
+    },
+    {
+      "id": 51,
+      "name": "Men’s Leather Belt",
+      "category": "Men",
+      "subcategory": "Accessory",
+      "price": 29.99,
+      "quantity": 30
+    },
+    {
+      "id": 52,
+      "name": "Men’s Polo Shirt",
+      "category": "Men",
+      "subcategory": "Clothing",
+      "price": 25.99,
+      "quantity": 28
+    },
+    {
+      "id": 53,
+      "name": "Running Sneakers",
+      "category": "Men",
+      "subcategory": "Sneakers",
+      "price": 59.99,
+      "quantity": 20
+    },
+    {
+      "id": 54,
+      "name": "Men’s Hoodie",
+      "category": "Men",
+      "subcategory": "Sweater",
+      "price": 34.99,
+      "quantity": 25
+    },
+    {
+      "id": 55,
+      "name": "Formal Trousers",
+      "category": "Men",
+      "subcategory": "Trouser",
+      "price": 39.99,
+      "quantity": 15
+    },
+    {
+      "id": 56,
+      "name": "Luxury Wristwatch",
+      "category": "Men",
+      "subcategory": "Watches",
+      "price": 249.99,
+      "quantity": 5
+    },
+    {
+      "id": 57,
+      "name": "Gym Dumbbells",
+      "category": "Sport",
+      "subcategory": "Fitness",
+      "price": 49.99,
+      "quantity": 30
+    },
+    {
+      "id": 58,
+      "name": "Running Cap",
+      "category": "Sport",
+      "subcategory": "Hats",
+      "price": 12.99,
+      "quantity": 40
+    },
+    {
+      "id": 59,
+      "name": "Men’s Football Jersey",
+      "category": "Sport",
+      "subcategory": "Mens",
+      "price": 35.99,
+      "quantity": 25
+    },
+    {
+      "id": 60,
+      "name": "Basketball Sneakers",
+      "category": "Sport",
+      "subcategory": "Sneaker",
+      "price": 89.99,
+      "quantity": 12
+    },
+    {
+      "id": 61,
+      "name": "Women’s Tennis Dress",
+      "category": "Sport",
+      "subcategory": "Womens",
+      "price": 59.99,
+      "quantity": 18
+    },
+    {
+      "id": 62,
+      "name": "Women’s Sunglasses",
+      "category": "Women",
+      "subcategory": "Glasses",
+      "price": 54.99,
+      "quantity": 20
+    },
+    {
+      "id": 63,
+      "name": "Leather Tote Bag",
+      "category": "Women",
+      "subcategory": "Handbags",
+      "price": 89.99,
+      "quantity": 14
+    },
+    {
+      "id": 64,
+      "name": "Brown Leather Bag",
+      "category": "Women",
+      "subcategory": "Leather Bag",
+      "price": 99.99,
+      "quantity": 10
+    },
+    {
+      "id": 65,
+      "name": "Casual Women Outfit",
+      "category": "Women",
+      "subcategory": "Outfit",
+      "price": 69.99,
+      "quantity": 22
+    },
+    {
+      "id": 66,
+      "name": "Summer Sandals",
+      "category": "Women",
+      "subcategory": "Sandals",
+      "price": 29.99,
+      "quantity": 30
+    },
+    {
+      "id": 67,
+      "name": "Suede Ankle Boots",
+      "category": "Accessories",
+      "subcategory": "Boots",
+      "price": 109.99,
+      "quantity": 14
+    },
+    {
+      "id": 68,
+      "name": "Leather Loafers",
+      "category": "Accessories",
+      "subcategory": "Shoes",
+      "price": 74.99,
+      "quantity": 18
+    },
+    {
+      "id": 69,
+      "name": "Round Frame Sunglasses",
+      "category": "Accessories",
+      "subcategory": "Sunglasses",
+      "price": 29.99,
+      "quantity": 26
+    },
+    {
+      "id": 70,
+      "name": "Waterproof Eyeliner",
+      "category": "Beauty",
+      "subcategory": "Eye",
+      "price": 9.99,
+      "quantity": 60
+    },
+    {
+      "id": 71,
+      "name": "Citrus Body Spray",
+      "category": "Beauty",
+      "subcategory": "Fragrance",
+      "price": 19.99,
+      "quantity": 35
+    },
+    {
+      "id": 72,
+      "name": "Herbal Conditioner",
+      "category": "Beauty",
+      "subcategory": "Hair",
+      "price": 13.99,
+      "quantity": 40
+    },
+    {
+      "id": 73,
+      "name": "Lip Gloss Set",
+      "category": "Beauty",
+      "subcategory": "Lips",
+      "price": 15.99,
+      "quantity": 45
+    },
+    {
+      "id": 74,
+      "name": "Nail Art Kit",
+      "category": "Beauty",
+      "subcategory": "Nails",
+      "price": 22.99,
+      "quantity": 30
+    },
+    {
+      "id": 75,
+      "name": "Anti-Aging Cream",
+      "category": "Beauty",
+      "subcategory": "Skincare",
+      "price": 39.99,
+      "quantity": 28
+    },
+    {
+      "id": 76,
+      "name": "Women’s Casual Shirt",
+      "category": "Clothes",
+      "subcategory": "Shirt",
+      "price": 24.99,
+      "quantity": 32
+    },
+    {
+      "id": 77,
+      "name": "Denim Shorts",
+      "category": "Clothes",
+      "subcategory": "Short",
+      "price": 21.99,
+      "quantity": 25
+    },
+    {
+      "id": 78,
+      "name": "Travel Duffel Bag",
+      "category": "Clothes",
+      "subcategory": "Bags",
+      "price": 59.99,
+      "quantity": 20
+    },
+    {
+      "id": 79,
+      "name": "Leather Work Boots",
+      "category": "Clothes",
+      "subcategory": "Boot",
+      "price": 79.99,
+      "quantity": 14
+    },
+    {
+      "id": 80,
+      "name": "Luxury Gold Watch",
+      "category": "Clothes",
+      "subcategory": "Watch",
+      "price": 349.99,
+      "quantity": 5
+    },
+    {
+      "id": 81,
+      "name": "Professional Camcorder",
+      "category": "Electronic",
+      "subcategory": "Camcorder",
+      "price": 699.99,
+      "quantity": 4
+    },
+    {
+      "id": 82,
+      "name": "All-in-One PC",
+      "category": "Electronic",
+      "subcategory": "Computers",
+      "price": 999.99,
+      "quantity": 7
+    },
+    {
+      "id": 83,
+      "name": "Noise-Canceling Headphones",
+      "category": "Electronic",
+      "subcategory": "Headphones",
+      "price": 149.99,
+      "quantity": 16
+    },
+    {
+      "id": 84,
+      "name": "Ultrabook Laptop",
+      "category": "Electronic",
+      "subcategory": "Laptops",
+      "price": 1299.99,
+      "quantity": 6
+    },
+    {
+      "id": 85,
+      "name": "Wireless Gaming Mouse",
+      "category": "Electronic",
+      "subcategory": "Mouse",
+      "price": 39.99,
+      "quantity": 25
+    },
+    {
+      "id": 86,
+      "name": "Budget Smartphone",
+      "category": "Electronic",
+      "subcategory": "Smartphones",
+      "price": 299.99,
+      "quantity": 22
+    },
+    {
+      "id": 87,
+      "name": "Fitness Smartwatch",
+      "category": "Electronic",
+      "subcategory": "Smartwatches",
+      "price": 149.99,
+      "quantity": 18
+    },
+    {
+      "id": 88,
+      "name": "Wireless Soundbar",
+      "category": "Electronic",
+      "subcategory": "Speaker",
+      "price": 199.99,
+      "quantity": 10
+    },
+    {
+      "id": 89,
+      "name": "OLED TV 55\"",
+      "category": "Electronic",
+      "subcategory": "Televisions",
+      "price": 1299.99,
+      "quantity": 5
+    },
+    {
+      "id": 90,
+      "name": "Steel Filing Cabinet",
+      "category": "Furniture",
+      "subcategory": "Cabinet",
+      "price": 199.99,
+      "quantity": 10
+    },
+    {
+      "id": 91,
+      "name": "Recliner Chair",
+      "category": "Furniture",
+      "subcategory": "Chair",
+      "price": 249.99,
+      "quantity": 8
+    },
+    {
+      "id": 92,
+      "name": "Ceiling Light",
+      "category": "Furniture",
+      "subcategory": "Lighting",
+      "price": 89.99,
+      "quantity": 15
+    },
+    {
+      "id": 93,
+      "name": "Luxury Sofa",
+      "category": "Furniture",
+      "subcategory": "Sofa",
+      "price": 899.99,
+      "quantity": 3
+    },
+    {
+      "id": 94,
+      "name": "Coffee Table",
+      "category": "Furniture",
+      "subcategory": "Table",
+      "price": 149.99,
+      "quantity": 12
+    },
+    {
+      "id": 95,
+      "name": "Charm Bracelet",
+      "category": "Jewelry",
+      "subcategory": "Bracelet",
+      "price": 99.99,
+      "quantity": 20
+    },
+    {
+      "id": 96,
+      "name": "Stud Earrings",
+      "category": "Jewelry",
+      "subcategory": "Earings",
+      "price": 59.99,
+      "quantity": 25
+    },
+    {
+      "id": 97,
+      "name": "Gold Chain Necklace",
+      "category": "Jewelry",
+      "subcategory": "Necklaces",
+      "price": 599.99,
+      "quantity": 10
+    },
+    {
+      "id": 98,
+      "name": "Engagement Ring",
+      "category": "Jewelry",
+      "subcategory": "Rings",
+      "price": 2499.99,
+      "quantity": 2
+    },
+    {
+      "id": 99,
+      "name": "Women’s Party Outfit",
+      "category": "Women",
+      "subcategory": "Outfit",
+      "price": 89.99,
+      "quantity": 18
+    },
+    {
+      "id": 100,
+      "name": "Designer Handbag",
+      "category": "Women",
+      "subcategory": "Handbags",
+      "price": 229.99,
+      "quantity": 6
+    }
+  ]
+}

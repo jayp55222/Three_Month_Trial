@@ -17,7 +17,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="bg-gray-900 text-white shadow-md">
+    <header className="bg-gray-900 text-white shadow-md font-lato">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}

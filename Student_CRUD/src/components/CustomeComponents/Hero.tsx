@@ -21,7 +21,7 @@ import {
 import { useGetStudentsQuery } from "@/services/studentApi";
 import type { Student } from "@/types/students";
 import { formatToIndianDate } from "@/services/dateconverter";
-import { getHeaderClass } from "@/functions/DyanamicClass";
+import { getHeaderClass, getSkeletonClass } from "@/functions/DyanamicClass";
 import DeleteConfirmDialog from "./DeleteConfirmDialog";
 import EditButton from "./EditeButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -132,38 +132,97 @@ export default function Hero() {
                     )}
                   </TableHead>
                 ))}
-                <TableHead className="table-cell">Actions</TableHead>
+                <TableHead className="table-cell font-roboto">
+                  Actions
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {(studentListState ? studentListState : [])
-                ?.slice(firstIndex, lastIndex)
-                .sort((a, b) =>
-                  order === "asc"
-                    ? Number(a.id) - Number(b.id)
-                    : Number(b.id) - Number(a.id)
-                )
-                .map((student) => (
-                  <TableRow key={student.id}>
-                    <TableCell className="font-medium hidden md:table-cell">{student.id}</TableCell>
-                    <TableCell>{student.firstname}</TableCell>
-                    <TableCell className="hidden md:table-cell">
-                      {student.lastname}
-                    </TableCell>
-                    <TableCell className="hidden sm:table-cell">{student.gender}</TableCell>
-                    <TableCell className="hidden sm:table-cell">{student.city}</TableCell>
-                    <TableCell>{student.state}</TableCell>
-                    <TableCell className="hidden lg:table-cell">
-                      {formatToIndianDate(student.birthday)}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2 sm:flex-col md:flex-row">
-                        <EditButton studentObj={student} />
-                        <DeleteConfirmDialog id={student.id} />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
+              {isLoading
+                ? Array.from({ length: 10 }).map((_, i) => (
+                    <TableRow key={i}>
+                      <TableCell className="skeleton bg-gray-200" />
+                      <TableCell className="skeleton bg-gray-200" />
+                      <TableCell className="skeleton bg-gray-200 hidden md:table-cell" />
+                      <TableCell className="skeleton bg-gray-200 hidden sm:table-cell" />
+                      <TableCell className="skeleton bg-gray-200 hidden sm:table-cell" />
+                      <TableCell className="skeleton bg-gray-200" />
+                      <TableCell className="skeleton bg-gray-200 hidden lg:table-cell" />
+                      <TableCell>
+                        <div className="flex items-center gap-2 sm:flex-col md:flex-row">
+                          <div className="skeleton bg-gray-200 w-12 h-6" />
+                          <div className="skeleton bg-gray-200 w-12 h-6" />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : (studentListState ? studentListState : [])
+                    ?.slice(firstIndex, lastIndex)
+                    .sort((a, b) =>
+                      order === "asc"
+                        ? Number(a.id) - Number(b.id)
+                        : Number(b.id) - Number(a.id)
+                    )
+                    .map((student) => (
+                      <TableRow key={student.id} className={`font-open-sans`}>
+                        <TableCell
+                          className={getSkeletonClass(
+                            student.id,
+                            "font-medium hidden md:table-cell"
+                          )}
+                        >
+                          {student.id}
+                        </TableCell>
+                        <TableCell
+                          className={getSkeletonClass(student.firstname, "")}
+                        >
+                          {student.firstname}
+                        </TableCell>
+                        <TableCell
+                          className={getSkeletonClass(
+                            student.lastname,
+                            "hidden md:table-cell"
+                          )}
+                        >
+                          {student.lastname}
+                        </TableCell>
+                        <TableCell
+                          className={getSkeletonClass(
+                            student.gender,
+                            "hidden sm:table-cell"
+                          )}
+                        >
+                          {student.gender}
+                        </TableCell>
+                        <TableCell
+                          className={getSkeletonClass(
+                            student.city,
+                            "hidden sm:table-cell"
+                          )}
+                        >
+                          {student.city}
+                        </TableCell>
+                        <TableCell
+                          className={getSkeletonClass(student.state, "")}
+                        >
+                          {student.state}
+                        </TableCell>
+                        <TableCell
+                          className={getSkeletonClass(
+                            student.birthday,
+                            "hidden lg:table-cell"
+                          )}
+                        >
+                          {formatToIndianDate(student.birthday)}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2 sm:flex-col md:flex-row">
+                            <EditButton studentObj={student} />
+                            <DeleteConfirmDialog id={student.id} />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
             </TableBody>
           </Table>
         </ScrollArea>
