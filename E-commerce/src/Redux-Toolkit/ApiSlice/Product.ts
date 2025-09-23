@@ -14,8 +14,16 @@ export const ProductApi = createApi({
     getFourProducts: builder.query<Product[], string>({
       query: () => `products?_limit=4`,
     }),
-    getAllProducts: builder.query<Product[], string>({
-      query: (itemsPerPage) => `products?_limit=${itemsPerPage}`,
+    getAllProducts: builder.query<Product[], { itemsPerPage: number; category?: string | null; subcategory?: string | null }>({
+      query: ({ itemsPerPage, category, subcategory }) => {
+    const params = new URLSearchParams();
+    params.set("_limit", itemsPerPage.toString());
+
+    if (category) params.set("category", category);
+    if (subcategory) params.set("subcategory", subcategory);
+
+    return `products?${params.toString()}`;
+  },
     }),
   }),
 });

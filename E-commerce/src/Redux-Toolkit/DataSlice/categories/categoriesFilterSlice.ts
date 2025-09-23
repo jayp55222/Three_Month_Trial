@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { type SubcategoryType } from "@/types/ProductType"; // Adjust the path to your types file
+import { type CategoryName, type SubcategoryType } from "@/types/ProductType"; // Adjust the path to your types file
 
 export type SortOption =
   | "Latest"
@@ -8,8 +8,8 @@ export type SortOption =
   | "Best Selling"
   | "Best Rated";
 
-interface FilterState {
-  category?: string | null;
+export interface FilterState {
+  category?: CategoryName | null;
   subcategory?: SubcategoryType | null;
   price?: string[];
   brands?: string[];

@@ -133,11 +133,11 @@ const List = () => (
 const priceOptions = [
   { id: "price-all", label: "All" },
   { id: "price-100", label: "0 - 100" },
-  { id: "price-300", label: "100.00 - 299.00" },
-  { id: "price-500", label: "300.00 - 499.00" },
-  { id: "price-999", label: "500.00 - 999.00" },
-  { id: "price-4999", label: "1,000.00 - 4,999.00" },
-  { id: "price-over", label: "4,999.00 & Over" },
+  { id: "price-300", label: "100 - 299" },
+  { id: "price-500", label: "300 - 499" },
+  { id: "price-999", label: "500 - 999" },
+  { id: "price-4999", label: "1,000 - 4,999" },
+  { id: "price-over", label: "4,999 & Over" },
 ];
 const brands = [
   {
@@ -559,12 +559,17 @@ const Shop = () => {
   const { itemsPerPage, firstIndex, lastIndex, currentPage } = useSelector(
     (state: RootState) => state.pagination
   );
-  const { data: allProducts } = useGetAllProductsQuery(itemsPerPage.toString());
-  const dispatch = useDispatch();
-
   const { category, subcategory, price } = useSelector(
     (state: RootState) => state.filter
   );
+  const { data: allProducts } = useGetAllProductsQuery({
+    itemsPerPage: itemsPerPage.toString(),
+    category: category,
+    subcategory: subcategory,
+  });
+  const dispatch = useDispatch();
+
+  console.log(category, subcategory, price?.toString());
 
   // React.useEffect(() => {
   //   getPaginationIndexes(currentPage, itemsPerPage, dispatch);
@@ -776,11 +781,9 @@ const Shop = () => {
 
             {/* Product Grid */}
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {allProducts
-                ?.slice(1, 16)
-                .map((product, index) => (
-                  <ProductCard key={index} product={product} />
-                ))}
+              {allProducts?.slice(1, 16).map((product, index) => (
+                <ProductCard key={index} product={product} />
+              ))}
             </div>
 
             {/* Pagination */}
