@@ -24,11 +24,13 @@ type SubcategoryType =
 interface Category {
   name: CategoryName;
   subcategories: SubcategoryType[];
+  img:string;
 }
 
 interface Product {
   id: number;
   name: string;
+  img:string;
   category: string;
   subcategory: string;
   price: number;

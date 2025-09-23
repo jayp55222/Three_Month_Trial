@@ -2,15 +2,25 @@
   "categories": [
     {
       "name": "Accessories",
-      "subcategories": ["Boots", "Shoes", "Sunglasses"]
+      "subcategories": ["Boots", "Shoes", "Sunglasses"],
+      "img": "https://upload.wikimedia.org/wikipedia/commons/a/ae/An_Adidas_shoe.jpg"
     },
     {
       "name": "Beauty",
-      "subcategories": ["Eye", "Fragrance", "Hair", "Lips", "Nails", "Skincare"]
+      "subcategories": [
+        "Eye",
+        "Fragrance",
+        "Hair",
+        "Lips",
+        "Nails",
+        "Skincare"
+      ],
+      "img": "https://pixabay.com/get/gf469d15b7aa04deea95e46531eda0381ce26bba56dfcf12d239e83d777dc1025014d5b32adfeb629805c90707001f8e9e345fa8579716636637ad6ccb76751b3_1280.jpg"
     },
     {
       "name": "Clothes",
-      "subcategories": ["Bags", "Boot", "Shirt", "Short", "Watch"]
+      "subcategories": ["Bags", "Boot", "Shirt", "Short", "Watch"],
+      "img": "https://pixabay.com/get/g6841ec657be796a33755bb1adb071d391bb6f4141d5d4edb9e92943495812d72324887986b3d698fa76a4b35569a0744_1280.jpg"
     },
     {
       "name": "Electronic",
@@ -24,15 +34,18 @@
         "Smartwatches",
         "Speaker",
         "Televisions"
-      ]
+      ],
+      "img": "https://pixabay.com/get/gf625de6efef81a46ede4b6470b3459568017dfd356792b508359702b38c754341d6945a2f0e979cbc9a627f9a1053970c18d1a330452aa2fea504cfd975dab91_1280.jpg"
     },
     {
       "name": "Furniture",
-      "subcategories": ["Cabinet", "Chair", "Lighting", "Sofa", "Table"]
+      "subcategories": ["Cabinet", "Chair", "Lighting", "Sofa", "Table"],
+      "img": "https://pixabay.com/get/g410eee27beec14ecf589090a574873eb3caf31a46fb9b34788a5fd424e497cd3a6105425154327ce3c968a3a3c805f18d783039a2ed4777de2daaea7dbb0d731_1280.jpg"
     },
     {
       "name": "Jewelry",
-      "subcategories": ["Bracelet", "Earings", "Necklaces", "Rings"]
+      "subcategories": ["Bracelet", "Earings", "Necklaces", "Rings"],
+      "img": "https://pixabay.com/get/g747061695b24fc1b7d3cc90ffc5f5341e6b55192f2d48379fade8c52a279fedfe15db89cc50dadc7ad2448969e8c7172_1280.jpg"
     },
     {
       "name": "Men",
@@ -43,11 +56,13 @@
         "Sweater",
         "Trouser",
         "Watches"
-      ]
+      ],
+      "img": "https://pixabay.com/get/gd73efb43d3fafbed50142825383cfb9460894ab5a1f7c73e5a7a11c6f7dda38a9fadef9dee855725607b2a08b5ad385000d643e9c71f7ba46087f5c7597072ae_1280.jpg"
     },
     {
       "name": "Sport",
-      "subcategories": ["Fitness", "Hats", "Mens", "Sneaker", "Womens"]
+      "subcategories": ["Fitness", "Hats", "Mens", "Sneaker", "Womens"],
+      "img": "https://pixabay.com/get/g3a01432aa142057fe318ae8c4faf9e433b0b62102865ff0106bbddce40a81b01e2a6d9f0222d415d18a31ad097bef0030d23a14591dfc9a4f0ff86c808ca8131_1280.jpg"
     },
     {
       "name": "Women",
@@ -58,7 +73,8 @@
         "Leather Bag",
         "Outfit",
         "Sandals"
-      ]
+      ],
+      "img": "https://pixabay.com/get/gb75bb53f06376a10c6c8bdcf2329c923ef8962ca060a20032514c4c539f067fe25a74913454325deb6bd92e1e273b7a9618f969c1b2797c1f09c1c2422d8a8b3_1280.jpg"
     }
   ],
   "products": [
@@ -67,6 +83,7 @@
       "name": "Classic Leather Boots",
       "category": "Accessories",
       "subcategory": "Boots",
+      "img": "https://pixabay.com/get/gd49aec45f16b56bc8105cded1afc91b5cef875dfedcb37bc515928047aa7dd8fc3bbbfe9a32718c0b38bcd4c1c468a7da3f58b608cc6a154352afe1d1481cc65_1280.jpg",
       "price": 89.99,
       "quantity": 15
     },
@@ -75,6 +92,7 @@
       "name": "Running Shoes",
       "category": "Accessories",
       "subcategory": "Shoes",
+      "img": "https://pixabay.com/get/g4d526e60b1167a04b799a37d305d24fc8fea1f955348b337183b6bfecdc44bab24eebbc240f6c95abcebaeb2dfed1cb397c137db7170d0fbab4d6f7a1beb7a31_1280.jpg",
       "price": 59.99,
       "quantity": 30
     },
@@ -83,6 +101,7 @@
       "name": "Polarized Sunglasses",
       "category": "Accessories",
       "subcategory": "Sunglasses",
+      "img": "https://pixabay.com/get/gbccef473ed3be65a39ac474bf0f80daf3e6d14461a1db187a21356e341e3ca95ebcf15464038276f3880ae93255e06753e90d937786ae9361d3e70b87ff7bc03_1280.jpg",
       "price": 39.99,
       "quantity": 25
     },
@@ -91,6 +110,7 @@
       "name": "Waterproof Mascara",
       "category": "Beauty",
       "subcategory": "Eye",
+      "img": "https://pixabay.com/get/gcc3ced1b96f8a5c75551066fcff63fb155399406afb2498839bee03cb087ccea9b99cc05fb060a15d637ceff6c0d34586cd655dd4520d2164a1d87070da89a3e_1280.jpg",
       "price": 12.99,
       "quantity": 40
     },
@@ -99,6 +119,7 @@
       "name": "Rose Perfume",
       "category": "Beauty",
       "subcategory": "Fragrance",
+      "img": "https://pixabay.com/get/gddc65cb713c43d3565a4a740859c32be4f385f41ca8df0818ffde104cc5cf3c7ce44f2d41425553bc98490244ff0a19ea67fdbeae6e595bbdf0837fb451523e7_1280.jpg",
       "price": 49.99,
       "quantity": 20
     },
@@ -107,6 +128,7 @@
       "name": "Organic Hair Oil",
       "category": "Beauty",
       "subcategory": "Hair",
+      "img": "https://pixabay.com/get/g89e66dc2dd3c2123a73eea5abf953cc2fe857e21da9453b89f3d7e35d4059ac1a4c68e3dcff8d67705ba1b3617e4ed68ac2d7c024bbf2ea70b4196524a954e66_1280.jpg",
       "price": 15.99,
       "quantity": 50
     },
@@ -115,6 +137,7 @@
       "name": "Casual Cotton Shirt",
       "category": "Clothes",
       "subcategory": "Shirt",
+      "img": "https://pixabay.com/get/g8fcfcba219fbad2b56abc20e976c23e89a81a765bdaaecc4ba707c34df1a2f91cb2f8666251c6ccaff36f4d633d19a34_1280.jpg",
       "price": 25.99,
       "quantity": 35
     },
@@ -123,6 +146,7 @@
       "name": "Summer Shorts",
       "category": "Clothes",
       "subcategory": "Short",
+      "img": "https://pixabay.com/get/gfcb202ef88b7d39a7241ba9b469369af66fc82496b403ec6e7ebe8fdac8b30b003d0048a6d37377243566ffa7f0a8407_1280.jpg",
       "price": 18.99,
       "quantity": 40
     },
@@ -219,6 +243,7 @@
       "name": "Leather Sandals",
       "category": "Women",
       "subcategory": "Sandals",
+      "img":"https://pixabay.com/get/gd9295b283f70b42a0ad6ca6e5ceb713b22f7345387146714657486ebe947eb4f15da9d8b25c89408151deacc43dcc858_1280.jpg",
       "price": 34.99,
       "quantity": 25
     },
@@ -275,6 +300,7 @@
       "name": "Matte Lipstick",
       "category": "Beauty",
       "subcategory": "Lips",
+      "img": "https://pixabay.com/get/g4486ccd6905e0de97c5fa61cf0981910fa96affe7bef71953383fd3c0b37e7800122753c9a1ccfa269305b9b0e08a02804f5a3e7a07408c7d4940105ffb3fdb8_1280.jpg",
       "price": 14.99,
       "quantity": 50
     },
@@ -283,6 +309,7 @@
       "name": "Nail Polish Set",
       "category": "Beauty",
       "subcategory": "Nails",
+      "img": "https://pixabay.com/get/gc67d2e6ca5a5c77618ddf31f63d301c73f6f3083d7215d12c938514fce9a74c7c9c60f199f6a2c02826eb0a7829609bbe21672ed09026c02c84cdd9270dd851a_1280.jpg",
       "price": 19.99,
       "quantity": 40
     },
@@ -291,6 +318,7 @@
       "name": "Face Moisturizer",
       "category": "Beauty",
       "subcategory": "Skincare",
+      "img": "https://pixabay.com/get/g0b25cc7f9075da9ce25944b43abf858cc93679bb5583c53ee3a95032ffd3486d68e73279732c14501ecd0bfa165df92c49d9d59862bbceb078c80b878e9ed5e1_1280.jpg",
       "price": 17.99,
       "quantity": 35
     },
@@ -315,6 +343,7 @@
       "name": "Casual Backpack",
       "category": "Clothes",
       "subcategory": "Bags",
+      "img": "https://pixabay.com/get/g48189ef04215faef09c359e74fcb8c8a92b47907cf553a8b4aeaa7970765926dfeca067ea447575ae88d8b957ddfeac3a4abfe52165cf18222eb1e52ee9f7101_1280.jpg",
       "price": 39.99,
       "quantity": 25
     },
@@ -331,6 +360,7 @@
       "name": "Sports Watch",
       "category": "Clothes",
       "subcategory": "Watch",
+      "img": "https://pixabay.com/get/g423d8caa89f560f71ed5b84d2fce14e06d792160c3af65b6f26a42f0fc52c00173448237b18d4cad636aa68fa949b5895e62f8f0b43f976df7c1033e065fc5f2_1280.jpg",
       "price": 119.99,
       "quantity": 8
     },
@@ -339,6 +369,7 @@
       "name": "HD Camcorder",
       "category": "Electronic",
       "subcategory": "Camcorder",
+      "img": "https://pixabay.com/get/gb0bd8a6836c6a4ea7ecd92b208ea18a5a94cbcf8245302c4d7dbb280544ba7c4fc2aefca5a018bac4ad5268a5be68a7a28024880dc78f7379a33c5484d432732_1280.jpg",
       "price": 249.99,
       "quantity": 6
     },
@@ -347,6 +378,7 @@
       "name": "Desktop Computer",
       "category": "Electronic",
       "subcategory": "Computers",
+      "img": "https://pixabay.com/get/gb8ff66b5c697b3e88bce3943dbc55e5995f5301504183b4bd3cd20f318fc18a36499fbcce0634da1376f9b6a51eb3690424d4cf959998560642d34f30504ff7b_1280.jpg",
       "price": 799.99,
       "quantity": 10
     },
@@ -355,6 +387,7 @@
       "name": "Bluetooth Headphones",
       "category": "Electronic",
       "subcategory": "Headphones",
+      "img": "https://pixabay.com/get/g26a426431cf0b8ec4aaa773e86a1b5dcfbcf24e2e4ac558876d81ef555465136c5b64e93a6088feb2a939e16259b83612cc3805c6da483442f8837b42ba2bca6_1280.jpg",
       "price": 59.99,
       "quantity": 25
     },
@@ -483,6 +516,7 @@
       "name": "Running Sneakers",
       "category": "Men",
       "subcategory": "Sneakers",
+      "img":"https://pixabay.com/get/gf8ffd00d37074514ac1c06b6e60c573cbac1a5032ea55d5dca60d7421948af85fee093b63e3450fb9e25901ed49774f0c30f7afe51cc10c69c8523df383a1fa1_1280.jpg",
       "price": 59.99,
       "quantity": 20
     },
@@ -491,6 +525,7 @@
       "name": "Men’s Hoodie",
       "category": "Men",
       "subcategory": "Sweater",
+      "img":"https://pixabay.com/get/g4c377cfcdd23ad6b724b6a123f2c74f6a8218c4b21ae4c8db0a16ab1bff60006f6b69b05215b7bb5bc8afdf5d202299a1d88b28681ae18da11f19a04e72b54b5_1280.jpg",
       "price": 34.99,
       "quantity": 25
     },
@@ -515,6 +550,7 @@
       "name": "Gym Dumbbells",
       "category": "Sport",
       "subcategory": "Fitness",
+      "img":"https://pixabay.com/get/gb39ab06326ecf15c1eda0bb5d5672ac61f65a77f11c77214594a98587bf52d0f863bff9540226de05103268f03b82ef1b3673d76d0119671559bf4558027edea_1280.jpg",
       "price": 49.99,
       "quantity": 30
     },
@@ -546,7 +582,7 @@
       "id": 61,
       "name": "Women’s Tennis Dress",
       "category": "Sport",
-      "subcategory": "Womens",
+      "subcategory": "Women",
       "price": 59.99,
       "quantity": 18
     },
@@ -731,6 +767,7 @@
       "name": "Ultrabook Laptop",
       "category": "Electronic",
       "subcategory": "Laptops",
+      "img": "https://pixabay.com/get/g0a1a55edf27d056f0dac4f18512976b1d9faf52fc4c0d6b797845fe04489df897f697017ecc03ae7e42a539acf266eeb3cabc87b6d1c30ce27cce8613d92cb86_1280.jpg",
       "price": 1299.99,
       "quantity": 6
     },
@@ -739,6 +776,7 @@
       "name": "Wireless Gaming Mouse",
       "category": "Electronic",
       "subcategory": "Mouse",
+      "img":"https://pixabay.com/get/g935ae1b04ed66e96cdfd6ed92760433accba812ef5cce371d5aeebb3d652fc659cf489e8d6c2164748199577f77443c066c2dfe9b86d5eb43f6903e6cf1a8d53_1280.jpg",
       "price": 39.99,
       "quantity": 25
     },
@@ -747,6 +785,7 @@
       "name": "Budget Smartphone",
       "category": "Electronic",
       "subcategory": "Smartphones",
+      "img":"https://pixabay.com/get/g03b19a4c11d2b341e1e36a7c37e10fb1ade59703e17e8de3222738cd1ffaa50aac7bf502e753d56b32e070b118620ae0df3bdffac293d32c2226ff6617f9c10e_1280.jpg",
       "price": 299.99,
       "quantity": 22
     },
@@ -755,6 +794,7 @@
       "name": "Fitness Smartwatch",
       "category": "Electronic",
       "subcategory": "Smartwatches",
+      "img":"https://pixabay.com/get/g37adcadbdb00da7ccd94bb841296f8876cb6413a0fd76b5fd86c4bfb5b31138ab036e24971d0c704325c08d2a15a64a8_1280.jpg",
       "price": 149.99,
       "quantity": 18
     },
@@ -763,6 +803,7 @@
       "name": "Wireless Soundbar",
       "category": "Electronic",
       "subcategory": "Speaker",
+      "img":"https://pixabay.com/get/g41d1ceb297164acb122c9178a805c3076a7f1d62b76b67451e069306fe9455d0d30e498ae889d8a8432951506d3835c6_1280.jpg",
       "price": 199.99,
       "quantity": 10
     },
@@ -771,6 +812,7 @@
       "name": "OLED TV 55\"",
       "category": "Electronic",
       "subcategory": "Televisions",
+      "img":"https://pixabay.com/get/g6f079583bc5a59aff9be86900eb3badc86e0878d170d3a5ccad1d2f82b672b7eaa4c1225e5af4c31694bb0f890b27aebd9f8afd72b290ab2395b8c05da996e53_1280.jpg",
       "price": 1299.99,
       "quantity": 5
     },
@@ -795,6 +837,7 @@
       "name": "Ceiling Light",
       "category": "Furniture",
       "subcategory": "Lighting",
+      "img":"https://pixabay.com/get/g83e67d30ef8f0286e76ea518c6b548c934cba4742606302bad0964e8868980e9955a8f29ae7f3711144f06a619f88ea3c7a3f23dd1c623d28df4c27883a0a0a9_1280.jpg",
       "price": 89.99,
       "quantity": 15
     },
@@ -803,6 +846,7 @@
       "name": "Luxury Sofa",
       "category": "Furniture",
       "subcategory": "Sofa",
+      "img":"https://pixabay.com/get/gcdca94cdcc1bcce2e81b8686bec2d0b6b715f5aef032f78f9d258ea1f97d61829df6c8a2043b9ce87502c43c86c2437abc951cc778f447fbaba04e295677ce68_1280.jpg",
       "price": 899.99,
       "quantity": 3
     },
@@ -811,6 +855,7 @@
       "name": "Coffee Table",
       "category": "Furniture",
       "subcategory": "Table",
+      "img":"https://pixabay.com/get/g0471f59f6a29823784c6fa12678cef2eaba3a4c1a0afce327859b5620a656ea0c3c7ecc162f8f149fe7f2d816f425760b8829fb08c534789a6869fd0623e19f7_1280.jpg",
       "price": 149.99,
       "quantity": 12
     },
@@ -835,6 +880,7 @@
       "name": "Gold Chain Necklace",
       "category": "Jewelry",
       "subcategory": "Necklaces",
+      "img":"https://pixabay.com/get/gc6a525c6bdf2ccfb8511c2daf73a1bdb86ec07c13851735e6e94719fb7975853738436085288524e94d0e21ad7bd3b4ce343990fffb47de4b1d8ca220e609cbe_1280.jpgces",
       "price": 599.99,
       "quantity": 10
     },

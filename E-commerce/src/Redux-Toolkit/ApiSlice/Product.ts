@@ -1,11 +1,12 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { Category, Product } from "@/types/ProductType";
+import { Backend_URL } from "@/GlobalVariable";
 
 // Define a service using a base URL and expected endpoints
 export const ProductApi = createApi({
   reducerPath: "ProductApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: Backend_URL || "" }),
   endpoints: (builder) => ({
     getProductCategories: builder.query<Category[], string>({
       query: () => `categories`,
@@ -14,7 +15,7 @@ export const ProductApi = createApi({
       query: () => `products?_limit=4`,
     }),
     getAllProducts: builder.query<Product[], string>({
-      query: () => `products`,
+      query: (itemsPerPage) => `products?_limit=${itemsPerPage}`,
     }),
   }),
 });
