@@ -35,6 +35,10 @@ interface Product {
   subcategory: string;
   price: number;
   quantity: number;
+  beforediscount:number;
+  badge:string;
+  description: string;
+  images: string[];
 }
 
 export type {Product,Category,SubcategoryType,CategoryName}

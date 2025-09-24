@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setCategory,
   setPriceRange,
+  setSort,
   setSubcategory,
 } from "@/Redux-Toolkit/DataSlice/categories/categoriesFilterSlice";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -16,7 +17,6 @@ import { Label } from "@/components/ui/label";
 import type { RootState } from "@/Redux-Toolkit/Store/ProductStore";
 import {
   Select,
-  SelectLabel,
   SelectGroup,
   SelectTrigger,
   SelectValue,
@@ -24,9 +24,10 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { getPaginationIndexes } from "@/functions/getPaginationIndexes";
 import IconButtons from "../cardonhover/IconsButtons";
 import { setCurrentPage } from "@/Redux-Toolkit/DataSlice/Pagination/PaginationSlice";
+import { getSortFunction } from "@/functions/getSortFunction";
+import { Link } from "react-router";
 
 // Icons from Lucide for React, commonly used with Shadcn
 const ChevronDown = () => (
@@ -345,136 +346,6 @@ const shortoption = [
   "Best Selling",
   "Best Rated",
 ];
-const products = [
-  {
-    name: "T-Shirt With Printed",
-    price: 25.0,
-    salePrice: 20.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-20%",
-  },
-  {
-    name: "Sweatshirt With Printed",
-    price: 150.0,
-    salePrice: 120.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-20%",
-  },
-  {
-    name: "Leather Shoulder Bag",
-    price: 150.0,
-    salePrice: 100.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-33%",
-  },
-  {
-    name: "Tie Shoulder Cami",
-    price: 69.0,
-    salePrice: null,
-    sale: false,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: null,
-  },
-  {
-    name: "Blue Short T-Shirt",
-    price: 40.0,
-    salePrice: null,
-    sale: false,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: null,
-  },
-  {
-    name: "Long Sleeve Shirt",
-    price: 49.0,
-    salePrice: 39.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-20%",
-  },
-  {
-    name: "Essential Basic T-Shirt",
-    price: 29.0,
-    salePrice: 20.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-30%",
-  },
-  {
-    name: "Rounded Brown Sunglasses",
-    price: 99.0,
-    salePrice: 110.0,
-    sale: false,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-10%",
-  },
-  {
-    name: "Slim Fit Trousers",
-    price: 49.0,
-    salePrice: null,
-    sale: false,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: null,
-  },
-  {
-    name: "Tank Top T-Shirt",
-    price: 39.0,
-    salePrice: 29.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-25%",
-  },
-  {
-    name: "Men's Casual Shirt",
-    price: 45.0,
-    salePrice: 20.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-55%",
-  },
-  {
-    name: "Fitted Crop T-shirt",
-    price: 49.0,
-    salePrice: 35.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-29%",
-  },
-  {
-    name: "Sleeve Back T-Shirt",
-    price: 80.0,
-    salePrice: 60.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-25%",
-  },
-  {
-    name: "Tie It High Heeled",
-    price: 89.0,
-    salePrice: 69.0,
-    sale: true,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: "-22%",
-  },
-  {
-    name: "Women's Short Dress",
-    price: 109.0,
-    salePrice: null,
-    sale: false,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: null,
-  },
-  {
-    name: "Men's Jacket",
-    price: 119.0,
-    salePrice: null,
-    sale: false,
-    image: "https://placehold.co/300x400/F2F2F2/737373?text=Product+Image",
-    badge: null,
-  },
-];
 
 const Pagination = () => (
   <nav className="flex items-center justify-end space-x-2 py-8 text-sm">
@@ -517,19 +388,30 @@ const Rating = ({ rating, count, checked, onChange }) => (
   </div>
 );
 
-const ProductCard = ({ product }: { product: Product }) => (
-  <div className="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer relative">
+interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  product: Product;
+}
+const ProductCard: React.FC<ProductCardProps> = ({ product, ...divProps }) => (
+  <div
+    {...divProps}
+    className="h-96 flex flex-col gap-7 group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer relative"
+  >
     {product.badge && (
       <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
         {product.badge}
       </div>
     )}
-    <IconButtons />
-    <img
-      src={product.img}
-      alt={product.name}
-      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-    />
+    {/* IconButtons visible only on hover */}
+    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+      <IconButtons product={product} />
+    </div>
+    <Link key={product.id} to={`/product/${product.id}`}>
+      <img
+        src={product.img}
+        alt={product.name}
+        className="w-full h-64 object-center transition-transform duration-300 group-hover:scale-105"
+      />
+    </Link>
     <div className="p-4 bg-white">
       <h3 className="text-sm font-medium text-zinc-900 line-clamp-2 min-h-[3rem]">
         {product.name}
@@ -559,21 +441,17 @@ const Shop = () => {
   const { itemsPerPage, firstIndex, lastIndex, currentPage } = useSelector(
     (state: RootState) => state.pagination
   );
-  const { category, subcategory, price } = useSelector(
+
+  const { category, subcategory, price, sort } = useSelector(
     (state: RootState) => state.filter
   );
   const { data: allProducts } = useGetAllProductsQuery({
     itemsPerPage: itemsPerPage.toString(),
     category: category,
     subcategory: subcategory,
+    priceArray: price,
   });
   const dispatch = useDispatch();
-
-  console.log(category, subcategory, price?.toString());
-
-  // React.useEffect(() => {
-  //   getPaginationIndexes(currentPage, itemsPerPage, dispatch);
-  // }, [itemsPerPage]);
 
   return (
     <div className="antialiased text-zinc-900 bg-white font-jost">
@@ -744,7 +622,12 @@ const Shop = () => {
             <div className="flex flex-col sm:flex-row justify-between items-center pb-6 border-b border-zinc-200">
               <div className="flex items-center space-x-2 text-sm font-medium">
                 <span className="text-zinc-600">Sort by:</span>
-                <Select>
+                <Select
+                  onValueChange={(value) => {
+                    // ✅ here you’ll get the value
+                    dispatch(setSort(value));
+                  }}
+                >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Sort By" />
                   </SelectTrigger>
@@ -754,7 +637,7 @@ const Shop = () => {
                       {shortoption.map((option) => (
                         <SelectItem
                           key={option}
-                          value={option.toLowerCase().replace(" ", "-")}
+                          value={option.replace(" ", "-")}
                         >
                           {option}
                         </SelectItem>
@@ -780,10 +663,13 @@ const Shop = () => {
             </div>
 
             {/* Product Grid */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {allProducts?.slice(1, 16).map((product, index) => (
-                <ProductCard key={index} product={product} />
-              ))}
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {allProducts
+                ?.slice(0, 15)
+                .sort(getSortFunction(sort))
+                .map((product) => (
+                  <ProductCard product={product} />
+                ))}
             </div>
 
             {/* Pagination */}

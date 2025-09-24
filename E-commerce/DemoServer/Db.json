@@ -85,7 +85,18 @@
       "subcategory": "Boots",
       "img": "https://pixabay.com/get/gd49aec45f16b56bc8105cded1afc91b5cef875dfedcb37bc515928047aa7dd8fc3bbbfe9a32718c0b38bcd4c1c468a7da3f58b608cc6a154352afe1d1481cc65_1280.jpg",
       "price": 89.99,
-      "quantity": 15
+      "quantity": 15,
+      "beforediscount": 120.0,
+      "badge": "20% OFF",
+      "description": "Beautifully tailored men's stripe shirt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et consectetur semper vitae enim duis.",
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "availableQuantity": 10
     },
     {
       "id": 2,
@@ -94,7 +105,17 @@
       "subcategory": "Shoes",
       "img": "https://pixabay.com/get/g4d526e60b1167a04b799a37d305d24fc8fea1f955348b337183b6bfecdc44bab24eebbc240f6c95abcebaeb2dfed1cb397c137db7170d0fbab4d6f7a1beb7a31_1280.jpg",
       "price": 59.99,
-      "quantity": 30
+      "quantity": 30,
+      "beforediscount": 70,
+      "badge": "10% OFF",
+      "description": "Page layouts look better with something in each section. Web page designers, content writers, and layout artists use lorem ipsum, also known as placeholder copy, to distinguish which areas on a page will hold advertisements, editorials, and filler before the final written content and website designs receive client approval.",
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ]
     },
     {
       "id": 3,
@@ -103,7 +124,17 @@
       "subcategory": "Sunglasses",
       "img": "https://pixabay.com/get/gbccef473ed3be65a39ac474bf0f80daf3e6d14461a1db187a21356e341e3ca95ebcf15464038276f3880ae93255e06753e90d937786ae9361d3e70b87ff7bc03_1280.jpg",
       "price": 39.99,
-      "quantity": 25
+      "quantity": 25,
+      "beforediscount": 80,
+      "badge": "5% OFF",
+      "description": "The standard lorem ipsum passage has been a printer's friend for centuries. Like stock photos today, it served as a placeholder for actual content. The original text comes from Cicero's philosophical work",
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ]
     },
     {
       "id": 4,
@@ -243,7 +274,7 @@
       "name": "Leather Sandals",
       "category": "Women",
       "subcategory": "Sandals",
-      "img":"https://pixabay.com/get/gd9295b283f70b42a0ad6ca6e5ceb713b22f7345387146714657486ebe947eb4f15da9d8b25c89408151deacc43dcc858_1280.jpg",
+      "img": "https://pixabay.com/get/gd9295b283f70b42a0ad6ca6e5ceb713b22f7345387146714657486ebe947eb4f15da9d8b25c89408151deacc43dcc858_1280.jpg",
       "price": 34.99,
       "quantity": 25
     },
@@ -516,7 +547,7 @@
       "name": "Running Sneakers",
       "category": "Men",
       "subcategory": "Sneakers",
-      "img":"https://pixabay.com/get/gf8ffd00d37074514ac1c06b6e60c573cbac1a5032ea55d5dca60d7421948af85fee093b63e3450fb9e25901ed49774f0c30f7afe51cc10c69c8523df383a1fa1_1280.jpg",
+      "img": "https://pixabay.com/get/gf8ffd00d37074514ac1c06b6e60c573cbac1a5032ea55d5dca60d7421948af85fee093b63e3450fb9e25901ed49774f0c30f7afe51cc10c69c8523df383a1fa1_1280.jpg",
       "price": 59.99,
       "quantity": 20
     },
@@ -525,7 +556,7 @@
       "name": "Men’s Hoodie",
       "category": "Men",
       "subcategory": "Sweater",
-      "img":"https://pixabay.com/get/g4c377cfcdd23ad6b724b6a123f2c74f6a8218c4b21ae4c8db0a16ab1bff60006f6b69b05215b7bb5bc8afdf5d202299a1d88b28681ae18da11f19a04e72b54b5_1280.jpg",
+      "img": "https://pixabay.com/get/g4c377cfcdd23ad6b724b6a123f2c74f6a8218c4b21ae4c8db0a16ab1bff60006f6b69b05215b7bb5bc8afdf5d202299a1d88b28681ae18da11f19a04e72b54b5_1280.jpg",
       "price": 34.99,
       "quantity": 25
     },
@@ -550,7 +581,7 @@
       "name": "Gym Dumbbells",
       "category": "Sport",
       "subcategory": "Fitness",
-      "img":"https://pixabay.com/get/gb39ab06326ecf15c1eda0bb5d5672ac61f65a77f11c77214594a98587bf52d0f863bff9540226de05103268f03b82ef1b3673d76d0119671559bf4558027edea_1280.jpg",
+      "img": "https://pixabay.com/get/gb39ab06326ecf15c1eda0bb5d5672ac61f65a77f11c77214594a98587bf52d0f863bff9540226de05103268f03b82ef1b3673d76d0119671559bf4558027edea_1280.jpg",
       "price": 49.99,
       "quantity": 30
     },
@@ -776,7 +807,7 @@
       "name": "Wireless Gaming Mouse",
       "category": "Electronic",
       "subcategory": "Mouse",
-      "img":"https://pixabay.com/get/g935ae1b04ed66e96cdfd6ed92760433accba812ef5cce371d5aeebb3d652fc659cf489e8d6c2164748199577f77443c066c2dfe9b86d5eb43f6903e6cf1a8d53_1280.jpg",
+      "img": "https://pixabay.com/get/g935ae1b04ed66e96cdfd6ed92760433accba812ef5cce371d5aeebb3d652fc659cf489e8d6c2164748199577f77443c066c2dfe9b86d5eb43f6903e6cf1a8d53_1280.jpg",
       "price": 39.99,
       "quantity": 25
     },
@@ -785,7 +816,7 @@
       "name": "Budget Smartphone",
       "category": "Electronic",
       "subcategory": "Smartphones",
-      "img":"https://pixabay.com/get/g03b19a4c11d2b341e1e36a7c37e10fb1ade59703e17e8de3222738cd1ffaa50aac7bf502e753d56b32e070b118620ae0df3bdffac293d32c2226ff6617f9c10e_1280.jpg",
+      "img": "https://pixabay.com/get/g03b19a4c11d2b341e1e36a7c37e10fb1ade59703e17e8de3222738cd1ffaa50aac7bf502e753d56b32e070b118620ae0df3bdffac293d32c2226ff6617f9c10e_1280.jpg",
       "price": 299.99,
       "quantity": 22
     },
@@ -794,7 +825,7 @@
       "name": "Fitness Smartwatch",
       "category": "Electronic",
       "subcategory": "Smartwatches",
-      "img":"https://pixabay.com/get/g37adcadbdb00da7ccd94bb841296f8876cb6413a0fd76b5fd86c4bfb5b31138ab036e24971d0c704325c08d2a15a64a8_1280.jpg",
+      "img": "https://pixabay.com/get/g37adcadbdb00da7ccd94bb841296f8876cb6413a0fd76b5fd86c4bfb5b31138ab036e24971d0c704325c08d2a15a64a8_1280.jpg",
       "price": 149.99,
       "quantity": 18
     },
@@ -803,7 +834,7 @@
       "name": "Wireless Soundbar",
       "category": "Electronic",
       "subcategory": "Speaker",
-      "img":"https://pixabay.com/get/g41d1ceb297164acb122c9178a805c3076a7f1d62b76b67451e069306fe9455d0d30e498ae889d8a8432951506d3835c6_1280.jpg",
+      "img": "https://pixabay.com/get/g41d1ceb297164acb122c9178a805c3076a7f1d62b76b67451e069306fe9455d0d30e498ae889d8a8432951506d3835c6_1280.jpg",
       "price": 199.99,
       "quantity": 10
     },
@@ -812,7 +843,7 @@
       "name": "OLED TV 55\"",
       "category": "Electronic",
       "subcategory": "Televisions",
-      "img":"https://pixabay.com/get/g6f079583bc5a59aff9be86900eb3badc86e0878d170d3a5ccad1d2f82b672b7eaa4c1225e5af4c31694bb0f890b27aebd9f8afd72b290ab2395b8c05da996e53_1280.jpg",
+      "img": "https://pixabay.com/get/g6f079583bc5a59aff9be86900eb3badc86e0878d170d3a5ccad1d2f82b672b7eaa4c1225e5af4c31694bb0f890b27aebd9f8afd72b290ab2395b8c05da996e53_1280.jpg",
       "price": 1299.99,
       "quantity": 5
     },
@@ -837,7 +868,7 @@
       "name": "Ceiling Light",
       "category": "Furniture",
       "subcategory": "Lighting",
-      "img":"https://pixabay.com/get/g83e67d30ef8f0286e76ea518c6b548c934cba4742606302bad0964e8868980e9955a8f29ae7f3711144f06a619f88ea3c7a3f23dd1c623d28df4c27883a0a0a9_1280.jpg",
+      "img": "https://pixabay.com/get/g83e67d30ef8f0286e76ea518c6b548c934cba4742606302bad0964e8868980e9955a8f29ae7f3711144f06a619f88ea3c7a3f23dd1c623d28df4c27883a0a0a9_1280.jpg",
       "price": 89.99,
       "quantity": 15
     },
@@ -846,7 +877,7 @@
       "name": "Luxury Sofa",
       "category": "Furniture",
       "subcategory": "Sofa",
-      "img":"https://pixabay.com/get/gcdca94cdcc1bcce2e81b8686bec2d0b6b715f5aef032f78f9d258ea1f97d61829df6c8a2043b9ce87502c43c86c2437abc951cc778f447fbaba04e295677ce68_1280.jpg",
+      "img": "https://pixabay.com/get/gcdca94cdcc1bcce2e81b8686bec2d0b6b715f5aef032f78f9d258ea1f97d61829df6c8a2043b9ce87502c43c86c2437abc951cc778f447fbaba04e295677ce68_1280.jpg",
       "price": 899.99,
       "quantity": 3
     },
@@ -855,7 +886,7 @@
       "name": "Coffee Table",
       "category": "Furniture",
       "subcategory": "Table",
-      "img":"https://pixabay.com/get/g0471f59f6a29823784c6fa12678cef2eaba3a4c1a0afce327859b5620a656ea0c3c7ecc162f8f149fe7f2d816f425760b8829fb08c534789a6869fd0623e19f7_1280.jpg",
+      "img": "https://pixabay.com/get/g0471f59f6a29823784c6fa12678cef2eaba3a4c1a0afce327859b5620a656ea0c3c7ecc162f8f149fe7f2d816f425760b8829fb08c534789a6869fd0623e19f7_1280.jpg",
       "price": 149.99,
       "quantity": 12
     },
@@ -880,7 +911,7 @@
       "name": "Gold Chain Necklace",
       "category": "Jewelry",
       "subcategory": "Necklaces",
-      "img":"https://pixabay.com/get/gc6a525c6bdf2ccfb8511c2daf73a1bdb86ec07c13851735e6e94719fb7975853738436085288524e94d0e21ad7bd3b4ce343990fffb47de4b1d8ca220e609cbe_1280.jpgces",
+      "img": "https://pixabay.com/get/gc6a525c6bdf2ccfb8511c2daf73a1bdb86ec07c13851735e6e94719fb7975853738436085288524e94d0e21ad7bd3b4ce343990fffb47de4b1d8ca220e609cbe_1280.jpgces",
       "price": 599.99,
       "quantity": 10
     },

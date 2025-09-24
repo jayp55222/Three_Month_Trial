@@ -18,13 +18,15 @@ import {
   LifeBuoy,
   CreditCard,
 } from "lucide-react";
-
+import { useParams } from "react-router";
+import { useGetProductByIdQuery } from "@/Redux-Toolkit/ApiSlice/Product";
 
 const ProductPage = () => {
+  const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState("description");
   const [quantity, setQuantity] = useState(1);
   const [activeSize, setActiveSize] = useState("M");
-
+  const { data: product, isLoading } = useGetProductByIdQuery(id || "");
 
   const products = [
     {
@@ -151,19 +153,19 @@ const ProductPage = () => {
       {/* Main Product Section */}
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
         {/* Product Images */}
-        <div className="lg:w-1/2 flex flex-col items-center">
+        <div className="lg:w-1/2 flex flex-row-reverse gap-x-2 items-start">
           <img
             src={productDetails.mainImageUrl}
             alt={productDetails.title}
-            className="w-full h-auto object-cover rounded-lg"
+            className="w-full h-3/4 object-cover rounded-lg"
           />
-          <div className="flex gap-2 mt-4 overflow-x-auto justify-center">
-            {productDetails.thumbnails.map((thumb, index) => (
+          <div className="flex flex-col gap-2 mt-4 overflow-x-auto justify-center">
+            {product?.images?.map((thumb, index) => (
               <img
                 key={index}
                 src={thumb}
                 alt={`Thumbnail ${index + 1}`}
-                className="w-20 h-24 object-cover rounded-lg cursor-pointer hover:border-2 border-gray-400"
+                className="w-20 h-24 object-fill rounded-lg cursor-pointer hover:border-2 border-gray-400"
               />
             ))}
           </div>
@@ -180,13 +182,13 @@ const ProductPage = () => {
           </div>
           <div className="flex items-center gap-4 mb-6">
             <span className="text-3xl font-semibold text-gray-900">
-              ${productDetails.price.toFixed(2)}
+              ${product?.price?.toFixed(2) || 100}
             </span>
             <span className="text-xl text-gray-400 line-through">
-              ${productDetails.originalPrice.toFixed(2)}
+              ${product?.beforediscount?.toFixed(2) || 150 }
             </span>
           </div>
-          <p className="text-gray-600 mb-6">{productDetails.description}</p>
+          <p className="text-gray-600 mb-6">{product?.description}</p>
           <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -197,7 +199,7 @@ const ProductPage = () => {
           </div>
 
           {/* Size Selector */}
-          <div className="mb-6">
+          {product?.category==="Clothes" && <div className="mb-6">
             <p className="font-semibold mb-2">Size</p>
             <div className="flex gap-2">
               {productDetails.sizes.map((size) => (
@@ -212,11 +214,11 @@ const ProductPage = () => {
                 </button>
               ))}
             </div>
-          </div>
+          </div>}
 
           {/* Quantity and Actions */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="flex items-center border border-gray-300 rounded-full px-2">
+            <div className="flex items-center border border-gray-300 rounded-none px-2">
               <button
                 onClick={() => handleQuantityChange("decrement")}
                 className="p-2 text-gray-500 hover:text-gray-900"
@@ -233,8 +235,11 @@ const ProductPage = () => {
                 <Plus size={18} />
               </button>
             </div>
-            <button className="btn btn-neutral flex-1 rounded-full text-white">
+            <button className="btn btn-neutral flex-1 rounded-none text-white">
               Add to Cart
+            </button>
+            <button className="btn btn-neutral flex-1 rounded-none text-white">
+              Buy It Now
             </button>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 text-sm text-gray-600">

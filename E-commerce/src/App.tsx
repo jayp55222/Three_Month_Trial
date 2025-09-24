@@ -1,3 +1,4 @@
+import { Route, Routes } from "react-router";
 import "./App.css";
 import Footer from "./components/CustomComponents/Footer";
 import Header from "./components/CustomComponents/Header";
@@ -11,11 +12,14 @@ function App() {
   return (
     <>
       <Header />
-      {/* <Hero /> */}
-      <Shop/>
-      {/* <ProductPage /> */}
-      {/* <AboutUs/> */}
-      {/* <ContactUs/> */}
+      <Routes>
+        <Route path="/" element={<Hero />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+      </Routes>
       <Footer />
     </>
   );
