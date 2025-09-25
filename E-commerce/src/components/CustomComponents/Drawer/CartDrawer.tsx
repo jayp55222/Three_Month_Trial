@@ -5,30 +5,42 @@ import type { RootState } from "@/Redux-Toolkit/Store/ProductStore";
 import type { CartState } from "@/Redux-Toolkit/DataSlice/cart/cartSlice";
 import type { WishlistState } from "@/Redux-Toolkit/DataSlice/wishlist/wishlistSlice";
 import { CiHeart } from "react-icons/ci";
+import { useEffect, useState } from "react";
 
 export interface Props {
   cart?: boolean;
   wishlist?: boolean;
+  onClick?: React.Dispatch<React.SetStateAction<boolean>>;
+  isCart: boolean;
 }
 
-const CartDrawer = ({ cart = false, wishlist = false }: Props) => {
-  let items: any[] = [];
-  let totalQuantity = 0;
+const CartDrawer = ({
+  cart = false,
+  wishlist = false,
+  onClick,
+  isCart,
+}: Props) => {
+  const [items, setItems] = useState([]);
+  const [totalQuantity, setTotalQuantity] = useState();
 
-  if (cart) {
-    const { items: cartitems, totalQuantity: carttotal } = useSelector(
-      (state: RootState) => state.cart
-    );
-    items = cartitems;
-    totalQuantity = carttotal;
-  } else if (wishlist) {
-    const { items: wishlistitems } = useSelector(
-      (state: RootState) => state.wishlist
-    );
-    items = wishlistitems;
-  } else {
-    return null;
-  }
+  const { items: wishlistitems } = useSelector(
+    (state: RootState) => state.wishlist
+  );
+  const { items: cartitems, totalQuantity: carttotal } = useSelector(
+    (state: RootState) => state.cart
+  );
+
+  useEffect(() => {
+    if (isCart) {
+      setItems(cartitems);
+      setTotalQuantity(carttotal);
+    } else if (!isCart) {
+      setItems(wishlistitems);
+    } else {
+      return null;
+    }
+  }, [isCart]);
+
 
   return (
     <div className="drawer drawer-end">
@@ -40,7 +52,17 @@ const CartDrawer = ({ cart = false, wishlist = false }: Props) => {
           htmlFor="cart-drawer"
           className="relative text-gray-600 hover:text-red-500 transition-colors cursor-pointer"
         >
-          {cart ? <IoCartOutline size={24} /> : <CiHeart size={24} />}
+          {cart ? (
+            <IoCartOutline
+              size={24}
+              onClick={onClick ? () => onClick(true) : undefined}
+            />
+          ) : (
+            <CiHeart
+              size={24}
+              onClick={onClick ? () => onClick(false) : undefined}
+            />
+          )}
           <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
             {totalQuantity}
           </span>
@@ -55,7 +77,8 @@ const CartDrawer = ({ cart = false, wishlist = false }: Props) => {
           aria-label="close drawer"
         ></label>
         <ul className="menu flex gap-4 bg-white text-base-content min-h-full w-80 p-4">
-          {items.map((item) => (
+          <h1 className="text-3xl text-black">{isCart ? "Cart" : "Wishlist"}</h1>
+          {items?.map((item) => (
             <ReusableProductCard
               price={item.price}
               imageSrc={item.image}
@@ -63,8 +86,9 @@ const CartDrawer = ({ cart = false, wishlist = false }: Props) => {
               key={item.id}
               id={item.id}
               quantity={item.quantity}
-              cart
-              wishlist
+              cart={cart}
+              wishlist={wishlist}
+              isCart={isCart}
             />
           ))}
         </ul>

@@ -3,16 +3,21 @@ import { CiHeart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { IoSearchOutline } from "react-icons/io5";
 import CartDrawer from "./Drawer/CartDrawer";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/Redux-Toolkit/Store/ProductStore";
+import { useState } from "react";
 
 const navLinks = [
-  { name: "HOME", href: "/", hasDropdown: true },
-  { name: "SHOP", href: "/shop", hasDropdown: true },
-  { name: "PRODUCTS", href: "/products", hasDropdown: true },
-  { name: "BLOGS", href: "/blogs", hasDropdown: true },
-  { name: "PAGES", href: "/pages", hasDropdown: true },
+  { name: "HOME", href: "/" },
+  { name: "SHOP", href: "/shop" },
+  { name: "PRODUCTS", href: "/products" },
+  { name: "BLOGS", href: "/blogs" },
+  { name: "PAGES", href: "/pages" },
 ];
 
 const Header = () => {
+  const [isCart, setIsCart] = useState();
+
   return (
     <header className="w-full bg-white text-gray-800 py-4 border-b border-gray-200 font-jost">
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -55,8 +60,8 @@ const Header = () => {
             <CiUser size={24} />
           </button>
 
-          <CartDrawer wishlist={true} />
-          <CartDrawer cart={true} />
+          <CartDrawer cart={false} wishlist={true} onClick={setIsCart}  isCart={isCart}/>
+          <CartDrawer cart={true} wishlist={false} onClick={setIsCart} isCart={isCart}/>
         </div>
       </div>
     </header>

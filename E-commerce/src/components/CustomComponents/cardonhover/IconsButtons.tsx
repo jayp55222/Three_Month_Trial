@@ -3,8 +3,25 @@ import { ShoppingBag, Heart, Search, Shuffle } from "lucide-react";
 import type { Product } from "@/types/ProductType";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/Redux-Toolkit/DataSlice/cart/cartSlice";
+import {
+  addToWishlist,
+  type WishlistItem,
+} from "@/Redux-Toolkit/DataSlice/wishlist/wishlistSlice";
+import {
+  addToComparision,
+  switchTrue,
+} from "@/Redux-Toolkit/DataSlice/Comparison/comparisonSlice";
 
-const IconButtons: React.FC = ({ product }: { product: Product }) => {
+interface IconButtonsProps {
+  cart: Product;
+  wishlist: WishlistItem;
+  comparison: Product;
+}
+const IconButtons: React.FC<IconButtonsProps> = ({
+  cart,
+  wishlist,
+  comparison,
+}) => {
   const dispatch = useDispatch();
 
   const icons = [
@@ -14,10 +31,10 @@ const IconButtons: React.FC = ({ product }: { product: Product }) => {
       onClick: () => {
         dispatch(
           addToCart({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            img: product.img,
+            id: cart.id,
+            name: cart.name,
+            price: cart.price,
+            img: cart.img,
             quantity: 1, // default add 1
           })
         );
@@ -26,17 +43,40 @@ const IconButtons: React.FC = ({ product }: { product: Product }) => {
     {
       component: Heart,
       label: "Heart",
-      onClick: () => console.log("Add to wishlist"),
+      onClick: () => {
+        dispatch(
+          addToWishlist({
+            id: wishlist.id,
+            name: wishlist.name,
+            img: wishlist.img,
+            price: wishlist.price,
+          })
+        );
+      },
     },
     {
       component: Search,
       label: "Search",
-      onClick: () => console.log("Open search"),
+      onClick: () => console.log("Search Clicked"),
     },
     {
       component: Shuffle,
       label: "Shuffle",
-      onClick: () => console.log("Shuffle products"),
+      onClick: () => {
+        dispatch(
+          addToComparision({
+            id: comparison.id,
+            img: comparison.img,
+            badge: comparison.badge,
+            price: comparison.price,
+            description: comparison.description,
+            name: comparison.name,
+            beforediscount: comparison.beforediscount,
+            category: comparison.category,
+          })
+        );
+        dispatch(switchTrue());
+      },
     },
   ];
 

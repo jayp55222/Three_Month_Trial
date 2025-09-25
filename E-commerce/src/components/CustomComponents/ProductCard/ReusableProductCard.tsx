@@ -17,6 +17,7 @@ interface ProductCardProps {
   quantity?: number;
   id: string;
   availableQuantity: number;
+  isCart:boolean
 }
 
 const ReusableProductCard: React.FC<ProductCardProps> = ({
@@ -25,9 +26,7 @@ const ReusableProductCard: React.FC<ProductCardProps> = ({
   price,
   quantity = 1,
   id,
-  availableQuantity,
-  cart,
-  wishlist,
+  isCart
 }) => {
         
   const { data } = useGetProductByIdQuery(id);
@@ -54,7 +53,7 @@ const ReusableProductCard: React.FC<ProductCardProps> = ({
 
         {/* Quantity and Remove Button */}
         <div className="flex items-center justify-between">
-          {cart && (
+          {isCart && (
             <div className="flex items-center border border-gray-300 rounded-md">
               <button
                 className="px-3 py-1 text-black hover:bg-gray-100 focus:outline-none"
@@ -90,9 +89,9 @@ const ReusableProductCard: React.FC<ProductCardProps> = ({
           <button
             className="text-red-500 hover:text-red-700 focus:outline-none"
             onClick={() => {
-              if (cart) {
+              if (isCart) {
                 dispatch(removeFromCart(id));
-              } else if (wishlist) {
+              } else if (!isCart) {
                 dispatch(removeFromWishlist(id));
               }
             }}

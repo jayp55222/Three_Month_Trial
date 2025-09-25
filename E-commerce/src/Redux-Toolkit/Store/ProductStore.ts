@@ -6,6 +6,7 @@ import filterReducer from "../DataSlice/categories/categoriesFilterSlice";
 import productPageReducer from "../DataSlice/ProductPage/ProductPageSlice";
 import cartReducer from "../DataSlice/cart/cartSlice";
 import wishlistReducer from "../DataSlice/wishlist/wishlistSlice";
+import comparisionReducer from "../DataSlice/Comparison/comparisonSlice";
 
 export const ProductStore = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const ProductStore = configureStore({
     productPage: productPageReducer,
     cart: cartReducer,
     wishlist: wishlistReducer,
+    comparision: comparisionReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling, and other useful features of RTK Query
   middleware: (getDefaultMiddleware) =>
