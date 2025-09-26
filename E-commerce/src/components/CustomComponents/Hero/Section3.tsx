@@ -1,3 +1,4 @@
+import { img } from "@/GlobalVariable";
 import React from "react";
 // Assuming your shadcn-ui components are in "@/components/ui"
 // import { Card } from "@/components/ui/card"; // Uncomment if you have shadcn Card
@@ -6,7 +7,7 @@ import React from "react";
 const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
   children,
   className,
-}) => <div className={`rounded-lg bg-white ${className}`}>{children}</div>;
+}) => <div className={`bg-white ${className}`}>{children}</div>;
 
 // Reusable Button component for "Shop Now"
 const ShopNowButton: React.FC<{ className?: string }> = ({ className }) => (
@@ -19,9 +20,9 @@ const ShopNowButton: React.FC<{ className?: string }> = ({ className }) => (
 
 const PromotionalBanners: React.FC = () => {
   return (
-    <div className="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-4 font-jost">
+    <div className="h-[500px] mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-4 font-jost">
       {/* Top Left Banner: Smartwatch */}
-      <Card className="relative bg-gray-100 min-h-[300px] flex items-center p-8 overflow-hidden col-span-1">
+      <Card className="relative  min-h-[300px] bg-cover bg-[url('img.jpg')] flex items-center p-8 overflow-hidden col-span-1">
         <div className="relative z-10 text-center md:text-left flex flex-col justify-center items-center md:items-start w-1/2">
           <span className="text-sm text-gray-600 mb-2 font-medium">
             EXCLUSIVE COUPON
@@ -34,10 +35,10 @@ const PromotionalBanners: React.FC = () => {
           </p>
           <ShopNowButton />
         </div>
-        <div className="absolute right-0 bottom-0 top-0 h-full flex items-center justify-end w-1/2">
+        <div className="absolute right-10 bottom-0 top-0 h-full flex items-center justify-end w-1/2">
           {/* Placeholder for Smartwatch Image */}
           <img
-            src="https://pixabay.com/get/gae92b8f1f4bf3b91e77bf3e5795c6bbf80f6031640557692f4055126150aadd82ec642b03752e454ca8981cc8d83c704ed376ad4fd4e1e51468718b886792456_1280.jpg"
+            src={img}
             alt="Smartwatch Mockup"
             className="h-full object-contain -mr-8" // Adjusted for visual match
           />
@@ -47,7 +48,7 @@ const PromotionalBanners: React.FC = () => {
       {/* Right Column */}
       <div className="grid grid-rows-2 gap-4 col-span-1">
         {/* Top Right Banner: Laptop */}
-        <Card className="relative bg-gray-100 min-h-[150px] flex items-center p-6 overflow-hidden">
+        <Card className="relative bg-cover bg-[url('img.jpg')] min-h-[150px] flex items-center p-6 overflow-hidden">
           <div className="relative z-10 w-1/2 pr-4">
             <span className="text-xs text-gray-600 font-medium">
               STARTING FROM $399.99
@@ -68,13 +69,11 @@ const PromotionalBanners: React.FC = () => {
         {/* Bottom Right Banners: Airpods & Speaker */}
         <div className="grid grid-cols-2 gap-4">
           {/* Airpods */}
-          <Card className="relative bg-gray-200 min-h-[150px] flex flex-col justify-end p-4 text-center overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center -mt-8">
-              {" "}
-              {/* Adjusted position */}
-              {/* Placeholder for Airpods Image */}
+          <Card className="relative bg-cover bg-[url('img.jpg')] min-h-[150px] flex flex-col justify-end p-4 text-center overflow-hidden">
+            <div className="absolute inset-0 flex flex-col items-center justify-center -mt-8">
+              <p className="text-sm text-gray-700 mb-2">For Accessories</p>
               <img
-                src="https://pixabay.com/get/gd8a06dfd0a853f2bb2b8ca9574e8b8cfcaae0a3e32ad51e43aa210d96dfcfeaec3fc4aac123a5733f621b6772912d2502ab3cab3daa9e712f58f1e8118635761_1280.jpg"
+                src={img}
                 alt="Airpods"
                 className="max-h-24 object-contain"
               />
@@ -82,25 +81,25 @@ const PromotionalBanners: React.FC = () => {
             <div className="relative z-10 mt-auto">
               {" "}
               {/* Ensures text is at the bottom */}
-              <p className="text-sm text-gray-700 mb-2">For Accessories</p>
+              
               <ShopNowButton className="px-4 py-2 text-xs" />
             </div>
           </Card>
 
           {/* Wireless Speaker */}
-          <Card className="relative bg-gray-200 min-h-[150px] flex flex-col justify-end p-4 text-center overflow-hidden">
+          <Card className="relative bg-cover bg-[url('img.jpg')] min-h-[150px] flex flex-col justify-end p-4 text-center overflow-hidden">
             <div className="absolute top-4 right-4 text-right z-10">
               <span className="text-xs text-red-500 font-semibold">
                 EXTRA 50% OFF
               </span>
               <h4 className="text-lg font-bold">Wireless Speaker</h4>
             </div>
-            <div className="absolute inset-0 flex items-center justify-center -mb-8">
+            <div className="absolute inset-0 flex items-center justify-center mb-2">
               {" "}
               {/* Adjusted position */}
               {/* Placeholder for Wireless Speaker Image */}
               <img
-                src="https://pixabay.com/get/g95f43ed2cf5132a31467bcaa29810228788b6a9a1224f9e7552a34b63395fc24025ba9e7931d9b0c8e7bd955a7b5f815_1280.png"
+                src={img}
                 alt="Wireless Speaker"
                 className="max-h-24 object-contain"
               />

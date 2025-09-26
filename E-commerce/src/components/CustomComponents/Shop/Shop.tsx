@@ -27,7 +27,8 @@ import { Button } from "@/components/ui/button";
 import IconButtons from "../cardonhover/IconsButtons";
 import { setCurrentPage } from "@/Redux-Toolkit/DataSlice/Pagination/PaginationSlice";
 import { getSortFunction } from "@/functions/getSortFunction";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import { img } from "@/GlobalVariable";
 
 // Icons from Lucide for React, commonly used with Shadcn
 const ChevronDown = () => (
@@ -391,10 +392,10 @@ const Rating = ({ rating, count, checked, onChange }) => (
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product;
 }
-const ProductCard: React.FC<ProductCardProps> = ({ product, ...divProps }) => (
+export const ProductCard: React.FC<ProductCardProps> = ({ product, ...divProps }) => (
   <div
     {...divProps}
-    className="h-96 flex flex-col gap-7 group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer relative"
+    className="min-h-72 flex flex-col gap-2 group overflow-hidden transition-all duration-300 cursor-pointer relative"
   >
     {product.badge && (
       <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 z-10">
@@ -407,16 +408,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, ...divProps }) => (
     </div>
     <Link key={product.id} to={`/product/${product.id}`}>
       <img
-        src={product.img}
+        // src={product.img}
+        src={img}
         alt={product.name}
         className="w-full h-64 object-center transition-transform duration-300 group-hover:scale-105"
       />
     </Link>
     <div className="p-4 bg-white">
-      <h3 className="text-sm font-medium text-zinc-900 line-clamp-2 min-h-[3rem]">
+      <h3 className="text-sm font-medium text-zinc-900 line-clamp-2 min-h-[1rem]">
         {product.name}
       </h3>
-      <div className="flex items-center mt-2 space-x-2">
+      <div className="flex items-center mt-2 space-x-2 justify-center">
         {product.salePrice && (
           <span className="text-zinc-900 font-semibold">
             ${product.salePrice.toFixed(2)}
@@ -479,7 +481,7 @@ const Shop = () => {
               <div className="space-y-6">
                 {/* Categories */}
                 <div>
-                  <h2 className="text-lg font-bold">Categories</h2>
+                  <h2 className="text-lg font-bold text-left">Categories</h2>
                   <ul className="mt-4 space-y-2">
                     {categories?.map((cat, index) => (
                       <div key={index} className="collapse mb-2 text-left">
@@ -512,7 +514,7 @@ const Shop = () => {
 
                 {/* Price Filter */}
                 <div>
-                  <h2 className="text-lg font-bold">Price</h2>
+                  <h2 className="text-lg font-bold text-left">Price</h2>
                   <div className="mt-4 space-y-2 text-sm text-zinc-600">
                     {priceOptions.map((option) => (
                       <div
@@ -543,21 +545,8 @@ const Shop = () => {
                   </div>
                 </div>
 
-                {/* Filter By Color */}
-                {/* <div>
-                <h2 className="text-lg font-bold">Filter By Color</h2>
-                <div className="mt-4 grid grid-cols-6 gap-2">
-                  {colors.map((color, index) => (
-                    <div
-                      key={index}
-                      className={`w-6 h-6 rounded-full cursor-pointer border-2 border-transparent hover:border-zinc-900 transition-colors ${color}`}
-                    />
-                  ))}
-                </div>
-              </div> */}
-
                 {/* Brands */}
-                <div className="bg-white max-w-sm mx-auto my-8">
+                <div className="bg-white max-w-sm mx-auto my-8 text-left">
                   <h2 className="text-lg font-bold text-gray-800">Brands</h2>
                   {/* The scrollable list container */}
                   <ul className="mt-4 space-y-2 max-h-64 overflow-y-auto">
@@ -575,7 +564,7 @@ const Shop = () => {
 
                 {/* Size */}
                 <div>
-                  <h2 className="text-lg font-bold">Size</h2>
+                  <h2 className="text-lg font-bold text-left">Size</h2>
                   <ul className="mt-4 space-y-2">
                     {sizes.map((size, index) => (
                       <div
@@ -591,7 +580,7 @@ const Shop = () => {
 
                 {/* Tags */}
                 <div>
-                  <h2 className="text-lg font-bold">Tags</h2>
+                  <h2 className="text-lg font-bold text-left">Tags</h2>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {tags.map((tag, index) => (
                       <span
@@ -606,7 +595,7 @@ const Shop = () => {
 
                 {/* Average Rating */}
                 <div>
-                  <h2 className="text-lg font-bold">Average Rating</h2>
+                  <h2 className="text-lg font-bold text-left">Average Rating</h2>
                   <ul className="mt-4 space-y-2">
                     <Rating rating={5} />
                     <Rating rating={4} />

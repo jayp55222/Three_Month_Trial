@@ -7,7 +7,7 @@ import type { RootState } from "@/Redux-Toolkit/Store/ProductStore";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoCloseOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 // NOTE: This component assumes you have Tailwind CSS and daisyUI set up in your React project.
 

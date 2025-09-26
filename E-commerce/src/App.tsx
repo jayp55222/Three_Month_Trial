@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/CustomComponents/Footer";
 import Header from "./components/CustomComponents/Header";
@@ -11,6 +11,9 @@ import ProductComparisonFooter from "./components/CustomComponents/ProductCompar
 import ProductComparisonPage from "./components/CustomComponents/ProductComparison/ProductComparisonPage/ProductComparisonPage";
 import type { RootState } from "./Redux-Toolkit/Store/ProductStore";
 import { useSelector } from "react-redux";
+import { MyAccountPage } from "./components/CustomComponents/MyAccountPage/MyAccountPage";
+import BillingAddressForm from "./components/CustomComponents/BillingAddressForm/BillingAddressForm";
+import ShipingAddressForm from "./components/CustomComponents/ShipingAddressForm/ShipingAddressForm";
 
 function App() {
   const { compareswitch } = useSelector(
@@ -20,8 +23,13 @@ function App() {
   return (
     <>
       <Header />
-
       <Routes>
+        <Route path="/MyAccount/*" element={<MyAccountPage />} />
+        <Route path="/MyAccount/addresses/billing" element={<BillingAddressForm />} />
+        <Route
+          path="/MyAccount/addresses/shipping"
+          element={<ShipingAddressForm />}
+        />
         <Route path="/" element={<Hero />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/aboutus" element={<AboutUs />} />
@@ -35,6 +43,7 @@ function App() {
           <ProductComparisonFooter />
         </div>
       )}
+
       <Footer />
     </>
   );

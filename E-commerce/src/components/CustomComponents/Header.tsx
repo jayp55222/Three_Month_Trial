@@ -1,11 +1,15 @@
-import { Link } from "react-router";
-import { CiHeart } from "react-icons/ci";
+import { Link } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { IoSearchOutline } from "react-icons/io5";
 import CartDrawer from "./Drawer/CartDrawer";
-import { useSelector } from "react-redux";
-import type { RootState } from "@/Redux-Toolkit/Store/ProductStore";
 import { useState } from "react";
+import Login from "./Login/Login";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "../ui/button";
 
 const navLinks = [
   { name: "HOME", href: "/" },
@@ -16,7 +20,9 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const [isMyAccount, setIsMyAccount] = useState(false);
   const [isCart, setIsCart] = useState();
+  const [isHovering, setIsHovering] = useState(false);
 
   return (
     <header className="w-full bg-white text-gray-800 py-4 border-b border-gray-200 font-jost">
@@ -24,7 +30,6 @@ const Header = () => {
         {/* Logo Section */}
         <div className="flex-shrink-0">
           <Link to="/" className="flex items-center space-x-2">
-            {/* Replace with your actual logo component or image */}
             <div className="w-10 h-10 border border-gray-800 flex items-center justify-center">
               <img
                 src="https://emall-be87.kxcdn.com/emall/wp-content/themes/emall/images/logo.png"
@@ -51,17 +56,47 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Action Icons Section */}
         <div className="flex items-center space-x-6">
           <button className="text-gray-600 hover:text-red-500 transition-colors">
             <IoSearchOutline size={24} />
           </button>
-          <button className="text-gray-600 hover:text-red-500 transition-colors hidden md:block">
-            <CiUser size={24} />
-          </button>
+          <div
+            className="relative"
+            // onClick={() => setIsHovering((prev) => !prev)}
+          >
+            <Popover open={isMyAccount} onOpenChange={setIsMyAccount}>
+              <PopoverTrigger asChild>
+                <button className="text-gray-600 hover:text-red-500 transition-colors hidden md:block">
+                  <CiUser size={24} />
+                </button>
+              </PopoverTrigger>
 
-          <CartDrawer cart={false} wishlist={true} onClick={setIsCart}  isCart={isCart}/>
-          <CartDrawer cart={true} wishlist={false} onClick={setIsCart} isCart={isCart}/>
+              <PopoverContent className="w-56" side="bottom" align="end">
+                <Link
+                  to="/MyAccount"
+                  onClick={() => {
+                    setIsMyAccount(false);
+                  }}
+                >
+                  <h4 className="font-medium leading-none">My Account</h4>
+                </Link>
+              </PopoverContent>
+            </Popover>
+
+            {/* {isHovering && <Login />} */}
+          </div>
+          <CartDrawer
+            cart={false}
+            wishlist={true}
+            onClick={setIsCart}
+            isCart={isCart}
+          />
+          <CartDrawer
+            cart={true}
+            wishlist={false}
+            onClick={setIsCart}
+            isCart={isCart}
+          />
         </div>
       </div>
     </header>

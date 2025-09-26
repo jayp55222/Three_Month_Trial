@@ -4,6 +4,7 @@ import type { Category, Product } from "@/types/ProductType";
 import { Backend_URL } from "@/GlobalVariable";
 import { buildPriceQuery } from "@/functions/buildPriceQuery";
 
+const params = new URLSearchParams();
 // Define a service using a base URL and expected endpoints
 export const ProductApi = createApi({
   reducerPath: "ProductApi",
@@ -25,7 +26,6 @@ export const ProductApi = createApi({
       }
     >({
       query: ({ itemsPerPage, category, subcategory, priceArray }) => {
-        const params = new URLSearchParams();
         params.set("_limit", itemsPerPage.toString());
 
         if (category) params.set("category", category);
@@ -46,6 +46,14 @@ export const ProductApi = createApi({
     getProductById: builder.query<Product, string>({
       query: (id) => `products/${id}`,
     }),
+    getProductByCategorie: builder.query<Product, {category:string}>({
+      query: ({ category, limit = 20 }) => {
+        params.set("_limit", limit.toString());
+        if (category) params.set("category", category);
+
+        return `products?${params.toString()}`;
+      },
+    }),
   }),
 });
 
@@ -56,4 +64,5 @@ export const {
   useGetFourProductsQuery,
   useGetAllProductsQuery,
   useGetProductByIdQuery,
+  useGetProductByCategorieQuery,
 } = ProductApi;

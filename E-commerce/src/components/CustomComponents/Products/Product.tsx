@@ -18,71 +18,24 @@ import {
   LifeBuoy,
   CreditCard,
 } from "lucide-react";
-import { useParams } from "react-router";
-import { useGetProductByIdQuery } from "@/Redux-Toolkit/ApiSlice/Product";
+import { useParams } from "react-router-dom";
+import {
+  useGetProductByCategorieQuery,
+  useGetProductByIdQuery,
+} from "@/Redux-Toolkit/ApiSlice/Product";
+import { img } from "@/GlobalVariable";
+import { ProductCard } from "../Shop/Shop";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState("description");
   const [quantity, setQuantity] = useState(1);
   const [activeSize, setActiveSize] = useState("M");
-  const { data: product, isLoading } = useGetProductByIdQuery(id || "");
-
-  const products = [
-    {
-      name: "Sleeve Block T-Shirt",
-      price: "$49.00",
-      imageUrl: "https://placehold.co/300x400/E5E7EB/4B5563?text=Product+Image",
-    },
-    {
-      name: "Men's Stripe Shirt",
-      price: "$99.00",
-      imageUrl: "https://placehold.co/300x400/E5E7EB/4B5563?text=Product+Image",
-    },
-    {
-      name: "Women's Matching Set",
-      price: "$75.00",
-      imageUrl: "https://placehold.co/300x400/E5E7EB/4B5563?text=Product+Image",
-    },
-    {
-      name: "Gold Bracelet",
-      price: "$150.00",
-      imageUrl: "https://placehold.co/300x400/E5E7EB/4B5563?text=Product+Image",
-    },
-  ];
-
-  const productDetails = {
-    title: "Men's Stripe Shirt",
-    rating: 4.5,
-    reviews: 2,
-    price: 99.0,
-    originalPrice: 150.0,
-    description:
-      "Gazelle non tellus est sed eu auctor augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et consectetur semper vitae eam risus.",
-    details: [
-      {
-        section: "Information",
-        items: [
-          "Giveaway collar",
-          "Fluid line stitching",
-          "Chest patch pocket",
-          "Drop sleeves",
-        ],
-      },
-      { section: "Fabric", items: ["100% Cotton"] },
-      { section: "Wearing", items: ["Model is 6'1 in Wearing Size M"] },
-    ],
-    mainImageUrl:
-      "https://placehold.co/600x800/E5E7EB/4B5563?text=Main+Product+Image",
-    thumbnails: [
-      "https://placehold.co/100x120/E5E7EB/4B5563?text=Thumb+1",
-      "https://placehold.co/100x120/E5E7EB/4B5563?text=Thumb+2",
-      "https://placehold.co/100x120/E5E7EB/4B5563?text=Thumb+3",
-      "https://placehold.co/100x120/E5E7EB/4B5563?text=Thumb+4",
-      "https://placehold.co/100x120/E5E7EB/4B5563?text=Thumb+5",
-    ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-  };
+  const { data: product } = useGetProductByIdQuery(id || "");
+  const { data: recommendedProducts } = useGetProductByCategorieQuery({
+    category: product?.category,
+  });
 
   const renderStars = (rating) => {
     const stars = [];
@@ -113,22 +66,6 @@ const ProductPage = () => {
     <h2 className="text-2xl font-semibold text-center mt-20 mb-10">{title}</h2>
   );
 
-  const ProductCard = ({ product }) => (
-    <div className="card w-64 bg-base-100 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
-      <figure>
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className="w-full h-auto object-cover rounded-t-lg"
-        />
-      </figure>
-      <div className="card-body p-4 text-center">
-        <h3 className="text-sm font-medium">{product.name}</h3>
-        <p className="text-gray-500">${product.price}</p>
-      </div>
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans p-4 sm:p-8 font-jost">
       {/* Breadcrumbs */}
@@ -155,9 +92,10 @@ const ProductPage = () => {
         {/* Product Images */}
         <div className="lg:w-1/2 flex flex-row-reverse gap-x-2 items-start">
           <img
-            src={productDetails.mainImageUrl}
-            alt={productDetails.title}
-            className="w-full h-3/4 object-cover rounded-lg"
+            // src={productDetails.mainImageUrl}
+            src={img}
+            // alt={productDetails.title}
+            className="w-full h-3/5 object-cover"
           />
           <div className="flex flex-col gap-2 mt-4 overflow-x-auto justify-center">
             {product?.images?.map((thumb, index) => (
@@ -173,19 +111,19 @@ const ProductPage = () => {
 
         {/* Product Details */}
         <div className="lg:w-1/2 mt-8 lg:mt-0">
-          <h1 className="text-3xl font-bold mb-2">{productDetails.title}</h1>
+          {/* <h1 className="text-3xl font-bold mb-2">{productDetails.title}</h1> */}
           <div className="flex items-center gap-2 mb-4">
-            {renderStars(productDetails.rating)}
+            {/* {renderStars(productDetails.rating)}
             <span className="text-gray-500 text-sm">
               ({productDetails.reviews} reviews)
-            </span>
+            </span> */}
           </div>
           <div className="flex items-center gap-4 mb-6">
             <span className="text-3xl font-semibold text-gray-900">
               ${product?.price?.toFixed(2) || 100}
             </span>
             <span className="text-xl text-gray-400 line-through">
-              ${product?.beforediscount?.toFixed(2) || 150 }
+              ${product?.beforediscount?.toFixed(2) || 150}
             </span>
           </div>
           <p className="text-gray-600 mb-6">{product?.description}</p>
@@ -199,22 +137,24 @@ const ProductPage = () => {
           </div>
 
           {/* Size Selector */}
-          {product?.category==="Clothes" && <div className="mb-6">
-            <p className="font-semibold mb-2">Size</p>
-            <div className="flex gap-2">
-              {productDetails.sizes.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setActiveSize(size)}
-                  className={`btn btn-sm btn-outline rounded-full ${
-                    activeSize === size ? "btn-neutral" : ""
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
+          {product?.category === "Clothes" && (
+            <div className="mb-6">
+              <p className="font-semibold mb-2">Size</p>
+              <div className="flex gap-2">
+                {/* {productDetails.sizes.map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => setActiveSize(size)}
+                    className={`btn btn-sm btn-outline rounded-full ${
+                      activeSize === size ? "btn-neutral" : ""
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))} */}
+              </div>
             </div>
-          </div>}
+          )}
 
           {/* Quantity and Actions */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -336,7 +276,7 @@ const ProductPage = () => {
             }`}
             onClick={() => setActiveTab("reviews")}
           >
-            Reviews ({productDetails.reviews})
+            {/* Reviews ({productDetails.reviews}) */}
           </a>
         </div>
 
@@ -353,21 +293,21 @@ const ProductPage = () => {
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Information</h3>
                     <ul className="list-disc list-inside space-y-1 text-gray-600">
-                      {productDetails.details[0].items.map((item, index) => (
+                      {/* {productDetails.details[0].items.map((item, index) => (
                         <li key={index}>{item}</li>
-                      ))}
+                      ))} */}
                     </ul>
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Fabric</h3>
                     <ul className="list-disc list-inside space-y-1 text-gray-600">
-                      <li>{productDetails.details[1].items[0]}</li>
+                      {/* <li>{productDetails.details[1].items[0]}</li> */}
                     </ul>
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Wearing</h3>
                     <ul className="list-disc list-inside space-y-1 text-gray-600">
-                      <li>{productDetails.details[2].items[0]}</li>
+                      {/* <li>{productDetails.details[2].items[0]}</li> */}
                     </ul>
                   </div>
                 </div>
@@ -425,20 +365,38 @@ const ProductPage = () => {
       </div>
 
       {/* Recommended Products */}
-      <SectionTitle title="You may also like..." />
-      <div className="flex flex-wrap justify-center gap-6">
-        {products.slice(0, 3).map((product, index) => (
-          <ProductCard key={index} product={product} />
-        ))}
+      <div className="my-8">
+        <SectionTitle title="You may also like..." />
+
+        {/* Scrollable area */}
+        <ScrollArea className="w-full flex justify-center whitespace-nowrap">
+          <div className="flex gap-6">
+            {recommendedProducts
+              ?.slice(0, 4)
+              .map((recommendedProduct, index) => (
+                <div key={index} className="min-w-[250px]">
+                  <ProductCard product={recommendedProduct} />
+                </div>
+              ))}
+          </div>
+        </ScrollArea>
       </div>
 
       {/* Recently Viewed Products */}
-      <SectionTitle title="Recently Viewed Products" />
-      <div className="flex flex-wrap justify-center gap-6">
-        {products.map((product, index) => (
-          <ProductCard key={index} product={product} />
-        ))}
-      </div>
+      <div className="my-8">
+        {/* Recently Viewed Products */}
+        <SectionTitle title="Recently Viewed Products" />
+
+        <ScrollArea className="w-full flex justify-center whitespace-nowrap">
+          <div className="flex gap-6">
+            {recommendedProducts?.slice(0, 4).map((product, index) => (
+              <div key={index} className="min-w-[250px]">
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+      </div>  
 
       {/* Footer Info Section */}
       <div className="mt-20 py-10 border-t border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">

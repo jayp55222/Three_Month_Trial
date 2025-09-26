@@ -10,7 +10,7 @@ interface FeatureItemProps {
 const FeatureItem: React.FC<FeatureItemProps> = ({ icon, title, description }) => {
   return (
     <div className="flex items-center space-x-4 p-4">
-      <div className="flex-shrink-0 text-gray-700">
+      <div className="flex-shrink-0 ">
         {icon}
       </div>
       <div>

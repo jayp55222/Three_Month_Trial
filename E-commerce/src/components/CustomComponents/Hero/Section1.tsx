@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { img } from "@/GlobalVariable";
 
 const slides = [
   {
@@ -39,7 +40,7 @@ export default function Section1() {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -100 }}
         transition={{ duration: 0.5 }}
-        className="flex w-full max-w-6xl items-center justify-between px-8"
+        className="flex w-full max-w-6xl items-center justify-between px-8 bg-cover bg-[url(img.jpg)]"
       >
         {/* Left Content */}
         <div className="flex flex-col gap-4 max-w-md">
@@ -56,9 +57,10 @@ export default function Section1() {
         </div>
 
         {/* Right Image */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 ">
           <img
-            src={slides[current].image}
+            // src={slides[current].image}
+            src={img}
             alt={slides[current].title}
             width={400}
             height={400}

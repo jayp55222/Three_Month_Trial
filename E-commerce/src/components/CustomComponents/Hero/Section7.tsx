@@ -1,3 +1,4 @@
+import { img } from '@/GlobalVariable';
 import React from 'react';
 
 // Reusable Product Card Component
@@ -11,10 +12,10 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ imageSrc, name, currentPrice, oldPrice }) => {
   return (
     <div className="flex items-center space-x-4 mb-6">
-      <div className="flex-shrink-0 w-24 h-24 bg-gray-100 flex items-center justify-center rounded-lg overflow-hidden">
-        <img src={imageSrc} alt={name} className="max-w-[80%] max-h-[80%] object-contain" />
+      <div className="flex-shrink-0 w-36 h-44 bg-cover bg-[url('img.jpg')] flex items-center justify-center overflow-hidden">
+        <img src={img} alt={name} className="max-w-[80%] max-h-[80%] object-contain" />
       </div>
-      <div>
+      <div className='pl-4'>
         <h4 className="text-sm font-medium text-gray-800 line-clamp-2">{name}</h4>
         <div className="flex items-baseline space-x-2 mt-1">
           <span className="text-sm font-bold text-gray-900">{currentPrice}</span>
@@ -47,12 +48,12 @@ const Section7: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white py-12 px-4 md:px-8">
+    <div className="bg-white py-12 px-4 md:px-8 font-jost text-left">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* On Sale Products Column */}
           <div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-6 border-b pb-2">ON SALE PRODUCTS</h3>
+            <h3 className="text-xl text-gray-800 mb-6 border-b pb-2 font-light">ON SALE PRODUCTS</h3>
             {onSaleProducts.map((product, index) => (
               <ProductCard
                 key={`on-sale-${index}`}
@@ -66,7 +67,7 @@ const Section7: React.FC = () => {
 
           {/* Trending Products Column */}
           <div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-6 border-b pb-2">TRENDING PRODUCTS</h3>
+            <h3 className="text-xl text-gray-800 mb-6 border-b pb-2 font-light">TRENDING PRODUCTS</h3>
             {trendingProducts.map((product, index) => (
               <ProductCard
                 key={`trending-${index}`}
@@ -80,7 +81,7 @@ const Section7: React.FC = () => {
 
           {/* Best Sellers Column */}
           <div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-6 border-b pb-2">BEST SELLERS</h3>
+            <h3 className="text-xl text-gray-800 mb-6 border-b pb-2 font-light">BEST SELLERS</h3>
             {bestSellers.map((product, index) => (
               <ProductCard
                 key={`best-seller-${index}`}

@@ -1,3 +1,5 @@
+import { Card } from "@/components/ui/card";
+import { img } from "@/GlobalVariable";
 import React from "react";
 // Assuming you have a Card component from shadcn-ui
 // import { Card, CardContent } from "@/components/ui/card"; // Adjust import path as per your project setup
@@ -12,7 +14,7 @@ const CustomCard = ({
   className?: string;
 }) => (
   <div
-    className={`rounded-lg bg-white p-4 shadow-sm h-64 w-48 flex flex-col justify-between items-center ${className}`}
+    className={`rounded-lg bg-white shadow-sm h-64 w-48 flex flex-col justify-between items-center ${className}`}
   >
     {children}
   </div>
@@ -45,21 +47,17 @@ const ProductCard: React.FC<ProductItemProps> = ({
   categoryName,
 }) => {
   return (
-    // Replaced shadcn Card and CardContent with CustomCard for demonstration.
-    // If you have shadcn-ui setup, use: <Card className="w-48 h-64 bg-gray-50 flex flex-col justify-between">
-    <CustomCard className="w-48 h-64 bg-gray-50 flex flex-col justify-between">
-      {/* If using shadcn-ui: <CardContent className="flex flex-col items-center justify-center p-4 h-full"> */}
-      <CustomCardContent className="flex flex-col items-center justify-center p-4 h-full">
+    <CustomCard className="w-80 h-64 bg-gray-50 p-0 flex flex-col justify-between">
+      <CustomCardContent className="w-full flex flex-col items-center p-0 justify-center h-full">
         <img
           src={imageSrc}
           alt={altText}
-          className="max-h-32 object-contain mb-4" // Tailwind v4 compatible
+          className="max-h-32 object-contain mb-4"
         />
         <span className="text-sm font-medium text-gray-700">
           {categoryName}
         </span>
       </CustomCardContent>
-      {/* If using shadcn-ui: </CardContent> */}
     </CustomCard>
   );
 };
@@ -128,19 +126,78 @@ const Section2: React.FC = () => {
     },
   ];
 
+  const categories = [
+    {
+      name: "Smartphone",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Smartphone",
+    },
+    {
+      name: "Headphone",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Headphone",
+    },
+    {
+      name: "Speakers",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Speakers",
+    },
+    {
+      name: "Computers",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Computers",
+    },
+    {
+      name: "Mouse",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Mouse",
+    },
+    {
+      name: "Mouse",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Mouse",
+    },
+    {
+      name: "Mouse",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Mouse",
+    },
+    {
+      name: "Mouse",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Mouse",
+    },
+    {
+      name: "Mouse",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Mouse",
+    },
+    {
+      name: "Mouse",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Mouse",
+    },
+    {
+      name: "Mouse",
+      image: "https://via.placeholder.com/200/F5F5F5/333333?text=Mouse",
+    },
+  ];
   return (
-    <div className="flex w-full overflow-x-auto p-4 gap-4 bg-gray-100 no-scrollbar">
-      {/* The no-scrollbar class is a custom utility if you want to hide scrollbars,
-          otherwise, overflow-x-auto will show them as needed. */}
-      {products.map((product, index) => (
-        <ProductCard
-          key={index}
-          imageSrc={product.imageSrc}
-          altText={product.altText}
-          categoryName={product.categoryName}
-        />
-      ))}
-    </div>
+    <>
+      {/* Categories Section */}
+      <section className="mb-12">
+        <div className="w-full flex p-4 gap-4 no-scrollbar justify-center">
+          <div className="flex w-1/2 overflow-x-auto gap-11 ">
+            {categories.map((category, index) => (
+              <Card
+                key={index}
+                className="w-48 h-64 bg-cover bg-[url('img.jpg')] flex-shrink-0 flex flex-col justify-between items-center p-4"
+              >
+                <img
+                  // src={category.image}
+                  src={img}
+                  alt={category.name}
+                  className="max-h-32 object-contain mb-4"
+                />
+                <span className="text-sm font-medium text-gray-700">
+                  {category.name}
+                </span>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
