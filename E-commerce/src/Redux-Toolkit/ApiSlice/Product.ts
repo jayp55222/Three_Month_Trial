@@ -23,11 +23,12 @@ export const ProductApi = createApi({
         category?: string | null;
         subcategory?: string | null;
         priceArray?: string[];
+        badge?: boolean;
       }
     >({
-      query: ({ itemsPerPage, category, subcategory, priceArray }) => {
+      query: ({ itemsPerPage, category, subcategory, priceArray,badge }) => {
         params.set("_limit", itemsPerPage.toString());
-
+        if (badge) params.set("badge_ne", null);
         if (category) params.set("category", category);
         if (subcategory) params.set("subcategory", subcategory);
         if (priceArray && priceArray.length > 0) {

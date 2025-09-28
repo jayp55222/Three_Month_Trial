@@ -6,14 +6,14 @@ type SortOption =
   | "Best Rated";
 
 import type { Product } from "@/types/ProductType";
-const parsePrice = (price: string) => Number(price.replace(/,/g, ''));
 
 const getSortFunction = (sort: SortOption | undefined) => {
+  
   switch (sort) {
     case "Price Low":
-      return (a: Product, b: Product) => parsePrice(a.price) - parsePrice(b.price);
+      return (a: Product, b: Product) => a.price - b.price;
     case "Price High":
-      return (a: Product, b: Product) => parsePrice(b.price) - parsePrice(a.price);
+      return (a: Product, b: Product) => b.price - a.price;
     default:
       return () => 0;
   }

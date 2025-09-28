@@ -39,8 +39,7 @@ const CartDrawer = ({
     } else {
       return null;
     }
-  }, [isCart]);
-
+  }, [isCart, cartitems, wishlistitems]);
 
   return (
     <div className="drawer drawer-end">
@@ -63,9 +62,11 @@ const CartDrawer = ({
               onClick={onClick ? () => onClick(false) : undefined}
             />
           )}
-          <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-            {totalQuantity}
-          </span>
+          {cart && (
+            <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+              {totalQuantity}
+            </span>
+          )}
         </label>
       </div>
 
@@ -77,7 +78,9 @@ const CartDrawer = ({
           aria-label="close drawer"
         ></label>
         <ul className="menu flex gap-4 bg-white text-base-content min-h-full w-80 p-4">
-          <h1 className="text-3xl text-black">{isCart ? "Cart" : "Wishlist"}</h1>
+          <h1 className="text-3xl text-black">
+            {isCart ? "Cart" : "Wishlist"}
+          </h1>
           {items?.map((item) => (
             <ReusableProductCard
               price={item.price}

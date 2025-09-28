@@ -1,3 +1,4 @@
+import { img } from "@/GlobalVariable";
 import { useGetProductByIdQuery } from "@/Redux-Toolkit/ApiSlice/Product";
 import {
   removeFromCart,
@@ -37,26 +38,27 @@ const ReusableProductCard: React.FC<ProductCardProps> = ({
       {/* Product Image */}
       <div className="flex-shrink-0 w-24 h-24">
         <img
-          src={imageSrc}
+          // src={imageSrc}
+          src={img}
           alt={productName}
-          className="object-cover text-black w-full h-full rounded-md"
+          className="object-cover text-black w-full h-full"
         />
       </div>
 
       {/* Product Details and Controls */}
-      <div className="flex-1 ml-4">
+      <div className="flex-1 ml-4 text-left">
         {/* Product Name and Price */}
         <div className="mb-2">
-          <h2 className="text-lg text-black font-semibold">{productName}</h2>
+          <h2 className="text-base text-black font-normal">{productName}</h2>
           <p className="text-gray-600">${price.toFixed(2)}</p>
         </div>
 
         {/* Quantity and Remove Button */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           {isCart && (
-            <div className="flex items-center border border-gray-300 rounded-md">
+            <div className="flex items-center border border-gray-300">
               <button
-                className="px-3 py-1 text-black hover:bg-gray-100 focus:outline-none"
+                className="p-2 text-black hover:bg-gray-100 focus:outline-none"
                 onClick={() =>
                   dispatch(
                     updateQuantityById({
@@ -69,9 +71,9 @@ const ReusableProductCard: React.FC<ProductCardProps> = ({
               >
                 —
               </button>
-              <span className="px-4 text-gray-800">{quantity}</span>
+              <span className="px-2 text-gray-800">{quantity}</span>
               <button
-                className="px-3 py-1 text-black hover:bg-gray-100 focus:outline-none"
+                className="p-2 text-black hover:bg-gray-100 focus:outline-none"
                 onClick={() =>
                   dispatch(
                     updateQuantityById({

@@ -72,46 +72,32 @@ const Section5 = () => {
     <div className="bg-gray-50 min-h-screen p-4 md:p-8 font-jost">
       {/* Main Promotional Banner Section */}
       <section className="min-h-80 grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <Card className="relative bg-[#EFEBE2] p-8 flex items-start justify-center overflow-hidden rounded-none text-left">
+        <Card className="relative bg-[#EFEBE2] bg-[url('https://emall-be87.kxcdn.com/emall/wp-content/uploads/2024/04/banner-5-electronic-01.jpg')] p-8 flex items-start justify-center overflow-hidden rounded-none text-left">
           <div className="relative z-10 flex flex-col">
-            <span className="text-sm font-semibold text-gray-600 mb-2">
+            <span className="text-base font-normal text-gray-600 mb-2">
               FLASH SALE 50% OFF
             </span>
-            <h2 className="text-5xl font-bold leading-tight">
+            <h2 className="text-4xl font-normal leading-tight">
               Wireless Earphone
             </h2>
             <button className="bg-black text-white text-sm font-semibold px-6 py-3 hover:bg-gray-800 transition-colors mt-4 w-fit">
               SHOP NOW
             </button>
           </div>
-          <div className="absolute right-0 bottom-0 h-full w-1/2 flex items-end">
-            <img
-              src="https://emall-be87.kxcdn.com/emall/wp-content/uploads/2024/04/banner-5-electronic-01.jpg"
-              alt="Wireless Earphone"
-              className="h-full object-contain"
-            />
-          </div>
         </Card>
 
-        <Card className="relative bg-[#E6F0F6] p-8 flex items-start justify-center overflow-hidden rounded-none">
+        <Card className="relative w-full bg-[#E5EEF3] bg-[url('https://emall-be87.kxcdn.com/emall/wp-content/uploads/2024/04/banner-6-electronic-01.jpg')] bg-right bg-no-repeat p-8 flex items-start justify-center overflow-hidden rounded-none text-left">
           <div className="relative z-10 flex flex-col">
-            <span className="text-sm font-semibold text-gray-600 mb-2">
+            <span className="text-base font-normal text-gray-600 mb-2">
               SEASON COLLECTION
             </span>
-            <h2 className="text-5xl font-bold leading-tight">Up to 30% Off</h2>
+            <h2 className="text-4xl font-normal leading-tight">Up to 30% Off</h2>
             <button className="bg-black text-white text-sm font-semibold px-6 py-3 hover:bg-gray-800 transition-colors mt-4 w-fit">
               SHOP NOW
             </button>
           </div>
-          <div className="absolute -right-8 bottom-0 h-full w-1/2 flex items-end justify-center">
-            <img
-              src="https://emall-be87.kxcdn.com/emall/wp-content/uploads/2024/04/banner-6-electronic-01.jpg"
-              alt="Smartwatch"
-              className="h-full object-contain"
-            />
-          </div>
         </Card>
-      </section>    
+      </section>
     </div>
   );
 };

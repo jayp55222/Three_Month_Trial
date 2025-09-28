@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 // import { useGetProductreact } from "CategoriesQuery";
 import {
   useGetAllProductsQuery,
@@ -392,7 +392,10 @@ const Rating = ({ rating, count, checked, onChange }) => (
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product;
 }
-export const ProductCard: React.FC<ProductCardProps> = ({ product, ...divProps }) => (
+export const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  ...divProps
+}) => (
   <div
     {...divProps}
     className="min-h-72 flex flex-col gap-2 group overflow-hidden transition-all duration-300 cursor-pointer relative"
@@ -439,11 +442,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, ...divProps }
 );
 
 const Shop = () => {
+  const [sale, setSale] = useState(false);
+
   const { data: categories } = useGetProductCategoriesQuery();
   const { itemsPerPage, firstIndex, lastIndex, currentPage } = useSelector(
     (state: RootState) => state.pagination
   );
- 
 
   const { category, subcategory, price, sort } = useSelector(
     (state: RootState) => state.filter
@@ -453,6 +457,7 @@ const Shop = () => {
     category: category,
     subcategory: subcategory,
     priceArray: price,
+    badge: sale,
   });
   const dispatch = useDispatch();
 
@@ -595,7 +600,9 @@ const Shop = () => {
 
                 {/* Average Rating */}
                 <div>
-                  <h2 className="text-lg font-bold text-left">Average Rating</h2>
+                  <h2 className="text-lg font-bold text-left">
+                    Average Rating
+                  </h2>
                   <ul className="mt-4 space-y-2">
                     <Rating rating={5} />
                     <Rating rating={4} />
@@ -619,17 +626,13 @@ const Shop = () => {
                       dispatch(setSort(value));
                     }}
                   >
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger className="w-[180px] rounded-none">
                       <SelectValue placeholder="Sort By" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="rounded-none">
                       <SelectGroup>
-                        {/* <SelectLabel>Fruits</SelectLabel> */}
                         {shortoption.map((option) => (
-                          <SelectItem
-                            key={option}
-                            value={option.replace(" ", "-")}
-                          >
+                          <SelectItem key={option} value={option}>
                             {option}
                           </SelectItem>
                         ))}
@@ -641,7 +644,12 @@ const Shop = () => {
                 <div className="flex items-center mt-4 sm:mt-0 space-x-6 text-sm">
                   <div className="flex items-center space-x-2">
                     <div className="flex items-center gap-2">
-                      <Checkbox id="toggle" />
+                      <Checkbox
+                        id="toggle"
+                        onClick={() => {
+                          setSale((prev) => !prev);
+                        }}
+                      />
                       <Label htmlFor="toggle">Show only products on sale</Label>
                     </div>
                     <span className="text-zinc-600">Show:</span>
