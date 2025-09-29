@@ -10,6 +10,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "../ui/button";
+import { useDispatch } from "react-redux";
+import { setSale } from "@/Redux-Toolkit/DataSlice/categories/categoriesFilterSlice";
 
 const navLinks = [
   { name: "HOME", href: "/" },
@@ -23,7 +25,7 @@ const Header = () => {
   const [isMyAccount, setIsMyAccount] = useState(false);
   const [isCart, setIsCart] = useState();
   const [isHovering, setIsHovering] = useState(false);
-
+  const dispatch = useDispatch();
   return (
     <header className="w-full bg-white text-gray-800 py-4 border-b border-gray-200 font-jost">
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -47,7 +49,7 @@ const Header = () => {
               <li key={link.name} className="relative group">
                 <Link
                   to={link.href}
-                  className="flex items-center font-semibold uppercase text-sm hover:text-red-500 transition-colors"
+                  className="flex items-center font-medium uppercase text-sm hover:text-red-500 transition-colors"
                 >
                   {link.name}
                 </Link>
@@ -57,6 +59,13 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center space-x-6">
+          <Link
+            to="/shop"
+            className="text-sm font-medium"
+            onClick={() => dispatch(setSale())}
+          >
+            SPECIAL OFFER!
+          </Link>
           <button className="text-gray-600 hover:text-red-500 transition-colors">
             <IoSearchOutline size={24} />
           </button>

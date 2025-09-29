@@ -14,6 +14,7 @@ export interface FilterState {
   price?: string[];
   brands?: string[];
   sort?: SortOption | undefined;
+  sale?: boolean;
 }
 
 const initialState: FilterState = {
@@ -22,6 +23,7 @@ const initialState: FilterState = {
   price: [],
   brands: [],
   sort: undefined, // Default sort option
+  sale: false,
 };
 
 const filterSlice = createSlice({
@@ -29,7 +31,6 @@ const filterSlice = createSlice({
   initialState,
   reducers: {
     setCategory: (state, action: PayloadAction<string | null>) => {
-      
       state.category = action.payload;
       state.subcategory = null; // Reset subcategory when category changes
     },
@@ -45,6 +46,9 @@ const filterSlice = createSlice({
     },
     setSort: (state, action: PayloadAction<SortOption>) => {
       state.sort = action.payload;
+    },
+    setSale: (state) => {
+      state.sale = !state.sale;
     },
     resetFilters: (state) => {
       state.category = initialState.category;
@@ -63,6 +67,7 @@ export const {
   setBrands,
   setSort,
   resetFilters,
+  setSale
 } = filterSlice.actions;
 
 const filterReducer = filterSlice.reducer;

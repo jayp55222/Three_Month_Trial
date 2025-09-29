@@ -96,7 +96,11 @@
         "https://picsum.photos/200/300",
         "https://picsum.photos/200/300"
       ],
-      "availableQuantity": 10
+      "availableQuantity": 10,
+      "product_add_date": "2025-10-26T00:00:00.000Z",
+      "isFeatured": false,
+      "isTrending": true,
+      "isBestseller": true
     },
     {
       "id": 2,
@@ -115,7 +119,11 @@
         "https://picsum.photos/200/300",
         "https://picsum.photos/200/300",
         "https://picsum.photos/200/300"
-      ]
+      ],
+      "product_add_date": "2025-10-01T00:00:00.000Z",
+      "isFeatured": false,
+      "isTrending": true,
+      "isBestseller": false
     },
     {
       "id": 3,
@@ -134,7 +142,9 @@
         "https://picsum.photos/200/300",
         "https://picsum.photos/200/300",
         "https://picsum.photos/200/300"
-      ]
+      ],
+      "product_add_date": "2025-09-24T00:00:00.000Z",
+      "isFeatured": true
     },
     {
       "id": 4,
@@ -143,7 +153,18 @@
       "subcategory": "Eye",
       "img": "https://pixabay.com/get/gcc3ced1b96f8a5c75551066fcff63fb155399406afb2498839bee03cb087ccea9b99cc05fb060a15d637ceff6c0d34586cd655dd4520d2164a1d87070da89a3e_1280.jpg",
       "price": 12.99,
-      "quantity": 40
+      "quantity": 40,
+      "product_add_date": "2025-09-25T00:00:00.000Z",
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isFeatured": true,
+      "isTrending": false,
+      "isBestseller": true
     },
     {
       "id": 5,
@@ -152,7 +173,18 @@
       "subcategory": "Fragrance",
       "img": "https://pixabay.com/get/gddc65cb713c43d3565a4a740859c32be4f385f41ca8df0818ffde104cc5cf3c7ce44f2d41425553bc98490244ff0a19ea67fdbeae6e595bbdf0837fb451523e7_1280.jpg",
       "price": 49.99,
-      "quantity": 20
+      "quantity": 20,
+      "product_add_date": "2025-09-27T00:00:00.000Z",
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isFeatured": false,
+      "isTrending": true,
+      "isBestseller": true
     },
     {
       "id": 6,
@@ -161,7 +193,18 @@
       "subcategory": "Hair",
       "img": "https://pixabay.com/get/g89e66dc2dd3c2123a73eea5abf953cc2fe857e21da9453b89f3d7e35d4059ac1a4c68e3dcff8d67705ba1b3617e4ed68ac2d7c024bbf2ea70b4196524a954e66_1280.jpg",
       "price": 15.99,
-      "quantity": 50
+      "quantity": 50,
+      "product_add_date": "2025-09-27T00:00:00.000Z",
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isFeatured": true,
+      "isTrending": false,
+      "isBestseller": false
     },
     {
       "id": 7,
@@ -170,7 +213,18 @@
       "subcategory": "Shirt",
       "img": "https://pixabay.com/get/g8fcfcba219fbad2b56abc20e976c23e89a81a765bdaaecc4ba707c34df1a2f91cb2f8666251c6ccaff36f4d633d19a34_1280.jpg",
       "price": 25.99,
-      "quantity": 35
+      "quantity": 35,
+      "product_add_date": "2025-09-27T00:00:00.000Z",
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isFeatured": true,
+      "isTrending": true,
+      "isBestseller": false
     },
     {
       "id": 8,
@@ -179,7 +233,18 @@
       "subcategory": "Short",
       "img": "https://pixabay.com/get/gfcb202ef88b7d39a7241ba9b469369af66fc82496b403ec6e7ebe8fdac8b30b003d0048a6d37377243566ffa7f0a8407_1280.jpg",
       "price": 18.99,
-      "quantity": 40
+      "quantity": 40,
+      "product_add_date": "2025-09-04T00:00:00.000Z",
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isFeatured": false,
+      "isTrending": false,
+      "isBestseller": true
     },
     {
       "id": 9,
@@ -187,7 +252,17 @@
       "category": "Electronic",
       "subcategory": "Smartphones",
       "price": 699.99,
-      "quantity": 12
+      "quantity": 12,
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isFeatured": true,
+      "isTrending": true,
+      "isBestseller": true
     },
     {
       "id": 10,
@@ -195,7 +270,16 @@
       "category": "Electronic",
       "subcategory": "Laptops",
       "price": 999.99,
-      "quantity": 8
+      "quantity": 8,
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isTrending": false,
+      "isBestseller": true
     },
     {
       "id": 11,
@@ -203,7 +287,16 @@
       "category": "Furniture",
       "subcategory": "Table",
       "price": 299.99,
-      "quantity": 5
+      "quantity": 5,
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isTrending": true,
+      "isBestseller": false
     },
     {
       "id": 12,
@@ -211,7 +304,17 @@
       "category": "Furniture",
       "subcategory": "Sofa",
       "price": 499.99,
-      "quantity": 3
+      "quantity": 3,
+      "images": [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+      ],
+      "isFeatured": true,
+      "isTrending": false,
+      "isBestseller": false
     },
     {
       "id": 13,
@@ -219,7 +322,9 @@
       "category": "Jewelry",
       "subcategory": "Rings",
       "price": 1299.99,
-      "quantity": 2
+      "quantity": 2,
+      "isTrending": true,
+      "isBestseller": true
     },
     {
       "id": 14,
@@ -227,7 +332,9 @@
       "category": "Jewelry",
       "subcategory": "Necklaces",
       "price": 799.99,
-      "quantity": 4
+      "quantity": 4,
+      "isTrending": false,
+      "isBestseller": true
     },
     {
       "id": 15,

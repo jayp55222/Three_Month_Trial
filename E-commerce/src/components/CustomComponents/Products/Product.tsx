@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import {
-  ShoppingCart,
   Heart,
-  User,
-  Search,
-  ChevronRight,
   Star,
   Minus,
   Plus,
-  Share2,
   Facebook,
   Twitter,
   Linkedin,
@@ -26,12 +21,15 @@ import {
 import { img } from "@/GlobalVariable";
 import { ProductCard } from "../Shop/Shop";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { useDispatch } from "react-redux";
+import { addToWishlist } from "@/Redux-Toolkit/DataSlice/wishlist/wishlistSlice";
+import { addToComparision } from "@/Redux-Toolkit/DataSlice/Comparison/comparisonSlice";
+import { addToCart } from "@/Redux-Toolkit/DataSlice/cart/cartSlice";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState("description");
   const [quantity, setQuantity] = useState(1);
-  const [activeSize, setActiveSize] = useState("M");
   const { data: product } = useGetProductByIdQuery(id || "");
   const { data: recommendedProducts } = useGetProductByCategorieQuery({
     category: product?.category,
@@ -65,9 +63,9 @@ const ProductPage = () => {
   const SectionTitle = ({ title }) => (
     <h2 className="text-2xl font-semibold text-center mt-20 mb-10">{title}</h2>
   );
-
+  const dispatch = useDispatch();
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans p-4 sm:p-8 font-jost">
+    <div className="min-h-screen bg-gray-50 text-gray-800 p-4 sm:p-8 font-jost">
       {/* Breadcrumbs */}
       <div className="text-sm breadcrumbs py-6 text-gray-500 hidden sm:block">
         <ul>
@@ -103,7 +101,7 @@ const ProductPage = () => {
                 key={index}
                 src={thumb}
                 alt={`Thumbnail ${index + 1}`}
-                className="w-20 h-24 object-fill rounded-lg cursor-pointer hover:border-2 border-gray-400"
+                className="w-20 h-24 object-fill cursor-pointer hover:border-2 border-gray-400"
               />
             ))}
           </div>
@@ -175,7 +173,20 @@ const ProductPage = () => {
                 <Plus size={18} />
               </button>
             </div>
-            <button className="btn btn-neutral flex-1 rounded-none text-white">
+            <button
+              className="btn btn-neutral flex-1 rounded-none text-white"
+              onClick={() => {
+                addToCart({
+                  id: product?.id,
+                  name: product?.name,
+                  price: product?.price,
+                  img: product?.img,
+                  quantity: 1,
+                  availableQuantity: product?.quantity,
+                });
+                console.log(product);
+              }}
+            >
               Add to Cart
             </button>
             <button className="btn btn-neutral flex-1 rounded-none text-white">
@@ -183,13 +194,30 @@ const ProductPage = () => {
             </button>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 text-sm text-gray-600">
-            <button className="btn btn-sm btn-ghost flex-1 rounded-full">
+            <button
+              className="btn btn-sm flex-1 hover:text-red-400"
+              onClick={() =>
+                dispatch(
+                  addToWishlist({
+                    id: product?.id,
+                    name: product?.name,
+                    price: product?.price,
+                    img: product?.img,
+                  })
+                )
+              }
+            >
               <Heart size={18} /> Add to wishlist
             </button>
-            <button className="btn btn-sm btn-ghost flex-1 rounded-full">
+            <button
+              className="btn btn-sm flex-1 hover:text-red-400"
+              onClick={() => {
+                addToComparision(product);
+              }}
+            >
               Compare
             </button>
-            <button className="btn btn-sm btn-ghost flex-1 rounded-full">
+            <button className="btn btn-sm flex-1 hover:text-red-400">
               Ask a question
             </button>
           </div>
@@ -396,7 +424,7 @@ const ProductPage = () => {
             ))}
           </div>
         </ScrollArea>
-      </div>  
+      </div>
 
       {/* Footer Info Section */}
       <div className="mt-20 py-10 border-t border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">

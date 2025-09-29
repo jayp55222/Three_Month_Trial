@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useGetProductreact } from "CategoriesQuery";
 import {
   useGetAllProductsQuery,
   useGetProductCategoriesQuery,
@@ -9,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setCategory,
   setPriceRange,
+  setSale,
   setSort,
   setSubcategory,
 } from "@/Redux-Toolkit/DataSlice/categories/categoriesFilterSlice";
@@ -46,23 +46,7 @@ const ChevronDown = () => (
     <path d="m6 9 6 6 6-6" />
   </svg>
 );
-const Filter = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M22 17H2" />
-    <path d="M22 12H2" />
-    <path d="M22 7H2" />
-  </svg>
-);
+
 const Star = ({ fill }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -76,58 +60,6 @@ const Star = ({ fill }) => (
     strokeLinejoin="round"
   >
     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-  </svg>
-);
-const Grid2X2 = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <rect width="18" height="18" x="3" y="3" rx="2" />
-    <path d="M3 12h18" />
-    <path d="M12 3v18" />
-  </svg>
-);
-const Square = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <rect width="18" height="18" x="3" y="3" rx="2" />
-  </svg>
-);
-const List = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <line x1="8" x2="21" y1="6" y2="6" />
-    <line x1="8" x2="21" y1="12" y2="12" />
-    <line x1="8" x2="21" y1="18" y2="18" />
-    <line x1="3" x2="3.01" y1="6" y2="6" />
-    <line x1="3" x2="3.01" y1="12" y2="12" />
-    <line x1="3" x2="3.01" y1="18" y2="18" />
   </svg>
 );
 
@@ -293,32 +225,6 @@ const sizes = [
   { name: "XXL" },
 ];
 
-const colors = [
-  "bg-red-500",
-  "bg-purple-500",
-  "bg-orange-500",
-  "bg-green-500",
-  "bg-yellow-500",
-  "bg-teal-500",
-  "bg-blue-500",
-  "bg-indigo-500",
-  "bg-pink-500",
-  "bg-gray-500",
-  "bg-black",
-  "bg-white border border-gray-300",
-  "bg-fuchsia-500",
-  "bg-lime-500",
-  "bg-rose-500",
-  "bg-emerald-500",
-  "bg-cyan-500",
-  "bg-violet-500",
-  "bg-amber-500",
-  "bg-slate-500",
-  "bg-zinc-500",
-  "bg-neutral-500",
-  "bg-stone-500",
-];
-
 const tags = [
   "Accessories",
   "Chairs",
@@ -398,7 +304,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => (
   <div
     {...divProps}
-    className="min-h-72 flex flex-col gap-2 group overflow-hidden transition-all duration-300 cursor-pointer relative"
+    className="min-h-96 w-64 flex flex-col gap-2 group overflow-hidden transition-all duration-300 cursor-pointer relative"
   >
     {product.badge && (
       <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 z-10">
@@ -411,29 +317,31 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     </div>
     <Link key={product.id} to={`/product/${product.id}`}>
       <img
-        // src={product.img}
         src={img}
         alt={product.name}
         className="w-full h-64 object-center transition-transform duration-300 group-hover:scale-105"
       />
     </Link>
     <div className="p-4 bg-white">
-      <h3 className="text-sm font-medium text-zinc-900 line-clamp-2 min-h-[1rem]">
+      <h3 className="text-base font-normal text-zinc-900 line-clamp-2 min-h-[1rem]">
         {product.name}
       </h3>
       <div className="flex items-center mt-2 space-x-2 justify-center">
-        {product.salePrice && (
-          <span className="text-zinc-900 font-semibold">
-            ${product.salePrice.toFixed(2)}
+        {product.price && (
+          <span className="text-zinc-900 font-normal">
+            ${product.price.toFixed(2)}
           </span>
         )}
         {product.price && (
           <span
-            className={`text-zinc-400 ${
-              product.salePrice ? "line-through" : "font-semibold"
+            className={`text-zinc-400 text-sm ${
+              product.beforediscount ? "line-through" : "font-normal"
             }`}
           >
-            ${product.price.toFixed(2)}
+            {product.beforediscount !== null && "$"}
+            {Number.isInteger(product.beforediscount)
+              ? product.beforediscount
+              : product.beforediscount?.toFixed(2)}
           </span>
         )}
       </div>
@@ -442,17 +350,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 );
 
 const Shop = () => {
-  const [sale, setSale] = useState(false);
 
   const { data: categories } = useGetProductCategoriesQuery();
   const { itemsPerPage, firstIndex, lastIndex, currentPage } = useSelector(
     (state: RootState) => state.pagination
   );
 
-  const { category, subcategory, price, sort } = useSelector(
+  const { category, subcategory, price, sort,sale } = useSelector(
     (state: RootState) => state.filter
   );
-  const { data: allProducts } = useGetAllProductsQuery({
+  const { data: allProducts,refetch } = useGetAllProductsQuery({
     itemsPerPage: itemsPerPage.toString(),
     category: category,
     subcategory: subcategory,
@@ -645,9 +552,11 @@ const Shop = () => {
                   <div className="flex items-center space-x-2">
                     <div className="flex items-center gap-2">
                       <Checkbox
+                      checked={sale}
                         id="toggle"
                         onClick={() => {
-                          setSale((prev) => !prev);
+                          dispatch(setSale());
+                          refetch();
                         }}
                       />
                       <Label htmlFor="toggle">Show only products on sale</Label>

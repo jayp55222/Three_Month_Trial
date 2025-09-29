@@ -20,7 +20,7 @@ const slides = [
   },
 ];
 
-export default function Section1() {
+export default function Section1( {onShopnow}: {onShopnow: () => void}) {
   const [current, setCurrent] = useState(0);
 
   const prevSlide = () => {
@@ -51,6 +51,7 @@ export default function Section1() {
           <Button
             variant="link"
             className="p-0 text-base underline underline-offset-4"
+            onClick={onShopnow}
           >
             {slides[current].cta}
           </Button>

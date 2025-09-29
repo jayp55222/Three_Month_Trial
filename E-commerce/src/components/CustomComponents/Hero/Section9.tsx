@@ -1,20 +1,16 @@
-import React from 'react';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
+} from "@/components/ui/carousel";
+import { img } from "@/GlobalVariable";
 
 const blogPosts = [
   {
@@ -41,20 +37,34 @@ const Section9 = () => {
   return (
     <div className="bg-white min-h-screen font-sans">
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-center text-4xl font-semibold text-gray-800 mb-12">Our Blog</h1>
+        <h1 className="text-center text-4xl font-semibold text-gray-800 mb-12">
+          Our Blog
+        </h1>
 
         <div className="flex flex-wrap -mx-4">
           {blogPosts.map((post, index) => (
-            <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
-                <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
+            <div
+              key={index}
+              className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 text-left"
+            >
+              <div className="bg-white shadow-lg overflow-hidden">
+                <img
+                  // src={post.image}
+                  src={img}
+                  alt={post.title}
+                  className="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105"
+                />
                 <div className="p-6">
                   <div className="flex items-center text-sm font-medium text-gray-500 mb-2">
-                    <span className="text-blue-500 mr-2 uppercase">{post.category}</span>
+                    <span className="text-sm font-light mr-2 uppercase">
+                      {post.category}
+                    </span>
                     <span>/</span>
-                    <span className="ml-2">{post.date}</span>
+                    <span className="ml-2 text-sm font-light">{post.date}</span>
                   </div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-2">{post.title}</h2>
+                  <h2 className="text-lg font-normal text-gray-900 mb-2">
+                    {post.title}
+                  </h2>
                 </div>
               </div>
             </div>
