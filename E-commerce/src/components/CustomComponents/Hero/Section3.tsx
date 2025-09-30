@@ -5,6 +5,7 @@ import {
   Container,
   Text,
 } from "../My_ReusableComponent/ReusableComponent";
+import "./Section3.scss";
 
 const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
   children,
@@ -36,8 +37,7 @@ const PromotionalBanners = ({ onShopnow }) => {
       <Card className="relative min-h-[300px] bg-cover flex items-center overflow-hidden col-span-1">
         <div className="absolute inset-0">
           <div
-            className="h-full w-full bg-[url('https://emall-be87.kxcdn.com/emall/wp-content/uploads/2024/04/banner-1-electronic-01.jpg')] bg-cover bg-center 
-                 transform transition-transform duration-300 hover:scale-105"
+            className="banner"
           ></div>
         </div>
         <Container className="h-auto z-10 flex flex-col justify-end w-full md:w-1/2 ml-auto mr-8 md:text-left items-center md:items-start">

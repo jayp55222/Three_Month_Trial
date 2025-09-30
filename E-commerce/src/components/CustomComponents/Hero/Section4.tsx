@@ -3,6 +3,7 @@ import { img } from "@/GlobalVariable";
 import { useGetRecent_Featured_ProductsQuery } from "@/Redux-Toolkit/ApiSlice/Product";
 import { ProductCard } from "../Shop/Shop";
 import { Container } from "../My_ReusableComponent/ReusableComponent";
+import "./Section4.scss";
 
 const Section4 = () => {
   const [isRecent, setIsRecent] = useState(true);
@@ -29,7 +30,7 @@ const Section4 = () => {
             FEATURED PRODUCTS
           </h3>
         </div>
-        <Container className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <Container className="grid-container">
           {recent_featured_product?.map((product, index) => (
             <ProductCard product={product} />
           ))}
