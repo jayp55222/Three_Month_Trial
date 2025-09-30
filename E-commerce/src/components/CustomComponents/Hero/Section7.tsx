@@ -3,6 +3,7 @@ import { useGetsale_trending_bestseller_productusQuery } from "@/Redux-Toolkit/A
 import type { Product } from "@/types/ProductType";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./Section7.scss";
 
 // Reusable Product Card Component
 
@@ -39,9 +40,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex items-center space-x-4 mb-6">
+    <div className="ProductCard">
       <div
-        className="flex-shrink-0 w-36 h-44 bg-cover bg-[url('img.jpg')] flex items-center justify-center overflow-hidden cursor-pointer"
+        className="flex-shrink-0 w-36 h-44 bg-gray-200 flex items-center justify-center overflow-hidden cursor-pointer"
         onClick={() => {
           navigate(`/product/${id}`);
         }}
@@ -52,9 +53,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
           className="max-w-[80%] max-h-[80%] object-contain"
         />
       </div>
-      <div className="pl-4">
+      <div className="w-full">
         <h4
-          className="text-sm font-base text-gray-800 line-clamp-2 cursor-pointer hover:text-red-400"
+          className="text-base font-base text-gray-800 line-clamp-2 cursor-pointer hover:text-red-400"
           onClick={() => {
             navigate(`/product/${id}`);
           }}
@@ -83,7 +84,7 @@ type ProductColumnProps = {
 
 const ProductColumn: React.FC<ProductColumnProps> = ({ title, products }) => {
   return (
-    <div className="text-left">
+    <div className="ProductColumn">
       <h3 className="text-xl text-gray-800 mb-6 pb-2 font-light">{title}</h3>
       {products.slice(0, 3).map((product, index) => (
         <ProductCard
@@ -105,7 +106,7 @@ const Section7: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center mt-8 text-left gap-32">
+      <div className="sale_trending_bestseller_product">
         {productSections.map(({ title, filter }) => (
           <ProductColumn
             key={title}

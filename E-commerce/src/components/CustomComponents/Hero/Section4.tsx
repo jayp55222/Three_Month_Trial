@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Card } from "@/components/ui/card"; // Import shadcn-ui Card component
 import { img } from "@/GlobalVariable";
 import { useGetRecent_Featured_ProductsQuery } from "@/Redux-Toolkit/ApiSlice/Product";
 import { ProductCard } from "../Shop/Shop";
+import { Container } from "../My_ReusableComponent/ReusableComponent";
 
 const Section4 = () => {
   const [isRecent, setIsRecent] = useState(true);
@@ -12,9 +12,9 @@ const Section4 = () => {
   );
 
   return (
-    <div className="bg-gray-50 min-h-screen p-16">
+    <Container className="min-h-screen p-14 mx-auto">
       {/* Product Grid Section */}
-      <section className="px-52">
+      <Container className="px-auto">
         <div className="mb-6 flex justify-center space-x-8">
           <h3
             className="text-2xl font-normal border-b-2 border-black pb-1 cursor-pointer"
@@ -29,13 +29,13 @@ const Section4 = () => {
             FEATURED PRODUCTS
           </h3>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1 px-28">
+        <Container className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {recent_featured_product?.map((product, index) => (
             <ProductCard product={product} />
           ))}
-        </div>
-      </section>
-    </div>
+        </Container>
+      </Container>
+    </Container>
   );
 };
 

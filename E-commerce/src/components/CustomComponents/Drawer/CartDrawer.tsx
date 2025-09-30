@@ -42,11 +42,11 @@ const CartDrawer = ({
   }, [isCart, cartitems, wishlistitems]);
 
   return (
-    <div className="drawer drawer-end">
+    <div className="drawer drawer-end w-6 h-6 mr-3">
       <input id="cart-drawer" type="checkbox" className="drawer-toggle" />
 
       {/* Button triggers drawer */}
-      <div className="drawer-content">
+      <div className="drawer-content w-6 h-6">
         <label
           htmlFor="cart-drawer"
           className="relative text-gray-600 hover:text-red-500 transition-colors cursor-pointer"

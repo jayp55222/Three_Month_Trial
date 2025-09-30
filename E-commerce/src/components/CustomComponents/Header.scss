@@ -1,0 +1,10 @@
+.header {
+  @media (min-width: 1030px) {
+
+  }
+  .specialoffer {
+    @media (max-width: 1030px) {
+      display: none;
+    }
+  }
+}

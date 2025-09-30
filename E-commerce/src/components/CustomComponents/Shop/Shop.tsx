@@ -304,7 +304,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => (
   <div
     {...divProps}
-    className="min-h-96 w-64 flex flex-col gap-2 group overflow-hidden transition-all duration-300 cursor-pointer relative"
+    className="min-h-96 max-w-4/5 w-full flex flex-col gap-2 group overflow-hidden transition-all duration-300 cursor-pointer relative"
   >
     {product.badge && (
       <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 z-10">

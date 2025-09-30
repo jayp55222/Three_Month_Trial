@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 
 const Section5 = ({ onShopnow }) => {
   return (
-    <div className="bg-gray-50 min-h-screen p-4 md:p-8 font-jost">
+    <div className="min-h-[400px] p-4 md:p-8 font-jost">
       <section className="min-h-80 grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <Card className="relative bg-[#EFEBE2] bg-[url('https://emall-be87.kxcdn.com/emall/wp-content/uploads/2024/04/banner-5-electronic-01.jpg')] p-8 flex items-start justify-center overflow-hidden rounded-none text-left">
           <div className="relative z-10 flex flex-col">

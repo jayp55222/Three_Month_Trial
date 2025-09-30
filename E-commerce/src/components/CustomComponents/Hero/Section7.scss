@@ -1,0 +1,56 @@
+.sale_trending_bestseller_product {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 0;
+  margin: 2rem 0 0 0;
+  justify-items: center;
+  text-align: left;
+
+  @media (max-width: 1176px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+  @media (max-width: 812px) {
+    grid-template-columns: repeat(1, 2fr);
+    gap: 2.5rem;
+  }
+}
+.ProductColumn {
+  width: 100%;
+  padding: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  justify-self: center;
+  text-align: left;
+
+  @media (max-width: 812px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // center children horizontally
+    text-align: center; // center text inside
+  }
+
+  h3 {
+    @media (max-width: 812px) {
+      width: auto;
+      text-align: center;
+    }
+  }
+
+  .w-3xs {
+    // target your ProductCard wrapper
+    @media (max-width: 812px) {
+      width: 100%; // optional: full width for mobile
+      max-width: 16rem; // limit width if needed
+    }
+  }
+}
+
+.ProductCard {
+  width: 16rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}

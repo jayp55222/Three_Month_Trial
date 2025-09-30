@@ -1,9 +1,11 @@
 import React from 'react';
+import './Section8.scss'
+import { Container } from '../My_ReusableComponent/ReusableComponent';
 
 const Section8: React.FC = () => {
   return (
-    <div className="flex justify-center items-center bg-white border-b-gray-200">
-      <div className="flex space-x-12">
+    
+      <div className="logo">
         {/* Logo 1 */}
         <div className="flex flex-col items-center">
           <svg
@@ -88,8 +90,8 @@ const Section8: React.FC = () => {
           <span className="mt-2 text-xs text-gray-500 uppercase font-sans">Brand</span>
         </div>
       </div>
-    </div>
-  );
-};
+    
+    );
+  };
 
 export default Section8;

@@ -12,6 +12,7 @@ import {
 import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
 import { setSale } from "@/Redux-Toolkit/DataSlice/categories/categoriesFilterSlice";
+import './Header.scss'
 
 const navLinks = [
   { name: "HOME", href: "/" },
@@ -27,8 +28,8 @@ const Header = () => {
   const [isHovering, setIsHovering] = useState(false);
   const dispatch = useDispatch();
   return (
-    <header className="w-full bg-white text-gray-800 py-4 border-b border-gray-200 font-jost">
-      <div className="container mx-auto px-4 flex items-center justify-between">
+    <header className="header w-full bg-white text-gray-800 py-4 border-b border-gray-200 font-jost px-16">
+      <div className="mx-auto px-4 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex-shrink-0">
           <Link to="/" className="flex items-center space-x-2">
@@ -43,7 +44,7 @@ const Header = () => {
         </div>
 
         {/* Navigation Links (Desktop) */}
-        <nav className="hidden md:flex flex-grow justify-center">
+        <nav className="hidden md:flex flex-grow justify-start pl-4">
           <ul className="flex items-center space-x-8">
             {navLinks.map((link) => (
               <li key={link.name} className="relative group">
@@ -58,10 +59,10 @@ const Header = () => {
           </ul>
         </nav>
 
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-3">
           <Link
             to="/shop"
-            className="text-sm font-medium"
+            className="text-sm font-medium specialoffer"
             onClick={() => dispatch(setSale())}
           >
             SPECIAL OFFER!
