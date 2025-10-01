@@ -13,10 +13,10 @@ const Section4 = () => {
   );
 
   return (
-    <Container className="min-h-screen p-14 mx-auto">
+    <Container className="outer-most">
       {/* Product Grid Section */}
       <Container className="px-auto">
-        <div className="mb-6 flex justify-center space-x-8">
+        <div className="grid-header">
           <h3
             className="text-2xl font-normal border-b-2 border-black pb-1 cursor-pointer"
             onClick={() => setIsRecent(true)}

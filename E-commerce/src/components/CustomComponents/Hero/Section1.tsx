@@ -40,7 +40,6 @@ export default function Section1({ onShopnow }: { onShopnow: () => void }) {
   const nextSlide = () => {
     setCurrent(current === slides.length - 1 ? 0 : current + 1);
   };
-  console.log(slides[current].image.toString());
 
   return (
     <Container

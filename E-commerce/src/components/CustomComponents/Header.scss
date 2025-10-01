@@ -1,6 +1,6 @@
 .header {
-  @media (min-width: 1030px) {
-
+  @media (max-width: 768px) {
+    display: none;
   }
   .specialoffer {
     @media (max-width: 1030px) {
@@ -8,3 +8,8 @@
     }
   }
 }
+// .alternative-header{
+//     @media (min-width: 769px) {
+//     display: none;
+//   }
+// }

@@ -42,7 +42,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
-html body #root{
+
+html body{
   width: 100%;
   height: 100%;
 }

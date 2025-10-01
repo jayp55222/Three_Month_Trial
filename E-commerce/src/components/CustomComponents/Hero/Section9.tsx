@@ -11,6 +11,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { img } from "@/GlobalVariable";
+import { Text } from "../My_ReusableComponent/ReusableComponent";
+import './Section9.scss'
 
 const blogPosts = [
   {
@@ -36,18 +38,17 @@ const blogPosts = [
 const Section9 = () => {
   return (
     <div className="bg-white min-h-screen font-sans">
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-center text-4xl font-semibold text-gray-800 mb-12">
+      <div className="grid grid-cols-1 mx-auto px-4 py-12">
+        <Text className="text-center text-4xl font-semibold text-gray-800 mb-12">
           Our Blog
-        </h1>
-
-        <div className="flex flex-wrap -mx-4">
+        </Text>
+        <div className="blog-flex-container">
           {blogPosts.map((post, index) => (
             <div
               key={index}
-              className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 text-left"
+              className="blog-flex-container-card"
             >
-              <div className="bg-white shadow-lg overflow-hidden">
+              <div className="max-w-96 bg-white shadow-lg overflow-hidden">
                 <img
                   // src={post.image}
                   src={img}
@@ -56,15 +57,15 @@ const Section9 = () => {
                 />
                 <div className="p-6">
                   <div className="flex items-center text-sm font-medium text-gray-500 mb-2">
-                    <span className="text-sm font-light mr-2 uppercase">
+                    <Text className="text-sm font-light mr-2 uppercase">
                       {post.category}
-                    </span>
+                    </Text>
                     <span>/</span>
-                    <span className="ml-2 text-sm font-light">{post.date}</span>
+                    <Text className="ml-2 text-sm font-light">{post.date}</Text>
                   </div>
-                  <h2 className="text-lg font-normal text-gray-900 mb-2">
+                  <Text className="text-lg font-normal text-gray-900 mb-2">
                     {post.title}
-                  </h2>
+                  </Text>
                 </div>
               </div>
             </div>
