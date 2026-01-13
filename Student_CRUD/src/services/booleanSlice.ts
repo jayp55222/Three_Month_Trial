@@ -1,27 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface BooleanState {
-  value: boolean;
+  showform: boolean;
 }
 
 const initialState: BooleanState = {
-  value: false,
+  showform:false
 };
 
 //will use to show update form visiablity
-const updateformbooleanSlice = createSlice({
-  name: "updateformboolean",
+const booleanSlice = createSlice({
+  name: "booleanSlice",
   initialState,
   reducers: {
     // equivalent of setBoolean(prev => !prev)
-    toggleforupdateform: (state) => {
-      state.value = !state.value;
+    toggleform: (state) => {
+      state.showform = !state.showform;
     },
   },
 });
 
-export const { toggleforupdateform } = updateformbooleanSlice.actions;
+export const { toggleform } = booleanSlice.actions;
 
 // export default updateformbooleanSlice.reducer;
 // export named reducer to allow named imports in store
-export const updateformbooleanReducer = updateformbooleanSlice.reducer;
+export const booleanReducer = booleanSlice.reducer;

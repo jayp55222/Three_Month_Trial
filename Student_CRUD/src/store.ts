@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { studentApi } from "./services/studentApi";
-import { updateformbooleanReducer } from "./services/booleanSlice";
+import { booleanReducer } from "./services/booleanSlice";
 import studentSliceReducer from "./services/dataSlice";
 // ...
 
 export const store = configureStore({
   reducer: {
     [studentApi.reducerPath]: studentApi.reducer,
-    updateFormBoolean: updateformbooleanReducer,
+    boolean: booleanReducer,
     editablestudent: studentSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>

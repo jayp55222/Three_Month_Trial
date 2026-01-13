@@ -11,7 +11,7 @@ export const studentApi = createApi({
   keepUnusedDataFor: 10,
   tagTypes: ["Student"], // <-- declare the tag type
   endpoints: (builder) => ({
-    getStudens: builder.query<Student[], string>({
+    getStudents: builder.query<Student[], string>({
       query: () => `students`,
       providesTags: ["Student"], // <-- this tells RTK Query that this query is related to 'Student'
     }),
@@ -23,21 +23,38 @@ export const studentApi = createApi({
       invalidatesTags: ["Student"], // <-- this tells RTK Query to refetch queries tagged with 'Student'
     }),
     // PATCH - update partial student data
-    patchStudent: builder.mutation<void, Partial<Omit<Student,"id" | " createdAt">> & { Id: string }>({
+    patchStudent: builder.mutation<
+      void,
+      Partial<Omit<Student, "id" | " createdAt">> & { Id: string }
+    >({
       query: ({ Id, ...patch }) => ({
         url: `students/${Id}`,
         method: "PATCH",
         body: patch,
-        headers:{
+        headers: {
           "Content-Type": "application/json",
         },
-        mode:'cors'
+        mode: "cors",
       }),
       invalidatesTags: ["Student"],
     }),
+    postStudent: builder.mutation<void, Omit<Student, "id" & "createdAt">>({
+      query: (student) => ({
+        url: `students`,
+        method: "POST",
+        body: student,
+      }),
+      invalidatesTags: ["Student"],
+    }),
+    
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetStudensQuery, useDeleteStudentMutation,usePatchStudentMutation } = studentApi;
+export const {
+  useGetStudentsQuery,
+  useDeleteStudentMutation,
+  usePatchStudentMutation,
+  usePostStudentMutation,
+} = studentApi;

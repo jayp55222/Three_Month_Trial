@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button"; // Assuming you have ShadCN Button
 import { UpdateStudentForm } from "./UpdateStudentForm";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "@/store";
-import { toggleforupdateform } from "@/services/booleanSlice";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "@/store";
+import { toggleform } from "@/services/booleanSlice";
 import type { Student } from "@/types/students";
 import { setEditableStudent } from "@/services/dataSlice";
 interface EditButtonProps {
@@ -20,7 +20,7 @@ const EditButton: React.FC<EditButtonProps> = ({ studentObj }) => {
       <Button
         onClick={() => {
           dispatch(setEditableStudent(studentObj));
-          dispatch(toggleforupdateform());
+          dispatch(toggleform());
         }}
         className=" bg-green-500 hover:bg-green-600"
       >

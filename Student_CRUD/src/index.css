@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
+  html, body, #root {
+  height: 100%;
+}
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -114,9 +118,5 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    width: 100%;
-    height: 100%;
-    @apply bg-background text-foreground;
-  }
+
 }

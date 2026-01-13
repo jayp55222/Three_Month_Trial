@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -25,22 +26,26 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleforupdateform } from "@/services/booleanSlice";
 import type { RootState } from "@/store";
-import { useEffect } from "react";
-import { usePatchStudentMutation } from "@/services/studentApi";
+import {
+  usePatchStudentMutation,
+  usePostStudentMutation,
+} from "@/services/studentApi";
 import toast from "react-hot-toast";
+import { toggleform } from "@/services/booleanSlice";
+import { clearEditableStudent } from "@/services/dataSlice";
+import { motion } from "framer-motion";
 
 // ✅ 1. Define schema with zod for validation
 const studentSchema = z.object({
-  // createdAt: z.string(),
-  firstname: z.string().min(2, "First name is too short"),
-  lastname: z.string().min(2, "Last name is too short"),
+  createdAt: z.string().optional(),
+  firstname: z.string().min(2, "First name is too short").default(""),
+  lastname: z.string().min(2, "Last name is too short").default(""),
   gender: z.enum(["Male", "Female", "Other"]),
-  birthday: z.string(),
-  city: z.string(),
-  state: z.string(),
-  id: z.string(),
+  birthday: z.string().default(""),
+  city: z.string().default(""),
+  state: z.string().default(""),
+  id: z.string().optional(),
 });
 
 export type StudentFormValues = z.infer<typeof studentSchema>;
@@ -53,9 +58,11 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
   const student = useSelector(
     (state: RootState) => state.editablestudent.editableStudent
   );
+
   const dispatch = useDispatch();
-  const [patchStudent, { isLoading, isSuccess, isError }] =
-    usePatchStudentMutation();
+  const [patchStudent] = usePatchStudentMutation();
+
+  const [postStudent] = usePostStudentMutation();
 
   // ✅ 2. Setup React Hook Form
   const form = useForm<StudentFormValues>({
@@ -63,7 +70,7 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
   });
 
   useEffect(() => {
-    if (student) {
+    if (student?.id) {
       form.reset(student); // reset will populate all fields
     }
   }, [student, form]);
@@ -75,7 +82,10 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
       <button
         type="button"
         className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-        onClick={() => dispatch(toggleforupdateform())} // replace with your close handler
+        onClick={() => {
+          dispatch(clearEditableStudent());
+          dispatch(toggleform());
+        }} // replace with your close handler
       >
         <X className="h-5 w-5" />
       </button>
@@ -84,16 +94,30 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((data) => {
-            return patchStudent({ Id: data.id, ...data })
-              .unwrap()
-              .then((fulfilled) => {
-                dispatch(toggleforupdateform());
-                toast.success("Successfully Updated!");
-              })
-              .catch((rejected) => {
-                toast.error("Failed to Update");
-                console.error(rejected);
-              });
+            if (student?.id) {
+              patchStudent({ Id: data.id, ...data })
+                .unwrap()
+                .then((fulfilled) => {
+                  dispatch(toggleform());
+                  dispatch(clearEditableStudent());
+                  toast.success("Successfully Updated!");
+                })
+                .catch((rejected) => {
+                  toast.error("Failed to Update");
+                  console.error(rejected);
+                });
+            } else {
+              postStudent(data)
+                .unwrap()
+                .then((fulfilled) => {
+                  dispatch(toggleform());
+                  toast.success("Successfully Created!");
+                })
+                .catch((rejected) => {
+                  toast.error("Failed to Create");
+                  console.error(rejected);
+                });
+            }
           })}
           className="space-y-4"
         >
@@ -134,7 +158,7 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    defaultValue={student?.gender}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select gender" />
@@ -154,44 +178,61 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
           <FormField
             control={form.control}
             name="birthday"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Birthday</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-[240px] justify-start text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {field.value ? (
-                          format(new Date(field.value), "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value ? new Date(field.value) : undefined}
-                      onSelect={(date) => {
-                        field.onChange(
-                          date ? date.toISOString().split("T")[0] : ""
-                        );
-                      }}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
+            render={({ field }) => {
+              const [open, setOpen] = React.useState(false); // control popover open state
+              const [month, setMonth] = React.useState(new Date());
+
+              return (
+                <FormItem className="flex flex-col relative">
+                  <FormLabel>Birthday</FormLabel>
+                  <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-[240px] justify-start text-left font-normal relative",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {field.value ? (
+                            format(new Date(field.value), "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <span className="sr-only">Select date</span>
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="w-auto overflow-hidden p-0"
+                      align="end"
+                      alignOffset={-8}
+                      sideOffset={10}
+                    >
+                      <Calendar
+                        mode="single"
+                        selected={
+                          field.value ? new Date(field.value) : undefined
+                        }
+                        month={month}
+                        captionLayout="dropdown"
+                        onMonthChange={setMonth}
+                        onSelect={(date) => {
+                          field.onChange(
+                            date ? date.toISOString().split("T")[0] : ""
+                          );
+                          setOpen(false);
+                        }}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
           />
 
           <FormField
@@ -223,14 +264,23 @@ export function UpdateStudentForm({ onClose }: UpdateStudentFormProps) {
           />
 
           {/* Hidden fields (id + createdAt) */}
-          <input type="hidden" {...form.register("id")} />
-          {/* <input type="hidden" {...form.register("createdAt")} /> */}
+
+          {student?.id && <input type="hidden" {...form.register("id")} />}
+
+          {!student?.id && (
+            <input
+              type="hidden"
+              {...form.register("createdAt", {
+                value: new Date(Date.now()).toISOString(),
+              })}
+            />
+          )}
 
           <Button
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600"
           >
-            Update Student
+            {student?.id !== undefined ? "Update Student" : "Create Student"}
           </Button>
         </form>
       </Form>

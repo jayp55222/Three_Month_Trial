@@ -1,5 +1,4 @@
-import React, { useMemo, useState } from "react";
-
+import React, { useEffect } from "react";
 // Shadcn-style imports (assumes you have these components scaffolded in your project)
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
@@ -13,111 +12,77 @@ import {
   TableCell,
 } from "../ui/table";
 import { ScrollArea } from "../ui/scroll-area";
-import { MoreHorizontal, ChevronsUpDown } from "lucide-react";
-import { useGetStudensQuery } from "@/services/studentApi";
+import {
+  MoreHorizontal,
+  ChevronsUpDown,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { useGetStudentsQuery } from "@/services/studentApi";
 import type { Student } from "@/types/students";
 import { formatToIndianDate } from "@/services/dateconverter";
 import { getHeaderClass } from "@/functions/DyanamicClass";
 import DeleteConfirmDialog from "./DeleteConfirmDialog";
 import EditButton from "./EditeButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/store";
-
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  createdAt: string;
-};
-
-const sampleData: User[] = [
-  {
-    id: "1",
-    name: "Asha Patel",
-    email: "asha@example.com",
-    role: "Admin",
-    createdAt: "2025-08-01",
-  },
-  {
-    id: "2",
-    name: "Ravi Kumar",
-    email: "ravi@example.com",
-    role: "Editor",
-    createdAt: "2025-07-12",
-  },
-  {
-    id: "3",
-    name: "Nina Verma",
-    email: "nina@example.com",
-    role: "Viewer",
-    createdAt: "2025-05-22",
-  },
-  {
-    id: "4",
-    name: "Karan Mehta",
-    email: "karan@example.com",
-    role: "Editor",
-    createdAt: "2025-04-18",
-  },
-  {
-    id: "5",
-    name: "Priya Singh",
-    email: "priya@example.com",
-    role: "Viewer",
-    createdAt: "2025-02-11",
-  },
-];
+import { CreateButton } from "./CreateButton";
+import {
+  clearTableQuery,
+  setPage,
+  setStudents,
+  setTableQuery,
+  setPaginationdata,
+  setTotalPage,
+  toggleOrder,
+} from "@/services/dataSlice";
+import { filterAndSortStudents } from "@/functions/filter";
 
 export default function Hero() {
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const pageSize = 3;
-  const [sortField, setSortField] = useState<keyof Student | null>(null);
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+  const dispatch = useDispatch();
 
-  const { data: studentList, isLoading, isSuccess } = useGetStudensQuery();
-  const editeobj = useSelector((state:RootState)=> state.editablestudent.editableStudent)
-  console.log(editeobj);
-  
+  const { data: studentList, isLoading, isSuccess } = useGetStudentsQuery();
+  const {
+    studentListState,
+    tabelquery,
+    currentpage,
+    totalPage,
+    order,
+    lastIndex,
+    firstIndex,
+    limit,
+  } = useSelector((state: RootState) => state.editablestudent);
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    let out = sampleData.filter(
-      (u) =>
-        u.name.toLowerCase().includes(q) ||
-        u.email.toLowerCase().includes(q) ||
-        u.role.toLowerCase().includes(q)
-    );
+  // Initialize students and pagination
+  useEffect(() => {
+    if (isSuccess && studentList) {
+      dispatch(setStudents(studentList));
+      const totalPages = Math.ceil(studentList.length / limit);
+      dispatch(setTotalPage(totalPages));
+      dispatch(setPaginationdata(1));
+    }
+  }, [isSuccess, studentList, dispatch, limit]);
 
-    if (sortField) {
-      out = out.slice().sort((a, b) => {
-        const va = String(a[sortField]).toLowerCase();
-        const vb = String(b[sortField]).toLowerCase();
-        if (va === vb) return 0;
-        if (sortDir === "asc") return va > vb ? 1 : -1;
-        return va < vb ? 1 : -1;
+  // Handle filtering and sorting
+  useEffect(() => {
+    if (studentList) {
+      filterAndSortStudents({
+        students: studentList,
+        filter: tabelquery,
+        dispatch: dispatch,
+        pageSize: limit,
+        firstIndex,
+        lastIndex,
       });
     }
+  }, [studentList, tabelquery, order, dispatch, limit]);
 
-    return out;
-  }, [query, sortField, sortDir]);
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
-  const paged = useMemo(() => {
-    const start = (page - 1) * pageSize;
-    return filtered.slice(start, start + pageSize);
-  }, [filtered, page]);
-
-  function toggleSort(field: keyof Student) {
-    if (sortField === field) {
-      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
-    } else {
-      setSortField(field);
-      setSortDir("asc");
+  // Reset to page 1 when search query changes
+  useEffect(() => {
+    if (tabelquery !== undefined) {
+      dispatch(setPaginationdata(1));
     }
-    setPage(1);
-  }
+  }, [tabelquery, dispatch]);
 
   const tablerow: Omit<Student, "createdAt"> = {
     id: "Id",
@@ -130,25 +95,20 @@ export default function Hero() {
   };
 
   return (
-    <Card className="w-full h-full">
+    <Card className="w-full h-[95%]">
       <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <CardTitle>Users</CardTitle>
+        <CardTitle>Students</CardTitle>
         <div className="flex items-center gap-2">
+          <CreateButton />
           <Input
-            placeholder="Search by name, email or role..."
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setPage(1);
-            }}
+            placeholder="Search by name, gender or role..."
+            value={tabelquery}
+            onChange={(e) => dispatch(setTableQuery(e.target.value))}
             className="max-w-xs"
           />
           <Button
             onClick={() => {
-              setQuery("");
-              setSortField(null);
-              setSortDir("asc");
-              setPage(1);
+              dispatch(clearTableQuery());
             }}
             className="bg-blue-500 hover:bg-blue-700 cursor-pointer"
           >
@@ -156,87 +116,79 @@ export default function Hero() {
           </Button>
         </div>
       </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[300px]">
+      <CardContent className="w-full h-11/12">
+        <ScrollArea className="w-full h-full py-8">
           <Table>
             <TableHeader>
               <TableRow>
                 {Object.entries(tablerow).map(([key, value]) => (
-                  <TableHead
-                    // className={`${getHeaderClass(key)}`}
-                    onClick={() => toggleSort(key)}
-                  >
+                  <TableHead key={key} className={`${getHeaderClass(key)}`}>
                     {value}
-                    <ChevronsUpDown className="inline-block w-4 h-4 ml-1 align-text-bottom" />
+                    {value === "Id" && (
+                      <ChevronsUpDown
+                        className="inline-block w-4 h-4 ml-1 align-text-bottom cursor-pointer"
+                        onClick={() => dispatch(toggleOrder())}
+                      />
+                    )}
                   </TableHead>
                 ))}
-                <TableHead>Actions</TableHead>
+                <TableHead className="table-cell">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {studentList?.map((student) => (
-                <TableRow key={student.id}>
-                  <TableCell className="font-medium">{student.id}</TableCell>
-                  <TableCell>{student.firstname}</TableCell>
-                  <TableCell className="hidden md:inline">
-                    {student.lastname}
-                  </TableCell>
-                  <TableCell>{student.gender}</TableCell>
-                  <TableCell>{student.city}</TableCell>
-                  <TableCell>{student.state}</TableCell>
-                  <TableCell className="hidden lg:block">
-                    {formatToIndianDate(student.birthday)}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <EditButton studentObj={student} />
-                      <DeleteConfirmDialog id={student.id} />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-
-              {paged.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={5}>
-                    <div className="py-6 text-center text-sm text-muted-foreground">
-                      No results found.
-                    </div>
-                  </TableCell>
-                </TableRow>
-              )}
+              {(studentListState ? studentListState : [])
+                ?.slice(firstIndex, lastIndex)
+                .sort((a, b) =>
+                  order === "asc"
+                    ? Number(a.id) - Number(b.id)
+                    : Number(b.id) - Number(a.id)
+                )
+                .map((student) => (
+                  <TableRow key={student.id}>
+                    <TableCell className="font-medium hidden md:table-cell">{student.id}</TableCell>
+                    <TableCell>{student.firstname}</TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {student.lastname}
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">{student.gender}</TableCell>
+                    <TableCell className="hidden sm:table-cell">{student.city}</TableCell>
+                    <TableCell>{student.state}</TableCell>
+                    <TableCell className="hidden lg:table-cell">
+                      {formatToIndianDate(student.birthday)}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2 sm:flex-col md:flex-row">
+                        <EditButton studentObj={student} />
+                        <DeleteConfirmDialog id={student.id} />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </ScrollArea>
-
-        {/* Pagination */}
-        <div className="mt-4 flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            Showing {Math.min((page - 1) * pageSize + 1, filtered.length)} -{" "}
-            {Math.min(page * pageSize, filtered.length)} of {filtered.length}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Button
-              disabled={page === 1}
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              className="bg-blue-500 hover:bg-blue-600"
-            >
-              Prev
-            </Button>
-            <div className="text-sm">
-              Page {page} of {totalPages}
-            </div>
-            <Button
-              disabled={page === totalPages}
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              className="bg-blue-500 hover:bg-blue-600"
-            >
-              Next
-            </Button>
-          </div>
-        </div>
       </CardContent>
+      <div className="flex justify-end-safe items-center gap-4 mr-8">
+        <Button
+          className="bg-blue-500 hover:bg-blue-600"
+          onClick={() => dispatch(setPage("decrement"))}
+          disabled={currentpage <= 1}
+        >
+          <ChevronLeft />
+          Previous
+        </Button>
+        <span className="text-sm">
+          Page {currentpage} of {totalPage}
+        </span>
+        <Button
+          className="bg-blue-500 hover:bg-blue-600"
+          onClick={() => dispatch(setPage("increment"))}
+          disabled={currentpage >= totalPage}
+        >
+          Next
+          <ChevronRight />
+        </Button>
+      </div>
     </Card>
   );
 }
