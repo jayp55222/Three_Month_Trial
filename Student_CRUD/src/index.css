@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+@plugin "daisyui";
 @import "tw-animate-css";
 
   html, body, #root {
@@ -44,6 +45,18 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
+@theme {
+
+  /* This pulls in Tailwind’s default theme variables (including --spacing) */
+  --default: initial;
+
+
+  --font-inter: "Inter", sans-serif;
+  --font-lato: "Lato", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-open-sans: "Open Sans", sans-serif;
+}
+
 
 :root {
   --radius: 0.625rem;

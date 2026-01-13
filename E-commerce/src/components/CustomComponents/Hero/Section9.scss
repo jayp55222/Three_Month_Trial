@@ -1,0 +1,33 @@
+.blog-flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 16px;
+
+  @media (max-width: 733px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+  }
+}
+
+.blog-flex-container-card {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 2rem;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 33.333333%;
+  }
+}

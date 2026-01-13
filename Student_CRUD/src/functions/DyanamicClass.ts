@@ -1,4 +1,4 @@
-export function getHeaderClass(field: string): string {
+function getHeaderClass(field: string): string {
   switch (field) {
     case "createdAt":
       return "text-black cursor-pointer";
@@ -20,3 +20,14 @@ export function getHeaderClass(field: string): string {
       return "cursor-pointer";
   }
 }
+
+function getSkeletonClass(value: any, existingClass: string = "") {
+  switch (true) {
+    case value === null || value === undefined || value === "":
+      return `skeleton ${existingClass}`;
+    default:
+      return existingClass;
+  }
+}
+
+export { getHeaderClass, getSkeletonClass };
